@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// ISO 2575 severity colours. Fixed — never follow the accent colour.
-/// Always pair with an icon + text label (WCAG 1.4.1).
+// warning colours stay the same in green and blue themes
+// always show an icon + text with them, never colour alone
 @immutable
 class SeverityColors extends ThemeExtension<SeverityColors> {
   const SeverityColors({
