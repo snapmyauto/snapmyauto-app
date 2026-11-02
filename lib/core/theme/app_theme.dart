@@ -19,7 +19,7 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
   final radius16 = BorderRadius.circular(16);
 
   return base.copyWith(
-    scaffoldBackgroundColor: isLight ? AppColors.bgLight : AppColors.bgDark,
+    scaffoldBackgroundColor: AppColors.background(accent, brightness),
     extensions: [isLight ? SeverityColors.light : SeverityColors.dark],
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
