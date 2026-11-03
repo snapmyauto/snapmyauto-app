@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snapmyauto/features/auth/presentation/login_screen.dart';
+import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
@@ -37,8 +38,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/auth/register',
-        builder: (context, state) =>
-            const PlaceholderScreen(title: 'Create account'),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: '/auth/forgot',
