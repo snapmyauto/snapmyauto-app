@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 String authErrorMessage(Object error) {
   if (error is! FirebaseAuthException) {
@@ -21,7 +22,15 @@ String authErrorMessage(Object error) {
       return 'Too many attempts. Wait a minute and try again.';
     case 'network-request-failed':
       return 'No internet connection.';
+    case 'account-exists-with-different-credential':
+      return 'This email is already used with a password. Log in with email instead.';
     default:
       return 'Something went wrong. Please try again.';
   }
+}
+
+// user closed the google popup, not a real error
+bool isGoogleCancel(Object error) {
+  return error is GoogleSignInException &&
+      error.code == GoogleSignInExceptionCode.canceled;
 }

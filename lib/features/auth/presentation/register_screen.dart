@@ -175,12 +175,12 @@ class _StrengthBar extends StatelessWidget {
     var s = 0;
     if (password.length >= 8) s++;
     if (password.length >= 12) s++;
-    if (RegExp(r'[A-Z]').hasMatch(password) &&
-        RegExp(r'[a-z]').hasMatch(password))
-      s++;
-    if (RegExp(r'[0-9]').hasMatch(password) ||
-        RegExp(r'[^A-Za-z0-9]').hasMatch(password))
-      s++;
+    final mixedCase =
+        RegExp(r'[A-Z]').hasMatch(password) &&
+        RegExp(r'[a-z]').hasMatch(password);
+    if (mixedCase) s++;
+    final numberOrSymbol = RegExp(r'[0-9]|[^A-Za-z0-9]').hasMatch(password);
+    if (numberOrSymbol) s++;
     return s;
   }
 
