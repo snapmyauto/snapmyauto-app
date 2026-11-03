@@ -1,0 +1,28 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "snapmyauto",
+          "appId": "1:1096943069899:android:bad425875bd714d39c894e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "snapmyauto",
+          "configurations": {
+            "android": "1:1096943069899:android:bad425875bd714d39c894e",
+            "ios": "1:1096943069899:ios:244e1ae601884b139c894e"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "asia-south1",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}
