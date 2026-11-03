@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096943069899",
+    "project_id": "snapmyauto",
+    "storage_bucket": "snapmyauto.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096943069899:android:bad425875bd714d39c894e",
+        "android_client_info": {
+          "package_name": "com.snapmyauto.snapmyauto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1x0VmHMt8BcLdGiamKkKZFBUF6uIequU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
