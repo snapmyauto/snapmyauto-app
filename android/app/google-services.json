@@ -12,7 +12,20 @@
           "package_name": "com.snapmyauto.snapmyauto"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1096943069899-p4f83p3cihoi08jqmkgkus8mg4c5ffra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snapmyauto.snapmyauto",
+            "certificate_hash": "86118cb0888e7a893662f3dfeee702eaa97c768b"
+          }
+        },
+        {
+          "client_id": "1096943069899-4fcjdm8kqbf86a0lrupt6pi479c3sh9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB1x0VmHMt8BcLdGiamKkKZFBUF6uIequU"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096943069899-4fcjdm8kqbf86a0lrupt6pi479c3sh9t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1096943069899-46buncf63squehjkb5o7apk0jt0gdku4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.snapmyauto.snapmyauto"
+              }
+            }
+          ]
         }
       }
     }

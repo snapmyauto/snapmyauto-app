@@ -56,13 +56,14 @@ class DefaultFirebaseOptions {
     projectId: 'snapmyauto',
     storageBucket: 'snapmyauto.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCoXaMpYPqrVHkXXYHUK_Nj82nv4b68-Bo',
     appId: '1:1096943069899:ios:244e1ae601884b139c894e',
     messagingSenderId: '1096943069899',
     projectId: 'snapmyauto',
     storageBucket: 'snapmyauto.firebasestorage.app',
+    androidClientId: '1096943069899-p4f83p3cihoi08jqmkgkus8mg4c5ffra.apps.googleusercontent.com',
+    iosClientId: '1096943069899-46buncf63squehjkb5o7apk0jt0gdku4.apps.googleusercontent.com',
     iosBundleId: 'com.snapmyauto.snapmyauto',
   );
 }
