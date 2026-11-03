@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snapmyauto/features/auth/presentation/forgot_password_screen.dart';
 import 'package:snapmyauto/features/auth/presentation/login_screen.dart';
 import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
@@ -42,8 +43,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/auth/forgot',
-        builder: (context, state) =>
-            const PlaceholderScreen(title: 'Forgot password'),
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(shell: shell),
