@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/theme/theme_providers.dart';
+import '../../auth/data/auth_repository.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -65,6 +67,40 @@ class SettingsScreen extends ConsumerWidget {
               chip('Safe', sev.safe, sev.safeTint, Icons.check_circle),
               chip('Info', sev.info, sev.infoTint, Icons.info),
             ],
+          ),
+          const SizedBox(height: 32),
+          OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: sev.stop,
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
+            ),
+            icon: const Icon(LucideIcons.logOut, size: 18),
+            label: const Text('Log out'),
+            onPressed: () async {
+              final ok = await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Log out?'),
+                  content: const Text('You can log back in any time.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx, false),
+                      child: const Text('Cancel'),
+                    ),
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size(0, 44),
+                      ),
+                      onPressed: () => Navigator.pop(ctx, true),
+                      child: const Text('Log out'),
+                    ),
+                  ],
+                ),
+              );
+              if (ok == true) await ref.read(authRepositoryProvider).signOut();
+            },
           ),
         ],
       ),
