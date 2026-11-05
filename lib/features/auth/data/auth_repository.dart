@@ -3,22 +3,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/constants/app_config.dart';
+import '../../profile/data/user_repository.dart';
 
 class AuthRepository {
-  AuthRepository(this._auth);
+  AuthRepository(this._auth, this._users);
 
   final FirebaseAuth _auth;
+  final UserRepository _users;
   bool _googleReady = false;
 
   Stream<User?> authChanges() => _auth.authStateChanges();
 
   User? get currentUser => _auth.currentUser;
 
-  Future<void> signIn(String email, String password) {
-    return _auth.signInWithEmailAndPassword(
+  Future<void> signIn(String email, String password) async {
+    final cred = await _auth.signInWithEmailAndPassword(
       email: email.trim(),
       password: password,
     );
+    final user = cred.user;
+    if (user != null) {
+      await _users.ensureProfile(user);
+    }
   }
 
   Future<User?> register(String name, String email, String password) async {
@@ -26,8 +32,12 @@ class AuthRepository {
       email: email.trim(),
       password: password,
     );
-    await cred.user?.updateDisplayName(name.trim());
-    return cred.user;
+    final user = cred.user;
+    if (user != null) {
+      await user.updateDisplayName(name.trim());
+      await _users.ensureProfile(user, name: name.trim());
+    }
+    return user;
   }
 
   Future<void> sendPasswordReset(String email) {
@@ -49,9 +59,13 @@ class AuthRepository {
     if (idToken == null) {
       throw FirebaseAuthException(code: 'missing-id-token');
     }
-    await _auth.signInWithCredential(
+    final cred = await _auth.signInWithCredential(
       GoogleAuthProvider.credential(idToken: idToken),
     );
+    final user = cred.user;
+    if (user != null) {
+      await _users.ensureProfile(user);
+    }
   }
 
   Future<void> signOut() async {
@@ -70,7 +84,10 @@ final firebaseAuthProvider = Provider<FirebaseAuth>(
 );
 
 final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepository(ref.watch(firebaseAuthProvider)),
+  (ref) => AuthRepository(
+    ref.watch(firebaseAuthProvider),
+    ref.watch(userRepositoryProvider),
+  ),
 );
 
 final authStateProvider = StreamProvider<User?>(
