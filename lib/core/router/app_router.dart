@@ -8,6 +8,7 @@ import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
+import '../../features/scan/presentation/scan_screen.dart';
 import '../widgets/app_shell.dart';
 import '../widgets/placeholder_screen.dart';
 
@@ -88,7 +89,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/scan',
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => const PlaceholderScreen(title: 'Scan'),
+        builder: (context, state) => const ScanScreen(),
       ),
     ],
   );
