@@ -5,20 +5,12 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/severity_colors.dart';
 import '../../../core/theme/theme_providers.dart';
 
 final _packageInfoProvider = FutureProvider(
   (ref) => PackageInfo.fromPlatform(),
 );
-
-const _team = [
-  ('Sasmitha', 'Team lead · scan, AI and data'),
-  ('Thilina', 'Onboarding and triage'),
-  ('Thevinu', 'Vehicles and profile'),
-  ('Ravindu', 'Home, history and settings'),
-  ('Wanuja', 'Garages and SOS'),
-  ('Nimeshika', 'Icon library, reminders and about'),
-];
 
 class AboutScreen extends ConsumerWidget {
   const AboutScreen({super.key});
@@ -27,6 +19,7 @@ class AboutScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+    final sev = context.severity;
     final accent = ref.watch(accentProvider);
     final info = ref.watch(_packageInfoProvider).value;
     final logo = accent == AppAccent.blue
@@ -36,7 +29,7 @@ class AboutScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('About')),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+        padding: EdgeInsets.all(20),
         children: [
           Center(child: SvgPicture.asset(logo, width: 88, height: 88)),
           const SizedBox(height: 14),
@@ -75,20 +68,24 @@ class AboutScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const _Card(
-            icon: LucideIcons.graduationCap,
-            title: 'Project',
-            lines: [
-              ('Module', 'SE303.3 Mobile Application Development'),
-              ('University', 'NSBM Green University'),
-              ('Group', '100'),
-            ],
+          const _NoteCard(
+            icon: LucideIcons.shieldCheck,
+            title: 'Your privacy',
+            text:
+                'Photos are checked on your phone and are never uploaded. '
+                'Your vehicles, scans and reminders are saved to your own '
+                'account only.',
           ),
           const SizedBox(height: 16),
-          _Card(
-            icon: LucideIcons.users,
-            title: 'Team',
-            lines: [for (final m in _team) (m.$1, m.$2)],
+          _NoteCard(
+            icon: LucideIcons.triangleAlert,
+            title: 'Safety first',
+            text:
+                'SnapMyAuto gives general advice. It does not replace a '
+                'mechanic. If a red light comes on, stop safely before you '
+                'check the app.',
+            color: sev.soon,
+            background: sev.soonTint,
           ),
           const SizedBox(height: 24),
           Text(
@@ -133,18 +130,7 @@ class _Card extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(icon, size: 20, color: colors.primary),
-              const SizedBox(width: 8),
-              Text(
-                title,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
+          _CardTitle(icon: icon, title: title, color: colors.primary),
           const SizedBox(height: 10),
           for (final (label, value) in lines)
             Padding(
@@ -175,6 +161,80 @@ class _Card extends StatelessWidget {
             ),
         ],
       ),
+    );
+  }
+}
+
+// card with a title and one paragraph, only the icon takes the custom colour
+class _NoteCard extends StatelessWidget {
+  const _NoteCard({
+    required this.icon,
+    required this.title,
+    required this.text,
+    this.color,
+    this.background,
+  });
+
+  final IconData icon;
+  final String title;
+  final String text;
+  final Color? color;
+  final Color? background;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: background ?? colors.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _CardTitle(icon: icon, title: title, color: color ?? colors.primary),
+          const SizedBox(height: 8),
+          Text(
+            text,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              // tinted cards need full contrast text
+              color: background == null
+                  ? colors.onSurfaceVariant
+                  : colors.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    required this.icon,
+    required this.title,
+    required this.color,
+  });
+
+  final IconData icon;
+  final String title;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: color),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium
+              ?.copyWith(fontWeight: FontWeight.w800),
+        ),
+      ],
     );
   }
 }
