@@ -184,22 +184,3 @@ class SeverityBadge extends StatelessWidget {
     );
   }
 }
-
-// old round icon, still used by the detail screen until it moves to LightIcon
-class LightIconCircle extends StatelessWidget {
-  const LightIconCircle({super.key, required this.light, this.size = 56});
-
-  final WarningLight light;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) => LightIcon(light: light, size: size);
-}
-
-extension CanDriveText on CanDrive {
-  String get label => switch (this) {
-    CanDrive.yes => 'Yes, you can keep driving',
-    CanDrive.short => 'Only a short distance, carefully',
-    CanDrive.no => 'No, stop when it is safe',
-  };
-}
