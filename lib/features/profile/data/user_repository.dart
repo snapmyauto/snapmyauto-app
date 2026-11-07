@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../auth/data/auth_repository.dart';
+import '../domain/user_profile.dart';
+
 class UserRepository {
   UserRepository(this._db);
 
@@ -25,6 +28,16 @@ class UserRepository {
     }
     await ref.set(data, SetOptions(merge: true));
   }
+
+  Stream<UserProfile?> watchProfile(String uid) {
+    return _doc(uid)
+        .snapshots()
+        .map((doc) => doc.exists ? UserProfile.fromDoc(doc) : null);
+  }
+
+  Future<void> updateName(String uid, String name) {
+    return _doc(uid).update({'name': name.trim()});
+  }
 }
 
 final firestoreProvider = Provider<FirebaseFirestore>(
@@ -34,3 +47,10 @@ final firestoreProvider = Provider<FirebaseFirestore>(
 final userRepositoryProvider = Provider<UserRepository>(
   (ref) => UserRepository(ref.watch(firestoreProvider)),
 );
+
+/// Profile of the signed-in user, updates live.
+final userProfileProvider = StreamProvider<UserProfile?>((ref) {
+  final uid = ref.watch(currentUidProvider);
+  if (uid == null) return Stream.value(null);
+  return ref.watch(userRepositoryProvider).watchProfile(uid);
+});
