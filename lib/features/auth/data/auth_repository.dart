@@ -93,3 +93,8 @@ final authRepositoryProvider = Provider<AuthRepository>(
 final authStateProvider = StreamProvider<User?>(
   (ref) => ref.watch(authRepositoryProvider).authChanges(),
 );
+
+// uid of the signed-in user, null when logged out
+final currentUidProvider = Provider<String?>(
+  (ref) => ref.watch(authStateProvider).value?.uid,
+);
