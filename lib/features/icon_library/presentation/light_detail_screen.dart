@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/theme/severity.dart';
+import '../../../core/widgets/severity_badge.dart';
 import '../data/warning_light_repository.dart';
 import '../domain/warning_light.dart';
 import 'widgets/light_visuals.dart';
@@ -123,7 +125,6 @@ class _Body extends StatelessWidget {
   }
 }
 
-// tinted top part with the symbol, name and severity
 class _Header extends StatelessWidget {
   const _Header({required this.light});
 
@@ -250,7 +251,6 @@ class _CauseChip extends StatelessWidget {
   }
 }
 
-// "can I keep driving?" answer, coloured by how safe it is
 class _DriveCard extends StatelessWidget {
   const _DriveCard({required this.light});
 

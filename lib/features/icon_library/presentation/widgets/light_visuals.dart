@@ -2,51 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../../../../core/theme/severity_colors.dart';
+import '../../../../core/theme/severity.dart';
 import '../../domain/warning_light.dart';
 
-extension LightSeverityStyle on LightSeverity {
-  String get label => switch (this) {
-    LightSeverity.stop => 'Stop now',
-    LightSeverity.soon => 'Garage soon',
-    LightSeverity.safe => 'Safe',
-    LightSeverity.info => 'Info',
-  };
-
-  // colour of the real light on the dashboard
+// colour of the real light on the dashboard
+extension SeverityLightColour on Severity {
   String get lightColour => switch (this) {
-    LightSeverity.stop => 'Red light',
-    LightSeverity.soon => 'Amber light',
-    LightSeverity.safe => 'Green light',
-    LightSeverity.info => 'Blue light',
+    Severity.stop => 'Red light',
+    Severity.soon => 'Amber light',
+    Severity.safe => 'Green light',
+    Severity.info => 'Blue light',
   };
-
-  IconData get icon => switch (this) {
-    LightSeverity.stop => LucideIcons.octagonX,
-    LightSeverity.soon => LucideIcons.triangleAlert,
-    LightSeverity.safe => LucideIcons.circleCheck,
-    LightSeverity.info => LucideIcons.info,
-  };
-
-  Color color(BuildContext context) {
-    final s = context.severity;
-    return switch (this) {
-      LightSeverity.stop => s.stop,
-      LightSeverity.soon => s.soon,
-      LightSeverity.safe => s.safe,
-      LightSeverity.info => s.info,
-    };
-  }
-
-  Color tint(BuildContext context) {
-    final s = context.severity;
-    return switch (this) {
-      LightSeverity.stop => s.stopTint,
-      LightSeverity.soon => s.soonTint,
-      LightSeverity.safe => s.safeTint,
-      LightSeverity.info => s.infoTint,
-    };
-  }
 }
 
 extension LightCategoryText on LightCategory {
@@ -71,14 +37,13 @@ extension CanDriveStyle on CanDrive {
     CanDrive.no => LucideIcons.x,
   };
 
-  LightSeverity get severity => switch (this) {
-    CanDrive.yes => LightSeverity.safe,
-    CanDrive.short => LightSeverity.soon,
-    CanDrive.no => LightSeverity.stop,
+  Severity get severity => switch (this) {
+    CanDrive.yes => Severity.safe,
+    CanDrive.short => Severity.soon,
+    CanDrive.no => Severity.stop,
   };
 }
 
-// dashboard symbol on a rounded tile, tile is the severity tint by default
 class LightIcon extends StatelessWidget {
   const LightIcon({
     super.key,
@@ -144,42 +109,6 @@ class _AbsSymbol extends StatelessWidget {
           fontWeight: FontWeight.w800,
           height: 1,
         ),
-      ),
-    );
-  }
-}
-
-// solid pill, e.g. "Usually: Stop now"
-class SeverityBadge extends StatelessWidget {
-  const SeverityBadge({super.key, required this.severity, this.prefix = ''});
-
-  final LightSeverity severity;
-  final String prefix;
-
-  @override
-  Widget build(BuildContext context) {
-    // surface colour reads well on the severity colour in light and dark
-    final fg = Theme.of(context).colorScheme.surface;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: severity.color(context),
-        borderRadius: BorderRadius.circular(99),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(severity.icon, size: 13, color: fg),
-          const SizedBox(width: 6),
-          Text(
-            '$prefix${severity.label}',
-            style: TextStyle(
-              color: fg,
-              fontSize: 12,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ],
       ),
     );
   }
