@@ -49,6 +49,15 @@ extension LightSeverityStyle on LightSeverity {
   }
 }
 
+extension LightCategoryText on LightCategory {
+  String get label => switch (this) {
+    LightCategory.engine => 'Engine',
+    LightCategory.brakes => 'Brakes',
+    LightCategory.safety => 'Safety',
+    LightCategory.lights => 'Lights',
+  };
+}
+
 extension CanDriveStyle on CanDrive {
   String get answer => switch (this) {
     CanDrive.yes => 'Yes',
