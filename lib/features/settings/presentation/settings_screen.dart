@@ -88,6 +88,14 @@ class SettingsScreen extends ConsumerWidget {
             onSelectionChanged: (s) =>
                 ref.read(themeModeProvider.notifier).change(s.first),
           ),
+          const SizedBox(height: 16),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(LucideIcons.bookOpen),
+            title: const Text('Warning light library'),
+            trailing: const Icon(LucideIcons.chevronRight),
+            onTap: () => context.push('/library'),
+          ),
           const SizedBox(height: 24),
           Wrap(
             spacing: 8,
