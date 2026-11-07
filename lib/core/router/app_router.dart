@@ -6,6 +6,7 @@ import 'package:snapmyauto/features/auth/presentation/forgot_password_screen.dar
 import 'package:snapmyauto/features/auth/presentation/login_screen.dart';
 import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
+import '../../features/about/presentation/about_screen.dart';
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
@@ -42,6 +43,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      GoRoute(
+        path: '/about',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const AboutScreen(),
+      ),
       GoRoute(
         path: '/library',
         parentNavigatorKey: _rootKey,
