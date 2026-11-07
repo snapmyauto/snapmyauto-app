@@ -8,6 +8,8 @@ import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
+import '../../features/reminders/presentation/reminder_form_screen.dart';
+import '../../features/reminders/presentation/reminders_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/scan/presentation/scan_screen.dart';
@@ -49,6 +51,22 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: ':id',
             builder: (context, state) =>
                 LightDetailScreen(lightId: state.pathParameters['id']!),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/reminders',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const RemindersScreen(),
+        routes: [
+          GoRoute(
+            path: 'new',
+            builder: (context, state) => const ReminderFormScreen(),
+          ),
+          GoRoute(
+            path: ':id/edit',
+            builder: (context, state) =>
+                ReminderFormScreen(reminderId: state.pathParameters['id']),
           ),
         ],
       ),

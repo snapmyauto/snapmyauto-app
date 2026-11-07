@@ -96,6 +96,13 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(LucideIcons.chevronRight),
             onTap: () => context.push('/library'),
           ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(LucideIcons.bellRing),
+            title: const Text('Reminders'),
+            trailing: const Icon(LucideIcons.chevronRight),
+            onTap: () => context.push('/reminders'),
+          ),
           const SizedBox(height: 24),
           Wrap(
             spacing: 8,
