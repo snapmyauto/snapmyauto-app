@@ -9,6 +9,9 @@ import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/scan/presentation/scan_screen.dart';
+import '../../features/vehicles/presentation/vehicle_detail_screen.dart';
+import '../../features/vehicles/presentation/vehicle_form_screen.dart';
+import '../../features/vehicles/presentation/vehicles_screen.dart';
 import '../widgets/app_shell.dart';
 import '../widgets/placeholder_screen.dart';
 
@@ -45,6 +48,29 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/auth/forgot',
         builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: '/vehicles',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const VehiclesScreen(),
+        routes: [
+          GoRoute(
+            path: 'new',
+            builder: (context, state) => const VehicleFormScreen(),
+          ),
+          GoRoute(
+            path: ':id',
+            builder: (context, state) =>
+                VehicleDetailScreen(vehicleId: state.pathParameters['id']!),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                builder: (context, state) =>
+                    VehicleFormScreen(vehicleId: state.pathParameters['id']),
+              ),
+            ],
+          ),
+        ],
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(shell: shell),
