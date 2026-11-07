@@ -38,6 +38,24 @@ class UserRepository {
   Future<void> updateName(String uid, String name) {
     return _doc(uid).update({'name': name.trim()});
   }
+
+  /// Firestore doesn't delete sub-collections with the parent doc,
+  /// so every collection under users/{uid} is cleared first.
+  Future<void> deleteAllData(String uid) async {
+    const collections = ['vehicles', 'scans', 'reminders', 'contacts'];
+    for (final name in collections) {
+      final snap = await _doc(uid).collection(name).get();
+      // a batch can hold at most 500 writes
+      for (var i = 0; i < snap.docs.length; i += 400) {
+        final batch = _db.batch();
+        for (final doc in snap.docs.skip(i).take(400)) {
+          batch.delete(doc.reference);
+        }
+        await batch.commit();
+      }
+    }
+    await _doc(uid).delete();
+  }
 }
 
 final firestoreProvider = Provider<FirebaseFirestore>(
