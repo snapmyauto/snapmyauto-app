@@ -58,7 +58,9 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     try {
       final cameras = await availableCameras();
       if (cameras.isEmpty) {
-        setState(() => _error = 'No camera found on this device.');
+        if (mounted) {
+          setState(() => _error = 'No camera found on this device.');
+        }
         return;
       }
       final back = cameras.firstWhere(
@@ -89,6 +91,13 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
           () => _error = denied
               ? 'Camera permission is off. Allow it in Settings, or pick a photo instead.'
               : 'Camera could not start. You can still pick a photo.',
+        );
+      }
+    } catch (_) {
+      // emulators with no camera throw a PlatformException instead
+      if (mounted) {
+        setState(
+          () => _error = 'Camera could not start. You can still pick a photo.',
         );
       }
     }
