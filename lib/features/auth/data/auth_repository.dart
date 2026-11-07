@@ -68,6 +68,52 @@ class AuthRepository {
     }
   }
 
+  /// True when the user signed up with email and password.
+  bool get usesPassword =>
+      _auth.currentUser?.providerData.any((p) => p.providerId == 'password') ??
+      false;
+
+  Future<void> updateDisplayName(String name) async {
+    await _auth.currentUser?.updateDisplayName(name.trim());
+  }
+
+  /// Firebase asks for a fresh login before deleting an account.
+  /// Email users pass their [password], Google users get the Google popup.
+  Future<void> reauthenticate({String? password}) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    final AuthCredential credential;
+    if (password != null) {
+      credential = EmailAuthProvider.credential(
+        email: user.email ?? '',
+        password: password,
+      );
+    } else {
+      await _initGoogle();
+      final account = await GoogleSignIn.instance.authenticate();
+      final idToken = account.authentication.idToken;
+      if (idToken == null) {
+        throw FirebaseAuthException(code: 'missing-id-token');
+      }
+      credential = GoogleAuthProvider.credential(idToken: idToken);
+    }
+    await user.reauthenticateWithCredential(credential);
+  }
+
+  /// Call [reauthenticate] first. Deletes all data, then the login itself.
+  Future<void> deleteAccount() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+    await _users.deleteAllData(user.uid);
+    await user.delete();
+    if (_googleReady) {
+      try {
+        await GoogleSignIn.instance.signOut();
+      } catch (_) {}
+    }
+  }
+
   Future<void> signOut() async {
     // clear google too, so the account picker shows next time
     if (_googleReady) {
