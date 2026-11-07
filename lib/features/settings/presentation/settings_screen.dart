@@ -103,6 +103,13 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(LucideIcons.chevronRight),
             onTap: () => context.push('/reminders'),
           ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(LucideIcons.info),
+            title: const Text('About SnapMyAuto'),
+            trailing: const Icon(LucideIcons.chevronRight),
+            onTap: () => context.push('/about'),
+          ),
           const SizedBox(height: 24),
           Wrap(
             spacing: 8,
