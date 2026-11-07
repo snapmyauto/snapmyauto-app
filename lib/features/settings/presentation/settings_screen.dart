@@ -7,6 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/theme/theme_providers.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../profile/data/user_repository.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -17,6 +18,7 @@ class SettingsScreen extends ConsumerWidget {
     final mode = ref.watch(themeModeProvider);
     final sev = context.severity;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final profile = ref.watch(userProfileProvider).value;
 
     Widget chip(String label, Color fg, Color bg, IconData icon) => Chip(
       avatar: Icon(icon, color: fg, size: 18),
@@ -34,6 +36,26 @@ class SettingsScreen extends ConsumerWidget {
         // extra bottom space so the glass bar doesn't cover the last item
         padding: const EdgeInsets.fromLTRB(18, 18, 18, 120),
         children: [
+          Card(
+            elevation: 0,
+            margin: EdgeInsets.zero,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            child: ListTile(
+              leading: CircleAvatar(
+                foregroundImage: profile?.photoUrl != null
+                    ? NetworkImage(profile!.photoUrl!)
+                    : null,
+                child: Text(profile?.initials ?? '?'),
+              ),
+              title: Text(
+                (profile?.name.isNotEmpty ?? false) ? profile!.name : 'Profile',
+              ),
+              subtitle: Text(profile?.email ?? ''),
+              trailing: const Icon(LucideIcons.chevronRight),
+              onTap: () => context.push('/profile'),
+            ),
+          ),
+          const SizedBox(height: 8),
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const Icon(LucideIcons.carFront),
