@@ -1,0 +1,182 @@
+[
+  {
+    "id": "abs",
+    "name": "ABS warning",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "There is a fault in the anti-lock braking system. Your normal brakes still work, but the wheels can lock up under hard braking.",
+    "action": "Drive carefully and leave extra stopping distance. Get the ABS checked at a garage soon.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "airbag",
+    "name": "Airbag warning",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "The airbag system has found a fault. The airbags may not open in a crash.",
+    "action": "You can drive, but get it checked as soon as possible. Don't try to fix airbag wiring yourself.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "battery",
+    "name": "Battery / charging",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "The battery is not being charged. This is usually the alternator or its belt. The car will run on battery power until it goes flat.",
+    "action": "Turn off the A/C, radio and other extras. Drive straight to a garage or a safe place. Don't switch the engine off until you get there, it may not start again.",
+    "canDrive": "short"
+  },
+  {
+    "id": "brake_system",
+    "name": "Brake system",
+    "severity": "stop",
+    "detectable": true,
+    "meaning": "The handbrake is on, the brake fluid is low, or there is a fault in the brake system.",
+    "action": "First check the handbrake is fully released. If the light stays on, stop safely and don't drive. Call for help.",
+    "canDrive": "no"
+  },
+  {
+    "id": "check_engine",
+    "name": "Check engine",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "The engine computer found a problem, from a loose fuel cap to a sensor or misfire. If it is flashing, the problem is serious.",
+    "action": "Check the fuel cap is tight. If the light is steady, book a garage visit. If it is flashing, slow down and stop as soon as it is safe.",
+    "canDrive": "short"
+  },
+  {
+    "id": "coolant_temp",
+    "name": "Engine overheating",
+    "severity": "stop",
+    "detectable": true,
+    "meaning": "The engine coolant is too hot. Driving on can badly damage the engine.",
+    "action": "Stop safely and switch off the engine. Wait at least 30 minutes before opening the radiator cap. Check the coolant level.",
+    "canDrive": "no"
+  },
+  {
+    "id": "door_open",
+    "name": "Door open",
+    "severity": "info",
+    "detectable": true,
+    "meaning": "A door, the boot or the bonnet is not fully closed.",
+    "action": "Stop and close every door, the boot and the bonnet properly.",
+    "canDrive": "no"
+  },
+  {
+    "id": "fog_light",
+    "name": "Fog lights on",
+    "severity": "safe",
+    "detectable": true,
+    "meaning": "Your fog lights are switched on.",
+    "action": "Nothing is wrong. Turn them off when visibility is good so you don't dazzle other drivers.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "low_fuel",
+    "name": "Low fuel",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "The fuel tank is nearly empty. Most cars have about 40 to 80 km left.",
+    "action": "Fill up at the nearest fuel station.",
+    "canDrive": "short"
+  },
+  {
+    "id": "oil_pressure",
+    "name": "Oil pressure",
+    "severity": "stop",
+    "detectable": true,
+    "meaning": "The engine oil pressure is too low. Without oil pressure the engine can be destroyed in minutes.",
+    "action": "Stop safely and switch off the engine straight away. Check the oil level. Don't drive until it is fixed.",
+    "canDrive": "no"
+  },
+  {
+    "id": "power_steering",
+    "name": "Power steering",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "There is a fault in the power steering. The steering will feel much heavier.",
+    "action": "Hold the wheel firmly and drive slowly to a garage. Restarting the car sometimes clears it.",
+    "canDrive": "short"
+  },
+  {
+    "id": "seatbelt",
+    "name": "Seatbelt reminder",
+    "severity": "info",
+    "detectable": true,
+    "meaning": "Someone in the car is not wearing a seatbelt.",
+    "action": "Make sure everyone has their seatbelt fastened.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "traction_control",
+    "name": "Traction control",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "If it flashes, traction control is working because the road is slippery. If it stays on, the system is off or has a fault.",
+    "action": "If flashing, ease off the accelerator. If it stays on, drive carefully and get it checked.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "tyre_pressure",
+    "name": "Tyre pressure",
+    "severity": "soon",
+    "detectable": true,
+    "meaning": "One or more tyres has low pressure, or there may be a puncture.",
+    "action": "Slow down and check the tyres at the next fuel station. Pump them to the pressure shown on the driver's door sticker.",
+    "canDrive": "short"
+  },
+  {
+    "id": "washer_fluid",
+    "name": "Washer fluid low",
+    "severity": "info",
+    "detectable": true,
+    "meaning": "The windscreen washer fluid is running low.",
+    "action": "Top it up with washer fluid or clean water when you can.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "high_beam",
+    "name": "High beam on",
+    "severity": "info",
+    "detectable": false,
+    "meaning": "Your main beam headlights are on.",
+    "action": "Switch to low beam when there is oncoming traffic or a car in front.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "cruise_control",
+    "name": "Cruise control on",
+    "severity": "safe",
+    "detectable": false,
+    "meaning": "Cruise control is switched on and holding your speed.",
+    "action": "Nothing is wrong. Press the brake or the cancel button to turn it off.",
+    "canDrive": "yes"
+  },
+  {
+    "id": "glow_plug",
+    "name": "Glow plug (diesel)",
+    "severity": "soon",
+    "detectable": false,
+    "meaning": "On a diesel, this shows the engine is warming up before starting. If it flashes while driving, there is an engine fault.",
+    "action": "Wait for it to go off before starting. If it flashes while driving, get the car checked soon.",
+    "canDrive": "short"
+  },
+  {
+    "id": "master_warning",
+    "name": "General warning",
+    "severity": "soon",
+    "detectable": false,
+    "meaning": "The car has a message for you. It usually shows together with another light or a message on the display.",
+    "action": "Read the message on the dashboard display and check the other lights that are on.",
+    "canDrive": "short"
+  },
+  {
+    "id": "transmission_temp",
+    "name": "Transmission overheating",
+    "severity": "stop",
+    "detectable": false,
+    "meaning": "The automatic gearbox is too hot. This can damage the gearbox.",
+    "action": "Stop safely, put it in Park and let the engine idle for a few minutes to cool down.",
+    "canDrive": "no"
+  }
+]
