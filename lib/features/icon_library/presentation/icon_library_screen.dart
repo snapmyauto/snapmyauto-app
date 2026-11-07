@@ -192,8 +192,15 @@ class _LightTile extends StatelessWidget {
 
   final WarningLight light;
 
+  static const _fontSize = 12.0;
+  static const _lineHeight = 1.3;
+
   @override
   Widget build(BuildContext context) {
+    // room for two lines of name, so one line and two line tiles match
+    final nameHeight =
+        MediaQuery.textScalerOf(context).scale(_fontSize) * _lineHeight * 2;
+
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
@@ -204,6 +211,33 @@ class _LightTile extends StatelessWidget {
         onTap: () => context.push('/library/${light.id}'),
         child: Stack(
           children: [
+            // icon and name sit in the middle of the tile
+            Positioned.fill(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LightIcon(light: light),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      height: nameHeight,
+                      child: Text(
+                        light.name,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: _fontSize,
+                          height: _lineHeight,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             // small dot shows how serious the light is
             Positioned(
               top: 10,
@@ -215,26 +249,6 @@ class _LightTile extends StatelessWidget {
                   color: light.severity.color(context),
                   shape: BoxShape.circle,
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 14, 8, 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LightIcon(light: light),
-                  const SizedBox(height: 8),
-                  Text(
-                    light.name,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
               ),
             ),
           ],
