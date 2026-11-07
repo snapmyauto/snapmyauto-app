@@ -49,15 +49,26 @@ class _DeleteAccountDialogState extends ConsumerState<_DeleteAccountDialog> {
       await auth.reauthenticate(
         password: auth.usesPassword ? _password.text : null,
       );
-      await auth.deleteAccount();
-      // the router sends the user to login once they're signed out
-      if (mounted) Navigator.of(context).pop();
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _busy = false;
         _error = isGoogleCancel(e) ? null : authErrorMessage(e);
       });
+      return;
+    }
+
+    if (!mounted) return;
+
+    // Close the dialog before deleting. Deleting signs the user out and the
+    // router swaps every screen for login, which must not happen while this
+    // dialog is still open.
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.of(context).pop();
+    try {
+      await auth.deleteAccount();
+    } catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(authErrorMessage(e))));
     }
   }
 
