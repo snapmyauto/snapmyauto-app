@@ -87,6 +87,7 @@ final dashlightDetectorProvider = Provider<DashlightDetector>((ref) {
 });
 
 const _size = 640;
+const _anchors = 8400;
 const _scoreThreshold = 0.35;
 const _iouThreshold = 0.45;
 
@@ -123,27 +124,25 @@ DetectionResult _detectSync(
     input[2 * plane + p] = rgb[p * 3 + 2] / 255.0;
   }
 
+  // flat buffers are much faster than nested lists
   final rows = 4 + labels.length;
-  final output = List.generate(
-    1,
-    (_) => List.generate(rows, (_) => List<double>.filled(8400, 0)),
-  );
-  interpreter.run(input.reshape([1, 3, _size, _size]), output);
-  final out = output[0];
+  final output = Float32List(rows * _anchors);
+  interpreter.run(input.buffer, output.buffer);
+  double at(int row, int i) => output[row * _anchors + i];
 
   // some exports give boxes as 0..1, others as 0..640
   var maxCoord = 0.0;
-  for (var i = 0; i < 8400; i++) {
-    maxCoord = math.max(maxCoord, out[2][i]);
+  for (var i = 0; i < _anchors; i++) {
+    maxCoord = math.max(maxCoord, at(2, i));
   }
   final coordScale = maxCoord <= 1.5 ? _size.toDouble() : 1.0;
 
   final candidates = <Detection>[];
-  for (var i = 0; i < 8400; i++) {
+  for (var i = 0; i < _anchors; i++) {
     var best = 0;
     var bestScore = 0.0;
     for (var c = 0; c < labels.length; c++) {
-      final s = out[4 + c][i];
+      final s = at(4 + c, i);
       if (s > bestScore) {
         bestScore = s;
         best = c;
@@ -151,10 +150,10 @@ DetectionResult _detectSync(
     }
     if (bestScore < _scoreThreshold) continue;
 
-    final cx = out[0][i] * coordScale;
-    final cy = out[1][i] * coordScale;
-    final w = out[2][i] * coordScale;
-    final h = out[3][i] * coordScale;
+    final cx = at(0, i) * coordScale;
+    final cy = at(1, i) * coordScale;
+    final w = at(2, i) * coordScale;
+    final h = at(3, i) * coordScale;
 
     // undo letterbox to get original photo pixels
     final left = ((cx - w / 2) - padX) / scale;
