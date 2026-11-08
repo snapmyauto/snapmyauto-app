@@ -167,7 +167,7 @@ class _Details extends ConsumerWidget {
           PrimaryButton(
             label: l10n.scanDetailAdvice,
             icon: LucideIcons.clipboardList,
-            onPressed: () => context.push('/home/triage', extra: result),
+            onPressed: () => context.push('/triage', extra: result),
           ),
           const SizedBox(height: 10),
           SecondaryButton(

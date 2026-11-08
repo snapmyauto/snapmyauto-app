@@ -69,7 +69,7 @@ class _ScanRow extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
           onTap: result == null
               ? null
-              : () => context.push('/home/triage', extra: result),
+              : () => context.push('/triage', extra: result),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
