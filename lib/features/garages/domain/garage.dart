@@ -1,6 +1,5 @@
 import 'package:latlong2/latlong.dart';
 
-// A single garage returned by the Overpass API.
 class Garage {
   const Garage({
     required this.id,
@@ -25,7 +24,7 @@ class Garage {
     return '${(distanceMeters / 1000).toStringAsFixed(1)} km';
   }
 
-  // Overpass gives nodes with lat/lon and ways with a "center" object.
+  // ways come with a center point instead of lat/lon
   static Garage? fromOverpass(Map<String, dynamic> json, LatLng from) {
     final center = json['center'] as Map<String, dynamic>?;
     final lat = (json['lat'] ?? center?['lat']) as num?;
@@ -45,6 +44,34 @@ class Garage {
       phone: (tags['phone'] ?? tags['contact:phone']) as String?,
       address: _address(tags),
       openingHours: tags['opening_hours'] as String?,
+    );
+  }
+
+  // nominatim sends lat/lon as text and the address as one long line
+  static Garage? fromNominatim(Map<String, dynamic> json, LatLng from) {
+    final lat = double.tryParse('${json['lat']}');
+    final lon = double.tryParse('${json['lon']}');
+    if (lat == null || lon == null) return null;
+
+    final extra = (json['extratags'] as Map?)?.cast<String, dynamic>() ?? {};
+    final name = (json['name'] as String?)?.trim() ?? '';
+    final parts = (json['display_name'] as String? ?? '')
+        .split(', ')
+        .where((p) => p.trim().isNotEmpty)
+        .toList();
+    if (name.isNotEmpty && parts.isNotEmpty && parts.first == name) {
+      parts.removeAt(0);
+    }
+    final point = LatLng(lat, lon);
+
+    return Garage(
+      id: '${json['osm_type']}/${json['osm_id']}',
+      name: name.isEmpty ? 'Unnamed garage' : name,
+      location: point,
+      distanceMeters: const Distance().as(LengthUnit.Meter, from, point),
+      phone: (extra['phone'] ?? extra['contact:phone']) as String?,
+      address: parts.isEmpty ? null : parts.take(3).join(', '),
+      openingHours: extra['opening_hours'] as String?,
     );
   }
 
