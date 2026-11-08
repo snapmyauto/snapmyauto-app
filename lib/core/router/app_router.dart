@@ -13,6 +13,8 @@ import '../../features/reminders/presentation/reminder_form_screen.dart';
 import '../../features/reminders/presentation/reminders_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
+import '../../features/scan/domain/scan_draft.dart';
+import '../../features/scan/presentation/scan_review_screen.dart';
 import '../../features/scan/presentation/scan_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/vehicles/presentation/vehicle_detail_screen.dart';
@@ -160,6 +162,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/scan',
         parentNavigatorKey: _rootKey,
         builder: (context, state) => const ScanScreen(),
+        routes: [
+          GoRoute(
+            path: 'review',
+            redirect: (context, state) =>
+                state.extra is ScanDraft ? null : '/scan',
+            builder: (context, state) =>
+                ScanReviewScreen(draft: state.extra! as ScanDraft),
+          ),
+        ],
       ),
     ],
   );

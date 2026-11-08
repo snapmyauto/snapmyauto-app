@@ -8,6 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../data/dashlight_detector.dart';
+import '../domain/scan_draft.dart';
+import '../domain/scan_record.dart';
+import 'widgets/scan_failed_sheet.dart';
 
 class ScanScreen extends ConsumerStatefulWidget {
   const ScanScreen({super.key});
@@ -117,7 +120,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     setState(() => _busy = true);
     try {
       final file = await camera.takePicture();
-      await _analyse(await file.readAsBytes());
+      await _analyse(await file.readAsBytes(), ScanSource.camera);
     } catch (e) {
       _showError('Could not take the photo. Try again.');
     }
@@ -131,21 +134,42 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     );
     if (file == null) return;
     setState(() => _busy = true);
-    await _analyse(await file.readAsBytes());
+    await _analyse(await file.readAsBytes(), ScanSource.gallery);
   }
 
-  Future<void> _analyse(Uint8List bytes) async {
+  Future<void> _analyse(Uint8List bytes, ScanSource source) async {
+    final DetectionResult result;
     try {
       final detector = ref.read(dashlightDetectorProvider);
       await detector.load();
-      final result = await detector.detect(bytes);
-      if (!mounted) return;
-      setState(() => _busy = false);
-      // temp: the next step swaps this for the detection review screen
-      _showResults(result);
+      result = await detector.detect(bytes);
     } catch (e) {
       _showError('Scan failed. Try again.');
+      return;
     }
+    if (!mounted) return;
+    setState(() => _busy = false);
+
+    if (result.detections.isEmpty) {
+      final action = await ScanFailedSheet.show(context);
+      if (action == ScanFailedAction.pickPhoto) await _pickPhoto();
+      return;
+    }
+
+    final draft = ScanDraft(photo: bytes, result: result, source: source);
+    await _setPreview(false);
+    if (!mounted) return;
+    await context.push('/scan/review', extra: draft);
+    await _setPreview(true);
+  }
+
+  // no need to keep the camera running while the review screen is open
+  Future<void> _setPreview(bool on) async {
+    final camera = _camera;
+    if (camera == null || !camera.value.isInitialized) return;
+    try {
+      on ? await camera.resumePreview() : await camera.pausePreview();
+    } on CameraException catch (_) {}
   }
 
   void _showError(String message) {
@@ -153,32 +177,6 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     setState(() => _busy = false);
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  void _showResults(DetectionResult result) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (ctx) => Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              result.detections.isEmpty
-                  ? 'No warning light found'
-                  : '${result.detections.length} light(s) found',
-              style: Theme.of(ctx).textTheme.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 8),
-            for (final d in result.detections)
-              Text('${d.label}  ${(d.score * 100).toStringAsFixed(0)}%'),
-            Text('${result.elapsed.inMilliseconds} ms'),
-          ],
-        ),
-      ),
-    );
   }
 
   @override
