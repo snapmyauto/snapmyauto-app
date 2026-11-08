@@ -195,4 +195,39 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get historyNoCar => 'වාහනයක් නැත';
+
+  @override
+  String get scanDetailTitle => 'ස්කෑන් විස්තර';
+
+  @override
+  String get scanDetailGone => 'මෙම ස්කෑන් එක මකා දමා ඇත.';
+
+  @override
+  String get scanDetailLights => 'හමු වූ ලාම්පු';
+
+  @override
+  String scanDetailSure(int percent) {
+    return '$percent% විශ්වාසයි';
+  }
+
+  @override
+  String get scanDetailAdvice => 'උපදෙස් බලන්න';
+
+  @override
+  String get scanDetailAskAi => 'මේ ගැන AI ගෙන් අහන්න';
+
+  @override
+  String get scanDetailDeleteTitle => 'මෙම ස්කෑන් එක මකන්නද?';
+
+  @override
+  String get scanDetailDeleteBody => 'මෙය ආපසු හැරවිය නොහැක.';
+
+  @override
+  String get cancel => 'අවලංගු කරන්න';
+
+  @override
+  String get sourceCamera => 'කැමරාව';
+
+  @override
+  String get sourceGallery => 'ඡායාරූපය';
 }

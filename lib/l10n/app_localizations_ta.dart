@@ -196,4 +196,39 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get historyNoCar => 'வாகனம் இல்லை';
+
+  @override
+  String get scanDetailTitle => 'ஸ்கேன் விவரங்கள்';
+
+  @override
+  String get scanDetailGone => 'இந்த ஸ்கேன் நீக்கப்பட்டது.';
+
+  @override
+  String get scanDetailLights => 'கண்டறிந்த விளக்குகள்';
+
+  @override
+  String scanDetailSure(int percent) {
+    return '$percent% உறுதி';
+  }
+
+  @override
+  String get scanDetailAdvice => 'ஆலோசனையைப் பார்';
+
+  @override
+  String get scanDetailAskAi => 'இதைப் பற்றி AI இடம் கேள்';
+
+  @override
+  String get scanDetailDeleteTitle => 'இந்த ஸ்கேனை நீக்கவா?';
+
+  @override
+  String get scanDetailDeleteBody => 'இதைச் செயல்தவிர்க்க முடியாது.';
+
+  @override
+  String get cancel => 'ரத்து செய்';
+
+  @override
+  String get sourceCamera => 'கேமரா';
+
+  @override
+  String get sourceGallery => 'புகைப்படம்';
 }

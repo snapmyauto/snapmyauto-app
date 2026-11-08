@@ -453,6 +453,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No car'**
   String get historyNoCar;
+
+  /// No description provided for @scanDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan details'**
+  String get scanDetailTitle;
+
+  /// No description provided for @scanDetailGone.
+  ///
+  /// In en, this message translates to:
+  /// **'This scan was deleted.'**
+  String get scanDetailGone;
+
+  /// No description provided for @scanDetailLights.
+  ///
+  /// In en, this message translates to:
+  /// **'Lights found'**
+  String get scanDetailLights;
+
+  /// No description provided for @scanDetailSure.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% sure'**
+  String scanDetailSure(int percent);
+
+  /// No description provided for @scanDetailAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'See advice'**
+  String get scanDetailAdvice;
+
+  /// No description provided for @scanDetailAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI about this'**
+  String get scanDetailAskAi;
+
+  /// No description provided for @scanDetailDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this scan?'**
+  String get scanDetailDeleteTitle;
+
+  /// No description provided for @scanDetailDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This can\'t be undone.'**
+  String get scanDetailDeleteBody;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @sourceCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get sourceCamera;
+
+  /// No description provided for @sourceGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get sourceGallery;
 }
 
 class _AppLocalizationsDelegate

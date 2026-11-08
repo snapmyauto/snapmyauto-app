@@ -194,4 +194,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyNoCar => 'No car';
+
+  @override
+  String get scanDetailTitle => 'Scan details';
+
+  @override
+  String get scanDetailGone => 'This scan was deleted.';
+
+  @override
+  String get scanDetailLights => 'Lights found';
+
+  @override
+  String scanDetailSure(int percent) {
+    return '$percent% sure';
+  }
+
+  @override
+  String get scanDetailAdvice => 'See advice';
+
+  @override
+  String get scanDetailAskAi => 'Ask AI about this';
+
+  @override
+  String get scanDetailDeleteTitle => 'Delete this scan?';
+
+  @override
+  String get scanDetailDeleteBody => 'This can\'t be undone.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get sourceCamera => 'Camera';
+
+  @override
+  String get sourceGallery => 'Photo';
 }

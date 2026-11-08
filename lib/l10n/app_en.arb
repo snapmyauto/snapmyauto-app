@@ -86,5 +86,23 @@
   "historyDeleted": "Scan deleted",
   "historyUndo": "Undo",
   "historyDelete": "Delete",
-  "historyNoCar": "No car"
+  "historyNoCar": "No car",
+  "scanDetailTitle": "Scan details",
+  "scanDetailGone": "This scan was deleted.",
+  "scanDetailLights": "Lights found",
+  "scanDetailSure": "{percent}% sure",
+  "@scanDetailSure": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "scanDetailAdvice": "See advice",
+  "scanDetailAskAi": "Ask AI about this",
+  "scanDetailDeleteTitle": "Delete this scan?",
+  "scanDetailDeleteBody": "This can't be undone.",
+  "cancel": "Cancel",
+  "sourceCamera": "Camera",
+  "sourceGallery": "Photo"
 }

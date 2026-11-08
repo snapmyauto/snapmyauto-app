@@ -10,6 +10,7 @@ import '../../features/about/presentation/about_screen.dart';
 import '../../features/ai_chat/domain/chat_context.dart';
 import '../../features/ai_chat/presentation/ai_chat_screen.dart';
 import '../../features/history/presentation/history_screen.dart';
+import '../../features/history/presentation/scan_detail_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
@@ -181,6 +182,14 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/history',
                 builder: (context, state) => const HistoryScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    parentNavigatorKey: _rootKey,
+                    builder: (context, state) =>
+                        ScanDetailScreen(scanId: state.pathParameters['id']!),
+                  ),
+                ],
               ),
             ],
           ),

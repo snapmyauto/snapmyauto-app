@@ -58,5 +58,16 @@
   "historyDeleted": "ஸ்கேன் நீக்கப்பட்டது",
   "historyUndo": "செயல்தவிர்",
   "historyDelete": "நீக்கு",
-  "historyNoCar": "வாகனம் இல்லை"
+  "historyNoCar": "வாகனம் இல்லை",
+  "scanDetailTitle": "ஸ்கேன் விவரங்கள்",
+  "scanDetailGone": "இந்த ஸ்கேன் நீக்கப்பட்டது.",
+  "scanDetailLights": "கண்டறிந்த விளக்குகள்",
+  "scanDetailSure": "{percent}% உறுதி",
+  "scanDetailAdvice": "ஆலோசனையைப் பார்",
+  "scanDetailAskAi": "இதைப் பற்றி AI இடம் கேள்",
+  "scanDetailDeleteTitle": "இந்த ஸ்கேனை நீக்கவா?",
+  "scanDetailDeleteBody": "இதைச் செயல்தவிர்க்க முடியாது.",
+  "cancel": "ரத்து செய்",
+  "sourceCamera": "கேமரா",
+  "sourceGallery": "புகைப்படம்"
 }
