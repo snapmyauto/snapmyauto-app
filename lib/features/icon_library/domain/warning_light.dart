@@ -1,4 +1,4 @@
-enum LightSeverity { stop, soon, safe, info }
+import '../../../core/theme/severity.dart';
 
 enum CanDrive { yes, short, no }
 
@@ -21,7 +21,7 @@ class WarningLight {
   // same as the model label, e.g. "oil_pressure"
   final String id;
   final String name;
-  final LightSeverity severity;
+  final Severity severity;
   final LightCategory category;
   final String meaning;
   final List<String> causes;
@@ -39,9 +39,7 @@ class WarningLight {
     return WarningLight(
       id: json['id'] as String,
       name: json['name'] as String,
-      severity:
-          LightSeverity.values.asNameMap()[json['severity']] ??
-          LightSeverity.info,
+      severity: Severity.values.asNameMap()[json['severity']] ?? Severity.info,
       category:
           LightCategory.values.asNameMap()[json['category']] ??
           LightCategory.safety,

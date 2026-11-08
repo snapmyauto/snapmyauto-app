@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/theme/severity.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../data/warning_light_repository.dart';
 import '../domain/warning_light.dart';
@@ -211,7 +212,6 @@ class _LightTile extends StatelessWidget {
         onTap: () => context.push('/library/${light.id}'),
         child: Stack(
           children: [
-            // icon and name sit in the middle of the tile
             Positioned.fill(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -238,7 +238,6 @@ class _LightTile extends StatelessWidget {
                 ),
               ),
             ),
-            // small dot shows how serious the light is
             Positioned(
               top: 10,
               right: 10,
