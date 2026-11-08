@@ -7,6 +7,8 @@ import 'package:snapmyauto/features/auth/presentation/login_screen.dart';
 import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
 import '../../features/about/presentation/about_screen.dart';
+import '../../features/ai_chat/domain/chat_context.dart';
+import '../../features/ai_chat/presentation/ai_chat_screen.dart';
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
@@ -46,6 +48,16 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      GoRoute(
+        path: '/chat',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) {
+          final extra = state.extra;
+          return AiChatScreen(
+            chatContext: extra is ChatContext ? extra : const ChatContext(),
+          );
+        },
+      ),
       GoRoute(
         path: '/about',
         parentNavigatorKey: _rootKey,
@@ -135,8 +147,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                     redirect: (context, state) =>
                         state.extra is TriageResult ? null : '/home',
                     // temp: the triage result screen comes in #8
-                    builder: (context, state) =>
-                        const PlaceholderScreen(title: 'Triage result'),
+                    builder: (context, state) => PlaceholderScreen(
+                      title: 'Triage result',
+                      actionLabel: 'Ask AI',
+                      onAction: () => context.push(
+                        '/chat',
+                        extra: ChatContext(
+                          triage: state.extra! as TriageResult,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
