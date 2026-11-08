@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,10 +38,13 @@ class ScanRepository {
         .map((doc) => doc.exists ? ScanRecord.fromDoc(doc) : null);
   }
 
-  // returns the scan with its new id
-  Future<ScanRecord> add(String uid, ScanRecord scan) async {
+  // returns at once with the new id, firestore keeps the write and
+  // sends it when the phone is online
+  ScanRecord add(String uid, ScanRecord scan) {
     final ref = _col(uid).doc();
-    await ref.set({...scan.toMap(), 'createdAt': FieldValue.serverTimestamp()});
+    unawaited(
+      ref.set({...scan.toMap(), 'createdAt': FieldValue.serverTimestamp()}),
+    );
     return scan.copyWith(id: ref.id);
   }
 
