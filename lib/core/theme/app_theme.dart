@@ -6,11 +6,27 @@ import 'severity_colors.dart';
 
 ThemeData buildTheme(AppAccent accent, Brightness brightness) {
   final isLight = brightness == Brightness.light;
-  final scheme = ColorScheme.fromSeed(
-    seedColor: AppColors.seed(accent),
-    brightness: brightness,
-    dynamicSchemeVariant: DynamicSchemeVariant.fidelity, // keeps brand colour exact
-  );
+  final brand = AppColors.seed(accent);
+  const onBrand = Colors.white;
+  final card = AppColors.card(accent, brightness);
+  final border = AppColors.border(accent, brightness);
+  final text = AppColors.text(accent, brightness);
+
+  final scheme =
+      ColorScheme.fromSeed(
+        seedColor: brand,
+        brightness: brightness,
+        dynamicSchemeVariant:
+            DynamicSchemeVariant.fidelity, // keeps brand colour exact
+      ).copyWith(
+        primary: AppColors.accentText(accent, brightness),
+        primaryContainer: AppColors.tile(accent, brightness),
+        onPrimaryContainer: AppColors.accentText(accent, brightness),
+        surfaceContainerLowest: card,
+        outlineVariant: border,
+        onSurface: text,
+        onSurfaceVariant: AppColors.mutedText(accent, brightness),
+      );
   final base = ThemeData(
     useMaterial3: true,
     colorScheme: scheme,
@@ -18,13 +34,21 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
   );
   final radius16 = BorderRadius.circular(16);
 
+  bool selected(Set<WidgetState> states) =>
+      states.contains(WidgetState.selected);
+
   return base.copyWith(
     scaffoldBackgroundColor: AppColors.background(accent, brightness),
-    extensions: [isLight ? SeverityColors.light : SeverityColors.dark],
+    extensions: [
+      isLight ? SeverityColors.light : SeverityColors.dark,
+      BrandColors(fill: brand, onFill: onBrand),
+    ],
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         minimumSize: const Size.fromHeight(54),
         shape: RoundedRectangleBorder(borderRadius: radius16),
+        backgroundColor: brand,
+        foregroundColor: onBrand,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -34,25 +58,64 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
         side: BorderSide(color: scheme.primary, width: 2),
       ),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: brand,
+      foregroundColor: onBrand,
+      shape: const CircleBorder(),
+    ),
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith(
+        (s) => selected(s) ? onBrand : null,
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (s) => selected(s) ? brand : null,
+      ),
+    ),
+    chipTheme: ChipThemeData(
+      shape: const StadiumBorder(),
+      showCheckmark: false,
+      side: WidgetStateBorderSide.resolveWith(
+        (s) => selected(s) ? BorderSide.none : BorderSide(color: border),
+      ),
+      color: WidgetStateProperty.resolveWith((s) => selected(s) ? brand : card),
+      labelStyle: WidgetStateTextStyle.resolveWith(
+        (s) => TextStyle(
+          color: selected(s) ? onBrand : text,
+          fontSize: 13,
+          fontWeight: selected(s) ? FontWeight.w800 : FontWeight.w700,
+        ),
+      ),
+    ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (s) => selected(s) ? brand : card,
+        ),
+        foregroundColor: WidgetStateProperty.resolveWith(
+          (s) => selected(s) ? onBrand : text,
+        ),
+        side: WidgetStatePropertyAll(BorderSide(color: border)),
+      ),
+    ),
     cardTheme: CardThemeData(
       elevation: 0,
       margin: EdgeInsets.zero,
-      color: scheme.surfaceContainerLowest,
+      color: card,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: scheme.outlineVariant),
+        side: BorderSide(color: border),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: scheme.surfaceContainerLowest,
+      fillColor: card,
       border: OutlineInputBorder(
         borderRadius: radius16,
-        borderSide: BorderSide(color: scheme.outlineVariant),
+        borderSide: BorderSide(color: border),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: radius16,
-        borderSide: BorderSide(color: scheme.outlineVariant),
+        borderSide: BorderSide(color: border),
       ),
     ),
   );
