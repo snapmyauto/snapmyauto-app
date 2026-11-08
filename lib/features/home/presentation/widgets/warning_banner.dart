@@ -63,7 +63,7 @@ class WarningBanner extends ConsumerWidget {
                         '${severity.label} · '
                         '${context.l10n.homeWarningScanned(when)}',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: colors.onSurfaceVariant,
                         ),
@@ -83,7 +83,7 @@ class WarningBanner extends ConsumerWidget {
                   child: Text(
                     context.l10n.homeView,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight: FontWeight.w800,
                       color: colors.onSurface,
                     ),

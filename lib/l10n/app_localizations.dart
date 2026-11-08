@@ -637,7 +637,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAiButtonSub.
   ///
   /// In en, this message translates to:
-  /// **'Show a quick button to ask the AI'**
+  /// **'Quick button to ask the AI'**
   String get settingsAiButtonSub;
 
   /// No description provided for @settingsAccount.

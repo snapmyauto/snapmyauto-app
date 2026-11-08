@@ -45,7 +45,7 @@ class GlassNavBar extends StatelessWidget {
                   label,
                   style: TextStyle(
                     color: color,
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
                   ),
                 ),

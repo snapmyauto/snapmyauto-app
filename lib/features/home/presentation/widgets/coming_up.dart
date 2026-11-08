@@ -85,14 +85,14 @@ class _ReminderRow extends StatelessWidget {
                       Text(
                         reminder.title,
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                       Text(
                         formatDate(reminder.dueDate),
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: colors.onSurfaceVariant,
                         ),
                       ),
@@ -111,7 +111,7 @@ class _ReminderRow extends StatelessWidget {
                   child: Text(
                     dueLabel(context, reminder.dueDate),
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w800,
                       color: colors.onSurface,
                     ),
@@ -148,7 +148,7 @@ class _EmptyRow extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),

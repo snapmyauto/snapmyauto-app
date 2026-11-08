@@ -131,7 +131,7 @@ class _Details extends ConsumerWidget {
         const SizedBox(height: 4),
         Text(
           info,
-          style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+          style: TextStyle(fontSize: 14, color: colors.onSurfaceVariant),
         ),
         const SizedBox(height: 22),
         Text(

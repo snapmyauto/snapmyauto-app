@@ -57,7 +57,7 @@ class PillPicker<T> extends StatelessWidget {
                     child: Text(
                       entry.value,
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
                         fontWeight: entry.key == selected
                             ? FontWeight.w800
                             : FontWeight.w700,
@@ -167,7 +167,7 @@ class _Swatch extends StatelessWidget {
                 Text(
                   label,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w800,
                   ),
                 ),

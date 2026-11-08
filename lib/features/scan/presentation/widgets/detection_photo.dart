@@ -77,7 +77,7 @@ class DetectionPhoto extends StatelessWidget {
                       backgroundColor: Colors.white.withValues(alpha: 0.16),
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -136,7 +136,7 @@ class _Box extends StatelessWidget {
                 box.tag,
                 style: TextStyle(
                   color: dark ? Colors.white : Colors.black,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: FontWeight.w800,
                 ),
               ),

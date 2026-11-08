@@ -86,7 +86,7 @@ class SettingsLink extends StatelessWidget {
             Text(
               value!,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
                 color: colors.onSurfaceVariant,
               ),

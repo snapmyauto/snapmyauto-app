@@ -61,7 +61,7 @@ class ScanFailedSheet extends StatelessWidget {
                     Text(
                       "Let's try that again",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
                         color: colors.onSurfaceVariant,
                       ),
                     ),
@@ -87,7 +87,7 @@ class ScanFailedSheet extends StatelessWidget {
                               child: Text(
                                 '${i + 1}',
                                 style: const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -96,7 +96,7 @@ class ScanFailedSheet extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 tip,
-                                style: const TextStyle(fontSize: 14),
+                                style: const TextStyle(fontSize: 15),
                               ),
                             ),
                           ],

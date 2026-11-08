@@ -93,7 +93,7 @@ class _ScanRow extends ConsumerWidget {
                           if (extra > 0) context.l10n.homeMoreLights(extra),
                         ].join(' · '),
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: colors.onSurfaceVariant,
                         ),
                       ),

@@ -27,7 +27,7 @@ class SeverityBadge extends StatelessWidget {
             '$prefix${severity.label}',
             style: TextStyle(
               color: fg,
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -60,7 +60,7 @@ class SeverityChip extends StatelessWidget {
             label ?? severity.label,
             style: TextStyle(
               color: Theme.of(context).colorScheme.onSurface,
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: FontWeight.w800,
             ),
           ),

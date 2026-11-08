@@ -155,7 +155,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
               child: Text(
                 groupName(group),
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w800,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -231,23 +231,29 @@ class _SeverityChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        ChoiceChip(
-          label: Text(context.l10n.historyAll),
-          selected: selected == null,
-          onSelected: (_) => onChanged(null),
-        ),
-        for (final s in [Severity.stop, Severity.soon, Severity.safe])
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
           ChoiceChip(
-            avatar: CircleAvatar(radius: 4, backgroundColor: s.color(context)),
-            label: Text(s.label),
-            selected: selected == s,
-            onSelected: (on) => onChanged(on ? s : null),
+            label: Text(context.l10n.historyAll),
+            selected: selected == null,
+            onSelected: (_) => onChanged(null),
           ),
-      ],
+          for (final s in [Severity.stop, Severity.soon, Severity.safe]) ...[
+            const SizedBox(width: 8),
+            ChoiceChip(
+              avatar: CircleAvatar(
+                radius: 4,
+                backgroundColor: s.color(context),
+              ),
+              label: Text(s.label),
+              selected: selected == s,
+              onSelected: (on) => onChanged(on ? s : null),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

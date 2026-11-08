@@ -40,7 +40,7 @@ class InfoCard extends StatelessWidget {
                       child: Text(
                         title!,
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
                           fontWeight: FontWeight.w800,
                           color: colors.onSurfaceVariant,
                         ),

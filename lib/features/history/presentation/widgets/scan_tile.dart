@@ -61,7 +61,7 @@ class ScanTile extends ConsumerWidget {
                     Text(
                       details,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         color: colors.onSurfaceVariant,
                       ),
                     ),

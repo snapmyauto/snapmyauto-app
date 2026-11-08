@@ -109,7 +109,7 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
               'Review detection',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
-            Text('Step 1 of 3', style: TextStyle(fontSize: 12)),
+            Text('Step 1 of 3', style: TextStyle(fontSize: 13)),
           ],
         ),
         bottom: PreferredSize(
@@ -184,7 +184,7 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
                   Text(
                     'Tap to include',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w700,
                       color: colors.onSurfaceVariant,
                     ),
@@ -295,7 +295,7 @@ class _LightRow extends StatelessWidget {
                           Text(
                             light.severity.lightColour,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: colors.onSurfaceVariant,
                             ),
                           ),
@@ -311,7 +311,7 @@ class _LightRow extends StatelessWidget {
                   Text(
                     'Confidence',
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                       color: colors.onSurfaceVariant,
                     ),
@@ -330,7 +330,7 @@ class _LightRow extends StatelessWidget {
                   Text(
                     _percent(item.light.score),
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -340,7 +340,7 @@ class _LightRow extends StatelessWidget {
                 const SizedBox(height: 12),
                 const Text(
                   'Not sure, is it one of these?',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
                 Wrap(

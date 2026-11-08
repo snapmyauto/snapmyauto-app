@@ -72,7 +72,7 @@ class HomeHeader extends ConsumerWidget {
         const SizedBox(height: 18),
         Text(
           _greeting(context),
-          style: TextStyle(fontSize: 14, color: colors.onSurfaceVariant),
+          style: TextStyle(fontSize: 15, color: colors.onSurfaceVariant),
         ),
         Text(
           firstName,

@@ -288,7 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAiButton => 'AI chat button';
 
   @override
-  String get settingsAiButtonSub => 'Show a quick button to ask the AI';
+  String get settingsAiButtonSub => 'Quick button to ask the AI';
 
   @override
   String get settingsAccount => 'Account and tools';

@@ -80,7 +80,9 @@ class VehicleHero extends ConsumerWidget {
                       message: l10n.homeChangeCar,
                       child: ActionChip(
                         onPressed: () => _pickCar(context, ref),
-                        backgroundColor: fg.withValues(alpha: 0.14),
+                        color: WidgetStatePropertyAll(
+                          fg.withValues(alpha: 0.14),
+                        ),
                         side: BorderSide.none,
                         shape: const StadiumBorder(),
                         label: Row(
@@ -107,7 +109,7 @@ class VehicleHero extends ConsumerWidget {
                   Text(
                     '${vehicle.year} · ${vehicle.fuelType.label}',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: soft,
                     ),
@@ -118,7 +120,7 @@ class VehicleHero extends ConsumerWidget {
               Text(
                 l10n.homeOdometer,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: soft,
                 ),
@@ -184,7 +186,7 @@ class _Stat extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: fg.withValues(alpha: 0.75),
               ),
@@ -195,7 +197,7 @@ class _Stat extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: FontWeight.w800,
                 color: fg,
               ),
@@ -230,7 +232,7 @@ class AddCarCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               l10n.homeAddCarBody,
-              style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+              style: TextStyle(fontSize: 14, color: colors.onSurfaceVariant),
             ),
             const SizedBox(height: 14),
             FilledButton.icon(

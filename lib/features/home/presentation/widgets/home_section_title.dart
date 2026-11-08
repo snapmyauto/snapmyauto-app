@@ -29,7 +29,7 @@ class HomeSectionTitle extends StatelessWidget {
               onPressed: onAction,
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),

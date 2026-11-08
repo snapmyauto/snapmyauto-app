@@ -138,7 +138,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                       ? 'Knows your scan & vehicle'
                       : 'Ask about your car',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: context.severity.safe,
                   ),
@@ -230,7 +230,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                     'AI can make mistakes. For safety, follow the triage result.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 12,
                       color: colors.onSurfaceVariant,
                     ),
                   ),
@@ -273,7 +273,7 @@ class _ContextChip extends StatelessWidget {
             child: Text(
               '${triage.worstLight!.name}$car',
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -293,7 +293,7 @@ class _Welcome extends StatelessWidget {
         'Ask anything about your warning lights or your car.',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 14,
+          fontSize: 15,
           color: Theme.of(context).colorScheme.onSurfaceVariant,
         ),
       ),
@@ -340,7 +340,7 @@ class _Bubble extends StatelessWidget {
               child: SelectableText(
                 message.text,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   height: 1.5,
                   color: mine ? context.brand.onFill : colors.onSurface,
                 ),
