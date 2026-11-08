@@ -61,7 +61,6 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: brand,
       foregroundColor: onBrand,
-      shape: const CircleBorder(),
     ),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith(
@@ -78,23 +77,12 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
         (s) => selected(s) ? BorderSide.none : BorderSide(color: border),
       ),
       color: WidgetStateProperty.resolveWith((s) => selected(s) ? brand : card),
-      labelStyle: WidgetStateTextStyle.resolveWith(
-        (s) => TextStyle(
-          color: selected(s) ? onBrand : text,
-          fontSize: 13,
-          fontWeight: selected(s) ? FontWeight.w800 : FontWeight.w700,
-        ),
-      ),
-    ),
-    segmentedButtonTheme: SegmentedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.resolveWith(
-          (s) => selected(s) ? brand : card,
-        ),
-        foregroundColor: WidgetStateProperty.resolveWith(
+      labelStyle: TextStyle(
+        color: WidgetStateColor.resolveWith(
           (s) => selected(s) ? onBrand : text,
         ),
-        side: WidgetStatePropertyAll(BorderSide(color: border)),
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
       ),
     ),
     cardTheme: CardThemeData(
