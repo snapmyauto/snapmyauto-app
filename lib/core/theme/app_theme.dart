@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 import 'severity_colors.dart';
@@ -30,7 +29,7 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
   final base = ThemeData(
     useMaterial3: true,
     colorScheme: scheme,
-    fontFamily: GoogleFonts.manrope().fontFamily,
+    fontFamily: 'Manrope',
   );
   final radius16 = BorderRadius.circular(16);
 
@@ -81,7 +80,7 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
         color: WidgetStateColor.resolveWith(
           (s) => selected(s) ? onBrand : text,
         ),
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: FontWeight.w700,
       ),
     ),
