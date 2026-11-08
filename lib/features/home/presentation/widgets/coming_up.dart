@@ -6,12 +6,12 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/theme/severity_colors.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../core/utils/l10n.dart';
-import '../../../../core/widgets/section_header.dart';
 import '../../../reminders/data/reminder_repository.dart';
 import '../../../reminders/domain/reminder.dart';
 import '../../../reminders/presentation/widgets/reminder_type_ui.dart';
 import '../../data/home_providers.dart';
 import 'date_labels.dart';
+import 'home_section_title.dart';
 
 class ComingUp extends ConsumerWidget {
   const ComingUp({super.key});
@@ -25,12 +25,12 @@ class ComingUp extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(
+        HomeSectionTitle(
           l10n.homeComingUp,
           actionLabel: l10n.homeSeeAll,
           onAction: () => context.push('/reminders'),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         if (loading)
           const Center(child: CircularProgressIndicator())
         else if (reminders.isEmpty)

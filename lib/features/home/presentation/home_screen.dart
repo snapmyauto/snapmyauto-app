@@ -27,8 +27,8 @@ class HomeScreen extends ConsumerWidget {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          // room at the bottom for the glass bar
-          padding: const EdgeInsets.fromLTRB(18, 16, 18, 130),
+          // room at the bottom for the glass bar and the ai button
+          padding: const EdgeInsets.fromLTRB(18, 16, 18, 170),
           children: [
             const HomeHeader(),
             const SizedBox(height: 18),

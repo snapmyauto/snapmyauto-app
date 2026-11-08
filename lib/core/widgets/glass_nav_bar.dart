@@ -118,26 +118,36 @@ class GlassNavBar extends StatelessWidget {
               top: -26,
               child: Tooltip(
                 message: l10n.navScan,
-                child: Material(
-                  color: brand.fill,
-                  elevation: 6,
-                  shadowColor: brand.fill.withValues(alpha: 0.5),
-                  shape: CircleBorder(
-                    side: BorderSide(
-                      color: theme.scaffoldBackgroundColor,
-                      width: 6,
-                    ),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: brand.fill.withValues(alpha: 0.4),
+                        blurRadius: 24,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: onScan,
-                    child: SizedBox(
-                      width: 68,
-                      height: 68,
-                      child: Icon(
-                        LucideIcons.scanLine,
-                        color: brand.onFill,
-                        size: 28,
+                  child: Material(
+                    color: brand.fill,
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: theme.scaffoldBackgroundColor,
+                        width: 6,
+                      ),
+                    ),
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: onScan,
+                      child: SizedBox(
+                        width: 68,
+                        height: 68,
+                        child: Icon(
+                          LucideIcons.scanLine,
+                          color: brand.onFill,
+                          size: 28,
+                        ),
                       ),
                     ),
                   ),

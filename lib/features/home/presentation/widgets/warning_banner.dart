@@ -25,7 +25,12 @@ class WarningBanner extends ConsumerWidget {
       padding: const EdgeInsets.only(top: 14),
       child: Material(
         color: severity.tint(context),
-        borderRadius: BorderRadius.circular(22),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(22),
+          side: BorderSide(
+            color: severity.color(context).withValues(alpha: 0.35),
+          ),
+        ),
         child: InkWell(
           borderRadius: BorderRadius.circular(22),
           onTap: () => context.push('/home/triage', extra: result),
@@ -66,12 +71,22 @@ class WarningBanner extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Text(
-                  context.l10n.homeView,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w800,
-                    color: colors.onSurface,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: severity.color(context).withValues(alpha: 0.18),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
+                  child: Text(
+                    context.l10n.homeView,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                      color: colors.onSurface,
+                    ),
                   ),
                 ),
               ],

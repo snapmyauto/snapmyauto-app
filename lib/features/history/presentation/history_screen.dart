@@ -121,8 +121,8 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
     };
 
     return ListView(
-      // room at the bottom for the glass bar
-      padding: const EdgeInsets.fromLTRB(18, 4, 18, 130),
+      // room at the bottom for the glass bar and the ai button
+      padding: const EdgeInsets.fromLTRB(18, 4, 18, 170),
       children: [
         TextField(
           controller: _search,

@@ -7,10 +7,11 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return FloatingActionButton.small(
       tooltip: 'Ask AI',
+      shape: const CircleBorder(),
       onPressed: () => context.push('/chat'),
-      child: const Icon(LucideIcons.sparkles),
+      child: const Icon(LucideIcons.sparkles, size: 20),
     );
   }
 }
