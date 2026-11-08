@@ -80,8 +80,12 @@ class VehicleHero extends ConsumerWidget {
                       message: l10n.homeChangeCar,
                       child: ActionChip(
                         onPressed: () => _pickCar(context, ref),
+                        // chips have a solid canvas behind, so blend the colour
                         color: WidgetStatePropertyAll(
-                          fg.withValues(alpha: 0.14),
+                          Color.alphaBlend(
+                            fg.withValues(alpha: 0.14),
+                            context.brand.fill,
+                          ),
                         ),
                         side: BorderSide.none,
                         shape: const StadiumBorder(),
