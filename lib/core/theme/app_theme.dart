@@ -5,7 +5,7 @@ import 'severity_colors.dart';
 
 ThemeData buildTheme(AppAccent accent, Brightness brightness) {
   final isLight = brightness == Brightness.light;
-  final brand = AppColors.seed(accent);
+  final brand = AppColors.fill(accent, brightness);
   const onBrand = Colors.white;
   final card = AppColors.card(accent, brightness);
   final border = AppColors.border(accent, brightness);
@@ -13,7 +13,7 @@ ThemeData buildTheme(AppAccent accent, Brightness brightness) {
 
   final scheme =
       ColorScheme.fromSeed(
-        seedColor: brand,
+        seedColor: AppColors.seed(accent),
         brightness: brightness,
         dynamicSchemeVariant:
             DynamicSchemeVariant.fidelity, // keeps brand colour exact

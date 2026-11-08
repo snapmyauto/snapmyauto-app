@@ -36,6 +36,16 @@ class AppColors {
     blueDark: 0xFF0A0F1C,
   );
 
+  // a calmer blue in dark mode, the bright one glares on a dark page
+  static Color fill(AppAccent accent, Brightness brightness) => _pick(
+    accent,
+    brightness,
+    greenLight: 0xFF0B6E5F,
+    greenDark: 0xFF0B6E5F,
+    blueLight: 0xFF1F4FD8,
+    blueDark: 0xFF2A4A9E,
+  );
+
   static Color card(AppAccent accent, Brightness brightness) => _pick(
     accent,
     brightness,
