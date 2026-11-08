@@ -69,5 +69,40 @@
         "type": "int"
       }
     }
-  }
+  },
+  "historyTitle": "History",
+  "historyAllVehicles": "All vehicles",
+  "historySearch": "Search warnings",
+  "historyAll": "All",
+  "groupToday": "Today",
+  "groupYesterday": "Yesterday",
+  "groupThisWeek": "This week",
+  "groupOlder": "Earlier",
+  "historyEmptyTitle": "No scans yet",
+  "historyEmptyBody": "Scan a warning light and it shows up here.",
+  "historyNoMatch": "No scans match",
+  "historyNoMatchBody": "Try another search or filter.",
+  "historyClearFilters": "Clear filters",
+  "historyDeleted": "Scan deleted",
+  "historyUndo": "Undo",
+  "historyDelete": "Delete",
+  "historyNoCar": "No car",
+  "scanDetailTitle": "Scan details",
+  "scanDetailGone": "This scan was deleted.",
+  "scanDetailLights": "Lights found",
+  "scanDetailSure": "{percent}% sure",
+  "@scanDetailSure": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "scanDetailAdvice": "See advice",
+  "scanDetailAskAi": "Ask AI about this",
+  "scanDetailDeleteTitle": "Delete this scan?",
+  "scanDetailDeleteBody": "This can't be undone.",
+  "cancel": "Cancel",
+  "sourceCamera": "Camera",
+  "sourceGallery": "Photo"
 }

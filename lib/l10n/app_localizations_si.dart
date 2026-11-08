@@ -143,4 +143,91 @@ class AppLocalizationsSi extends AppLocalizations {
   String homeMoreLights(int count) {
     return '+$count තවත්';
   }
+
+  @override
+  String get historyTitle => 'ඉතිහාසය';
+
+  @override
+  String get historyAllVehicles => 'සියලු වාහන';
+
+  @override
+  String get historySearch => 'අනතුරු ඇඟවීම් සොයන්න';
+
+  @override
+  String get historyAll => 'සියල්ල';
+
+  @override
+  String get groupToday => 'අද';
+
+  @override
+  String get groupYesterday => 'ඊයේ';
+
+  @override
+  String get groupThisWeek => 'මේ සතිය';
+
+  @override
+  String get groupOlder => 'ඊට පෙර';
+
+  @override
+  String get historyEmptyTitle => 'තවම ස්කෑන් නැත';
+
+  @override
+  String get historyEmptyBody =>
+      'අනතුරු ඇඟවීමේ ලාම්පුවක් ස්කෑන් කළ විට එය මෙහි පෙන්වයි.';
+
+  @override
+  String get historyNoMatch => 'ගැළපෙන ස්කෑන් නැත';
+
+  @override
+  String get historyNoMatchBody => 'වෙනත් සෙවුමක් හෝ පෙරහනක් උත්සාහ කරන්න.';
+
+  @override
+  String get historyClearFilters => 'පෙරහන් ඉවත් කරන්න';
+
+  @override
+  String get historyDeleted => 'ස්කෑන් එක මකා දැමුණි';
+
+  @override
+  String get historyUndo => 'ආපසු';
+
+  @override
+  String get historyDelete => 'මකන්න';
+
+  @override
+  String get historyNoCar => 'වාහනයක් නැත';
+
+  @override
+  String get scanDetailTitle => 'ස්කෑන් විස්තර';
+
+  @override
+  String get scanDetailGone => 'මෙම ස්කෑන් එක මකා දමා ඇත.';
+
+  @override
+  String get scanDetailLights => 'හමු වූ ලාම්පු';
+
+  @override
+  String scanDetailSure(int percent) {
+    return '$percent% විශ්වාසයි';
+  }
+
+  @override
+  String get scanDetailAdvice => 'උපදෙස් බලන්න';
+
+  @override
+  String get scanDetailAskAi => 'මේ ගැන AI ගෙන් අහන්න';
+
+  @override
+  String get scanDetailDeleteTitle => 'මෙම ස්කෑන් එක මකන්නද?';
+
+  @override
+  String get scanDetailDeleteBody => 'මෙය ආපසු හැරවිය නොහැක.';
+
+  @override
+  String get cancel => 'අවලංගු කරන්න';
+
+  @override
+  String get sourceCamera => 'කැමරාව';
+
+  @override
+  String get sourceGallery => 'ඡායාරූපය';
 }

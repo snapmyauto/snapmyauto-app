@@ -351,6 +351,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'+{count} more'**
   String homeMoreLights(int count);
+
+  /// No description provided for @historyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyTitle;
+
+  /// No description provided for @historyAllVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'All vehicles'**
+  String get historyAllVehicles;
+
+  /// No description provided for @historySearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search warnings'**
+  String get historySearch;
+
+  /// No description provided for @historyAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get historyAll;
+
+  /// No description provided for @groupToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get groupToday;
+
+  /// No description provided for @groupYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get groupYesterday;
+
+  /// No description provided for @groupThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get groupThisWeek;
+
+  /// No description provided for @groupOlder.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get groupOlder;
+
+  /// No description provided for @historyEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No scans yet'**
+  String get historyEmptyTitle;
+
+  /// No description provided for @historyEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a warning light and it shows up here.'**
+  String get historyEmptyBody;
+
+  /// No description provided for @historyNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No scans match'**
+  String get historyNoMatch;
+
+  /// No description provided for @historyNoMatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another search or filter.'**
+  String get historyNoMatchBody;
+
+  /// No description provided for @historyClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get historyClearFilters;
+
+  /// No description provided for @historyDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan deleted'**
+  String get historyDeleted;
+
+  /// No description provided for @historyUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get historyUndo;
+
+  /// No description provided for @historyDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get historyDelete;
+
+  /// No description provided for @historyNoCar.
+  ///
+  /// In en, this message translates to:
+  /// **'No car'**
+  String get historyNoCar;
+
+  /// No description provided for @scanDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan details'**
+  String get scanDetailTitle;
+
+  /// No description provided for @scanDetailGone.
+  ///
+  /// In en, this message translates to:
+  /// **'This scan was deleted.'**
+  String get scanDetailGone;
+
+  /// No description provided for @scanDetailLights.
+  ///
+  /// In en, this message translates to:
+  /// **'Lights found'**
+  String get scanDetailLights;
+
+  /// No description provided for @scanDetailSure.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% sure'**
+  String scanDetailSure(int percent);
+
+  /// No description provided for @scanDetailAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'See advice'**
+  String get scanDetailAdvice;
+
+  /// No description provided for @scanDetailAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI about this'**
+  String get scanDetailAskAi;
+
+  /// No description provided for @scanDetailDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this scan?'**
+  String get scanDetailDeleteTitle;
+
+  /// No description provided for @scanDetailDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This can\'t be undone.'**
+  String get scanDetailDeleteBody;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @sourceCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get sourceCamera;
+
+  /// No description provided for @sourceGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get sourceGallery;
 }
 
 class _AppLocalizationsDelegate
