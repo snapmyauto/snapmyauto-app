@@ -143,4 +143,57 @@ class AppLocalizationsTa extends AppLocalizations {
   String homeMoreLights(int count) {
     return '+$count மேலும்';
   }
+
+  @override
+  String get historyTitle => 'வரலாறு';
+
+  @override
+  String get historyAllVehicles => 'அனைத்து வாகனங்கள்';
+
+  @override
+  String get historySearch => 'எச்சரிக்கைகளைத் தேடு';
+
+  @override
+  String get historyAll => 'அனைத்தும்';
+
+  @override
+  String get groupToday => 'இன்று';
+
+  @override
+  String get groupYesterday => 'நேற்று';
+
+  @override
+  String get groupThisWeek => 'இந்த வாரம்';
+
+  @override
+  String get groupOlder => 'முன்பு';
+
+  @override
+  String get historyEmptyTitle => 'இன்னும் ஸ்கேன்கள் இல்லை';
+
+  @override
+  String get historyEmptyBody =>
+      'எச்சரிக்கை விளக்கை ஸ்கேன் செய்தால் அது இங்கே தோன்றும்.';
+
+  @override
+  String get historyNoMatch => 'பொருந்தும் ஸ்கேன்கள் இல்லை';
+
+  @override
+  String get historyNoMatchBody =>
+      'வேறு தேடல் அல்லது வடிகட்டியை முயற்சிக்கவும்.';
+
+  @override
+  String get historyClearFilters => 'வடிகட்டிகளை அழி';
+
+  @override
+  String get historyDeleted => 'ஸ்கேன் நீக்கப்பட்டது';
+
+  @override
+  String get historyUndo => 'செயல்தவிர்';
+
+  @override
+  String get historyDelete => 'நீக்கு';
+
+  @override
+  String get historyNoCar => 'வாகனம் இல்லை';
 }

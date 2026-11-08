@@ -69,5 +69,22 @@
         "type": "int"
       }
     }
-  }
+  },
+  "historyTitle": "History",
+  "historyAllVehicles": "All vehicles",
+  "historySearch": "Search warnings",
+  "historyAll": "All",
+  "groupToday": "Today",
+  "groupYesterday": "Yesterday",
+  "groupThisWeek": "This week",
+  "groupOlder": "Earlier",
+  "historyEmptyTitle": "No scans yet",
+  "historyEmptyBody": "Scan a warning light and it shows up here.",
+  "historyNoMatch": "No scans match",
+  "historyNoMatchBody": "Try another search or filter.",
+  "historyClearFilters": "Clear filters",
+  "historyDeleted": "Scan deleted",
+  "historyUndo": "Undo",
+  "historyDelete": "Delete",
+  "historyNoCar": "No car"
 }

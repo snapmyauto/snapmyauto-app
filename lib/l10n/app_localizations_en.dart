@@ -143,4 +143,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String homeMoreLights(int count) {
     return '+$count more';
   }
+
+  @override
+  String get historyTitle => 'History';
+
+  @override
+  String get historyAllVehicles => 'All vehicles';
+
+  @override
+  String get historySearch => 'Search warnings';
+
+  @override
+  String get historyAll => 'All';
+
+  @override
+  String get groupToday => 'Today';
+
+  @override
+  String get groupYesterday => 'Yesterday';
+
+  @override
+  String get groupThisWeek => 'This week';
+
+  @override
+  String get groupOlder => 'Earlier';
+
+  @override
+  String get historyEmptyTitle => 'No scans yet';
+
+  @override
+  String get historyEmptyBody => 'Scan a warning light and it shows up here.';
+
+  @override
+  String get historyNoMatch => 'No scans match';
+
+  @override
+  String get historyNoMatchBody => 'Try another search or filter.';
+
+  @override
+  String get historyClearFilters => 'Clear filters';
+
+  @override
+  String get historyDeleted => 'Scan deleted';
+
+  @override
+  String get historyUndo => 'Undo';
+
+  @override
+  String get historyDelete => 'Delete';
+
+  @override
+  String get historyNoCar => 'No car';
 }

@@ -41,5 +41,22 @@
   "homeRecentScans": "මෑත ස්කෑන්",
   "homeNoScans": "තවම ස්කෑන් නැත",
   "homeNoScansBody": "ස්කෑන් කළ ලාම්පු මෙහි පෙන්වයි.",
-  "homeMoreLights": "+{count} තවත්"
+  "homeMoreLights": "+{count} තවත්",
+  "historyTitle": "ඉතිහාසය",
+  "historyAllVehicles": "සියලු වාහන",
+  "historySearch": "අනතුරු ඇඟවීම් සොයන්න",
+  "historyAll": "සියල්ල",
+  "groupToday": "අද",
+  "groupYesterday": "ඊයේ",
+  "groupThisWeek": "මේ සතිය",
+  "groupOlder": "ඊට පෙර",
+  "historyEmptyTitle": "තවම ස්කෑන් නැත",
+  "historyEmptyBody": "අනතුරු ඇඟවීමේ ලාම්පුවක් ස්කෑන් කළ විට එය මෙහි පෙන්වයි.",
+  "historyNoMatch": "ගැළපෙන ස්කෑන් නැත",
+  "historyNoMatchBody": "වෙනත් සෙවුමක් හෝ පෙරහනක් උත්සාහ කරන්න.",
+  "historyClearFilters": "පෙරහන් ඉවත් කරන්න",
+  "historyDeleted": "ස්කෑන් එක මකා දැමුණි",
+  "historyUndo": "ආපසු",
+  "historyDelete": "මකන්න",
+  "historyNoCar": "වාහනයක් නැත"
 }
