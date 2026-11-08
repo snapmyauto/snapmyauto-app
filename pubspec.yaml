@@ -53,6 +53,7 @@ dependencies:
   image_picker: ^1.2.4
   camera: ^0.12.2
   connectivity_plus: ^7.3.2
+  firebase_ai: ^5.1.0
 
 dev_dependencies:
   flutter_test:
