@@ -6,6 +6,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/theme/theme_providers.dart';
+import '../../ai_chat/data/chat_bubble_setting.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../profile/data/user_repository.dart';
 
@@ -16,6 +17,7 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final accent = ref.watch(accentProvider);
     final mode = ref.watch(themeModeProvider);
+    final showBubble = ref.watch(chatBubbleProvider);
     final sev = context.severity;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
     final profile = ref.watch(userProfileProvider).value;
@@ -89,6 +91,14 @@ class SettingsScreen extends ConsumerWidget {
                 ref.read(themeModeProvider.notifier).change(s.first),
           ),
           const SizedBox(height: 16),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: const Icon(LucideIcons.sparkles),
+            title: const Text('AI chat button'),
+            subtitle: const Text('Show a quick button to ask the AI'),
+            value: showBubble,
+            onChanged: (on) => ref.read(chatBubbleProvider.notifier).change(on),
+          ),
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const Icon(LucideIcons.bookOpen),

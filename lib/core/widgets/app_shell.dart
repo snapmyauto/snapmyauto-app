@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/ai_chat/data/chat_bubble_setting.dart';
+import '../../features/ai_chat/presentation/widgets/chat_bubble.dart';
 import '../utils/connectivity.dart';
 import 'glass_nav_bar.dart';
 import 'offline_banner.dart';
@@ -14,6 +16,7 @@ class AppShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final offline = ref.watch(isOfflineProvider).value ?? false;
+    final showBubble = ref.watch(chatBubbleProvider);
 
     return Scaffold(
       // lets screen content scroll behind the glass bar
@@ -31,6 +34,7 @@ class AppShell extends ConsumerWidget {
           ),
         ],
       ),
+      floatingActionButton: showBubble ? const ChatBubble() : null,
       bottomNavigationBar: GlassNavBar(
         currentIndex: shell.currentIndex,
         onTap: (i) =>
