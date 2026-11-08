@@ -26,6 +26,7 @@ class SettingsScreen extends ConsumerWidget {
   }) {
     return showModalBottomSheet<T>(
       context: context,
+      useRootNavigator: true,
       showDragHandle: true,
       builder: (context) => SafeArea(
         child: Column(

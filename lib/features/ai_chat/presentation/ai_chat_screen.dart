@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/widgets/severity_badge.dart';
 import '../../vehicles/data/vehicle_repository.dart';
@@ -120,8 +121,8 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
           children: [
             CircleAvatar(
               radius: 20,
-              backgroundColor: colors.primary,
-              foregroundColor: colors.onPrimary,
+              backgroundColor: context.brand.fill,
+              foregroundColor: context.brand.onFill,
               child: const Icon(LucideIcons.sparkles, size: 20),
             ),
             const SizedBox(width: 12),
@@ -213,8 +214,8 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                         child: IconButton.filled(
                           tooltip: 'Send',
                           style: IconButton.styleFrom(
-                            backgroundColor: colors.primary,
-                            foregroundColor: colors.onPrimary,
+                            backgroundColor: context.brand.fill,
+                            foregroundColor: context.brand.onFill,
                           ),
                           onPressed: _waiting || _limitReached
                               ? null
@@ -325,7 +326,9 @@ class _Bubble extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: mine ? colors.primary : colors.surfaceContainerLowest,
+                color: mine
+                    ? context.brand.fill
+                    : colors.surfaceContainerLowest,
                 border: mine ? null : Border.all(color: colors.outlineVariant),
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(20),
@@ -339,7 +342,7 @@ class _Bubble extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   height: 1.5,
-                  color: mine ? colors.onPrimary : colors.onSurface,
+                  color: mine ? context.brand.onFill : colors.onSurface,
                 ),
               ),
             ),

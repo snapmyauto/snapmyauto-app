@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/l10n.dart';
 import '../../../reminders/domain/reminder.dart';
 import '../../../settings/data/app_settings.dart';
@@ -21,6 +22,7 @@ class VehicleHero extends ConsumerWidget {
     final vehicles = ref.read(vehiclesProvider).value ?? const [];
     final picked = await showModalBottomSheet<String>(
       context: context,
+      useRootNavigator: true,
       showDragHandle: true,
       builder: (context) => SafeArea(
         child: Column(
@@ -47,9 +49,8 @@ class VehicleHero extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final fg = colors.onPrimary;
+    final fg = context.brand.onFill;
     final soft = fg.withValues(alpha: 0.75);
     final km = vehicle.odometerKm;
     final unit = ref.watch(distanceUnitProvider);
@@ -62,7 +63,7 @@ class VehicleHero extends ConsumerWidget {
     }
 
     return Material(
-      color: colors.primary,
+      color: context.brand.fill,
       borderRadius: BorderRadius.circular(28),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -166,7 +167,7 @@ class _Stat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = Theme.of(context).colorScheme.onPrimary;
+    final fg = context.brand.onFill;
 
     return Expanded(
       child: Container(

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../theme/app_colors.dart';
 import '../utils/l10n.dart';
 
 class GlassNavBar extends StatelessWidget {
@@ -24,6 +25,7 @@ class GlassNavBar extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final radius = BorderRadius.circular(35);
     final l10n = context.l10n;
+    final brand = context.brand;
 
     Widget item(int index, IconData icon, String label) {
       final selected = index == currentIndex;
@@ -117,9 +119,9 @@ class GlassNavBar extends StatelessWidget {
               child: Tooltip(
                 message: l10n.navScan,
                 child: Material(
-                  color: scheme.primary,
+                  color: brand.fill,
                   elevation: 6,
-                  shadowColor: scheme.primary.withValues(alpha: 0.5),
+                  shadowColor: brand.fill.withValues(alpha: 0.5),
                   shape: CircleBorder(
                     side: BorderSide(
                       color: theme.scaffoldBackgroundColor,
@@ -134,7 +136,7 @@ class GlassNavBar extends StatelessWidget {
                       height: 68,
                       child: Icon(
                         LucideIcons.scanLine,
-                        color: scheme.onPrimary,
+                        color: brand.onFill,
                         size: 28,
                       ),
                     ),
