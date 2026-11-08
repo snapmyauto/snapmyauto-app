@@ -93,7 +93,10 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
         );
 
     final result = TriageResult.fromLabels(kept.map((l) => l.label), library);
-    context.go('/home/triage', extra: result);
+    // home stays under triage so back goes home, not out of the app
+    GoRouter.of(context)
+      ..go('/home')
+      ..push('/triage', extra: result);
   }
 
   @override

@@ -33,7 +33,7 @@ class WarningBanner extends ConsumerWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(22),
-          onTap: () => context.push('/home/triage', extra: result),
+          onTap: () => context.push('/triage', extra: result),
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: Row(

@@ -186,25 +186,6 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/home',
                 builder: (context, state) => const HomeScreen(),
-                routes: [
-                  GoRoute(
-                    path: 'triage',
-                    parentNavigatorKey: _rootKey,
-                    redirect: (context, state) =>
-                        state.extra is TriageResult ? null : '/home',
-                    // temp: the triage result screen comes in #8
-                    builder: (context, state) => PlaceholderScreen(
-                      title: 'Triage result',
-                      actionLabel: 'Ask AI',
-                      onAction: () => context.push(
-                        '/chat',
-                        extra: ChatContext(
-                          triage: state.extra! as TriageResult,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
@@ -255,6 +236,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ScanReviewScreen(draft: state.extra! as ScanDraft),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/triage',
+        parentNavigatorKey: _rootKey,
+        redirect: (context, state) =>
+            state.extra is TriageResult ? null : '/home',
+        // temp: the triage result screen comes in #8
+        builder: (context, state) => PlaceholderScreen(
+          title: 'Triage result',
+          actionLabel: 'Ask AI',
+          onAction: () => context.push(
+            '/chat',
+            extra: ChatContext(triage: state.extra! as TriageResult),
+          ),
+        ),
       ),
     ],
   );
