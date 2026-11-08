@@ -231,4 +231,85 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get sourceGallery => 'புகைப்படம்';
+
+  @override
+  String get settingsTitle => 'அமைப்புகள்';
+
+  @override
+  String get settingsAppearance => 'தோற்றம்';
+
+  @override
+  String get settingsTheme => 'தீம்';
+
+  @override
+  String get themeLight => 'ஒளி';
+
+  @override
+  String get themeDark => 'இருள்';
+
+  @override
+  String get themeSystem => 'கணினி';
+
+  @override
+  String get settingsAccent => 'முதன்மை நிறம்';
+
+  @override
+  String get accentGreen => 'பச்சை';
+
+  @override
+  String get accentBlue => 'நீலம்';
+
+  @override
+  String get settingsGeneral => 'பொது';
+
+  @override
+  String get settingsLanguage => 'மொழி';
+
+  @override
+  String get languageSystem => 'தொலைபேசி மொழி';
+
+  @override
+  String get settingsUnits => 'தூர அலகுகள்';
+
+  @override
+  String get unitsKm => 'கிலோமீட்டர் (km)';
+
+  @override
+  String get unitsMiles => 'மைல்கள் (mi)';
+
+  @override
+  String get settingsNotifications => 'அறிவிப்புகள்';
+
+  @override
+  String get settingsReminderAlerts => 'நினைவூட்டல்கள்';
+
+  @override
+  String get settingsReminderAlertsSub => 'உரிமம், காப்பீடு, சர்வீஸ்';
+
+  @override
+  String get settingsAiButton => 'AI அரட்டை பொத்தான்';
+
+  @override
+  String get settingsAiButtonSub => 'AI இடம் கேட்க விரைவுப் பொத்தானைக் காட்டு';
+
+  @override
+  String get settingsAccount => 'கணக்கு மற்றும் கருவிகள்';
+
+  @override
+  String get settingsMyVehicles => 'எனது வாகனங்கள்';
+
+  @override
+  String get settingsEmergency => 'அவசரத் தொடர்புகள்';
+
+  @override
+  String get settingsAbout => 'SnapMyAuto பற்றி';
+
+  @override
+  String get logout => 'வெளியேறு';
+
+  @override
+  String get logoutTitle => 'வெளியேறவா?';
+
+  @override
+  String get logoutBody => 'எப்போது வேண்டுமானாலும் மீண்டும் உள்நுழையலாம்.';
 }
