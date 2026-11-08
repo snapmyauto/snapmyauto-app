@@ -37,6 +37,9 @@ import '../widgets/placeholder_screen.dart';
 
 final _rootKey = GlobalKey<NavigatorState>();
 
+// these work without an account so people can scan with no data
+const _openPaths = ['/auth', '/scan', '/triage', '/library'];
+
 final routerProvider = Provider<GoRouter>((ref) {
   // router re-checks redirect whenever this value changes
   final user = ValueNotifier<User?>(
@@ -51,8 +54,9 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: user,
     redirect: (context, state) {
       final loggedIn = user.value != null;
-      final onAuthPage = state.matchedLocation.startsWith('/auth');
-      if (!loggedIn && !onAuthPage) return '/auth/login';
+      final path = state.matchedLocation;
+      final onAuthPage = path.startsWith('/auth');
+      if (!loggedIn && !_openPaths.any(path.startsWith)) return '/auth/login';
       if (loggedIn && onAuthPage) return '/home';
       return null;
     },

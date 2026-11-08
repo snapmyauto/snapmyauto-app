@@ -77,25 +77,27 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
 
   void _save(List<WarningLight> library) {
     final uid = ref.read(currentUidProvider);
-    if (uid == null) return;
     final kept = _kept;
 
-    ref
-        .read(scanRepositoryProvider)
-        .add(
-          uid,
-          ScanRecord(
-            id: '',
-            lights: kept,
-            source: widget.draft.source,
-            vehicleId: _vehicleId,
-          ),
-        );
+    // a quick scan without an account isn't saved
+    if (uid != null) {
+      ref
+          .read(scanRepositoryProvider)
+          .add(
+            uid,
+            ScanRecord(
+              id: '',
+              lights: kept,
+              source: widget.draft.source,
+              vehicleId: _vehicleId,
+            ),
+          );
+    }
 
     final result = TriageResult.fromLabels(kept.map((l) => l.label), library);
-    // home stays under triage so back goes home, not out of the app
+    // home (or login) stays under triage so back doesn't leave the app
     GoRouter.of(context)
-      ..go('/home')
+      ..go(uid == null ? '/auth/login' : '/home')
       ..push('/triage', extra: result);
   }
 
@@ -141,6 +143,7 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
     final byId = {for (final l in library) l.id: l};
     final draft = widget.draft;
     final colors = Theme.of(context).colorScheme;
+    final guest = ref.watch(currentUidProvider) == null;
 
     return Column(
       children: [
@@ -208,10 +211,13 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
                 const SizedBox(height: 10),
               ],
               const SizedBox(height: 8),
-              VehicleChips(
-                selectedId: _vehicleId,
-                onChanged: (id) => setState(() => _vehicleId = id),
-              ),
+              if (guest)
+                const _NotSavedNote()
+              else
+                VehicleChips(
+                  selectedId: _vehicleId,
+                  onChanged: (id) => setState(() => _vehicleId = id),
+                ),
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerLeft,
@@ -235,6 +241,33 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _NotSavedNote extends StatelessWidget {
+  const _NotSavedNote();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Icon(LucideIcons.cloudOff, size: 20, color: colors.primary),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'This scan won\'t be saved. Log in to keep your scan history.',
+                style: TextStyle(fontSize: 14, color: colors.onSurfaceVariant),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
