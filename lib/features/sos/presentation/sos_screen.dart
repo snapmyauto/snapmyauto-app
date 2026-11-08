@@ -1,0 +1,160 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
+import '../../../core/theme/severity_colors.dart';
+import '../data/contact_repository.dart';
+import '../data/sos_service.dart';
+import '../domain/emergency_contact.dart';
+
+class SosScreen extends ConsumerStatefulWidget {
+  const SosScreen({super.key});
+
+  @override
+  ConsumerState<SosScreen> createState() => _SosScreenState();
+}
+
+class _SosScreenState extends ConsumerState<SosScreen> {
+  bool _sendingSms = false;
+
+  void _snack(String text) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  Future<void> _callPrimary(EmergencyContact? primary) async {
+    if (primary == null) {
+      _snack('Add an emergency contact first');
+      return;
+    }
+    HapticFeedback.heavyImpact();
+    final ok = await ref.read(sosServiceProvider).call(primary);
+    if (!ok && mounted) _snack('Could not open the phone app');
+  }
+
+  Future<void> _sendSms(List<EmergencyContact> contacts) async {
+    if (contacts.isEmpty) {
+      _snack('Add an emergency contact first');
+      return;
+    }
+    setState(() => _sendingSms = true);
+    final ok = await ref.read(sosServiceProvider).sendLocationSms(contacts);
+    if (!mounted) return;
+    setState(() => _sendingSms = false);
+    if (!ok) _snack('Could not open the messages app');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final sev = context.severity;
+    final contacts = ref.watch(contactsProvider).value ?? [];
+    final primary = ref.read(sosServiceProvider).primaryOf(contacts);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Emergency SOS',
+          style: TextStyle(fontWeight: FontWeight.w800),
+        ),
+        actions: [
+          IconButton(
+            tooltip: 'Emergency contacts',
+            icon: const Icon(LucideIcons.users),
+            onPressed: () => context.push('/sos/contacts'),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            Text(
+              primary == null
+                  ? 'No emergency contact yet'
+                  : 'Press to call ${primary.name}',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 32),
+            Center(
+              child: SizedBox.square(
+                dimension: 220,
+                child: Material(
+                  color: sev.stop,
+                  shape: CircleBorder(
+                    side: BorderSide(color: sev.stopTint, width: 14),
+                  ),
+                  elevation: 6,
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () => _callPrimary(primary),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          LucideIcons.phoneCall,
+                          size: 44,
+                          color: sev.stopTint,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'SOS',
+                          style: theme.textTheme.displaySmall?.copyWith(
+                            color: sev.stopTint,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+            OutlinedButton.icon(
+              icon: _sendingSms
+                  ? const SizedBox.square(
+                      dimension: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(LucideIcons.messageSquare, size: 18),
+              label: const Text('Send my location by SMS'),
+              onPressed: _sendingSms ? null : () => _sendSms(contacts),
+            ),
+            const SizedBox(height: 12),
+            TextButton.icon(
+              icon: const Icon(LucideIcons.timer, size: 18),
+              label: const Text('Test crash countdown'),
+              onPressed: () => context.push('/sos/countdown'),
+            ),
+            const SizedBox(height: 24),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(LucideIcons.info, color: sev.info),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        contacts.isEmpty
+                            ? 'Add at least one emergency contact so SOS can work.'
+                            : 'SMS goes to all ${contacts.length} of your contacts '
+                                  'with a map link to where you are.',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

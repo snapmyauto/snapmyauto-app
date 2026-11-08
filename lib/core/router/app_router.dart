@@ -17,6 +17,11 @@ import '../../features/icon_library/presentation/light_detail_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
 import '../../features/reminders/presentation/reminders_screen.dart';
 import '../../features/garages/presentation/garages_screen.dart';
+import '../../features/sos/domain/emergency_contact.dart';
+import '../../features/sos/presentation/contact_form_screen.dart';
+import '../../features/sos/presentation/contacts_screen.dart';
+import '../../features/sos/presentation/crash_countdown_screen.dart';
+import '../../features/sos/presentation/sos_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/triage/domain/triage_result.dart';
@@ -69,11 +74,36 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) =>
             const PlaceholderScreen(title: 'Symptom check'),
       ),
-      // temp: sos comes in #6
       GoRoute(
         path: '/sos',
         parentNavigatorKey: _rootKey,
-        builder: (context, state) => const PlaceholderScreen(title: 'SOS'),
+        builder: (context, state) => const SosScreen(),
+        routes: [
+          GoRoute(
+            path: 'contacts',
+            parentNavigatorKey: _rootKey,
+            builder: (context, state) => const ContactsScreen(),
+            routes: [
+              GoRoute(
+                path: 'new',
+                parentNavigatorKey: _rootKey,
+                builder: (context, state) => const ContactFormScreen(),
+              ),
+              GoRoute(
+                path: 'edit',
+                parentNavigatorKey: _rootKey,
+                builder: (context, state) => ContactFormScreen(
+                  contact: state.extra as EmergencyContact?,
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'countdown',
+            parentNavigatorKey: _rootKey,
+            builder: (context, state) => const CrashCountdownScreen(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/about',
