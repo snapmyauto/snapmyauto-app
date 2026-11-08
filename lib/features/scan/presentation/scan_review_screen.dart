@@ -5,15 +5,17 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/severity.dart';
 import '../../../core/widgets/app_button.dart';
-import '../../../core/widgets/severity_badge.dart';
 import '../../../core/widgets/state_views.dart';
+import '../../auth/data/auth_repository.dart';
 import '../../icon_library/data/warning_light_repository.dart';
 import '../../icon_library/domain/warning_light.dart';
 import '../../icon_library/presentation/widgets/light_visuals.dart';
 import '../../triage/domain/triage_result.dart';
+import '../data/scan_repository.dart';
 import '../domain/scan_draft.dart';
 import '../domain/scan_record.dart';
 import 'widgets/detection_photo.dart';
+import 'widgets/vehicle_chips.dart';
 
 const _unsureBelow = 0.6;
 
@@ -48,6 +50,7 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
         d.alternatives,
       ),
   ];
+  String? _vehicleId;
 
   List<ScanLight> get _kept => [
     for (final item in _items)
@@ -72,30 +75,25 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
     if (picked != null) _setLabel(item, picked);
   }
 
-  // temp: feat/save-scans saves the scan and opens the triage result
-  void _continue(List<WarningLight> library) {
-    final result = TriageResult.fromLabels(_kept.map((l) => l.label), library);
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SeverityBadge(severity: result.severity),
-            const SizedBox(height: 12),
-            Text(
-              result.worstLight?.name ?? '',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 6),
-            Text(result.worstLight?.driveNote ?? ''),
-          ],
-        ),
-      ),
-    );
+  void _save(List<WarningLight> library) {
+    final uid = ref.read(currentUidProvider);
+    if (uid == null) return;
+    final kept = _kept;
+
+    ref
+        .read(scanRepositoryProvider)
+        .add(
+          uid,
+          ScanRecord(
+            id: '',
+            lights: kept,
+            source: widget.draft.source,
+            vehicleId: _vehicleId,
+          ),
+        );
+
+    final result = TriageResult.fromLabels(kept.map((l) => l.label), library);
+    context.go('/home/triage', extra: result);
   }
 
   @override
@@ -206,6 +204,12 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
                 ),
                 const SizedBox(height: 10),
               ],
+              const SizedBox(height: 8),
+              VehicleChips(
+                selectedId: _vehicleId,
+                onChanged: (id) => setState(() => _vehicleId = id),
+              ),
+              const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton.icon(
@@ -223,7 +227,7 @@ class _ScanReviewScreenState extends ConsumerState<ScanReviewScreen> {
             padding: const EdgeInsets.fromLTRB(18, 8, 18, 12),
             child: PrimaryButton(
               label: 'Continue',
-              onPressed: _kept.isEmpty ? null : () => _continue(library),
+              onPressed: _kept.isEmpty ? null : () => _save(library),
             ),
           ),
         ),
