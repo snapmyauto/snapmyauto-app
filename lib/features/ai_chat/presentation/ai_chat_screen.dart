@@ -209,8 +209,13 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                           : 'Ask about your warning...',
                       suffixIcon: Padding(
                         padding: const EdgeInsets.all(6),
+                        // the text field recolours suffix icons, so set it here
                         child: IconButton.filled(
                           tooltip: 'Send',
+                          style: IconButton.styleFrom(
+                            backgroundColor: colors.primary,
+                            foregroundColor: colors.onPrimary,
+                          ),
                           onPressed: _waiting || _limitReached
                               ? null
                               : () => _send(_input.text),
