@@ -16,6 +16,7 @@ import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
 import '../../features/reminders/presentation/reminders_screen.dart';
+import '../../features/garages/presentation/garages_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/triage/domain/triage_result.dart';
@@ -197,8 +198,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/garages',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Garages'),
+                builder: (context, state) => const GaragesScreen(),
               ),
             ],
           ),
