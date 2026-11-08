@@ -13,6 +13,7 @@ class Detection {
     required this.classIndex,
     required this.score,
     required this.box,
+    this.alternatives = const [],
   });
 
   final String label;
@@ -20,6 +21,8 @@ class Detection {
   final double score;
   // box in original photo pixels
   final Rect box;
+  // top 3 labels for this box, best first
+  final List<String> alternatives;
 }
 
 class DetectionResult {
@@ -155,6 +158,9 @@ DetectionResult _detectSync(
     final w = at(2, i) * coordScale;
     final h = at(3, i) * coordScale;
 
+    final ranked = List.generate(labels.length, (c) => c)
+      ..sort((a, b) => at(4 + b, i).compareTo(at(4 + a, i)));
+
     // undo letterbox to get original photo pixels
     final left = ((cx - w / 2) - padX) / scale;
     final top = ((cy - h / 2) - padY) / scale;
@@ -166,6 +172,7 @@ DetectionResult _detectSync(
         label: labels[best],
         classIndex: best,
         score: bestScore,
+        alternatives: [for (final c in ranked.take(3)) labels[c]],
         box: Rect.fromLTRB(
           left.clamp(0, photo.width.toDouble()),
           top.clamp(0, photo.height.toDouble()),
