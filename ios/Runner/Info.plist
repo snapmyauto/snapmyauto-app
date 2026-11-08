@@ -70,5 +70,11 @@
 		<string>SnapMyAuto uses the camera to scan dashboard warning lights.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>SnapMyAuto lets you pick a dashboard photo to scan.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>SnapMyAuto uses your location to find garages near you.</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>tel</string>
+		</array>
 	</dict>
 </plist>
