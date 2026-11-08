@@ -79,6 +79,11 @@ class ReminderNotifications {
     );
   }
 
+  Future<void> cancelAll() async {
+    await _init();
+    await _plugin.cancelAll();
+  }
+
   Future<void> cancel(String reminderId) async {
     await _init();
     await _plugin.cancel(id: idFor(reminderId));
