@@ -23,14 +23,17 @@ String formatMonthYear(DateTime date) {
   return '${_months[date.month - 1]} ${date.year}';
 }
 
-/// 120,500 km
-String formatKm(int km) {
-  final digits = km.toString();
+/// 120,500
+String formatNumber(int n) {
+  final digits = n.toString();
   final buffer = StringBuffer();
   for (var i = 0; i < digits.length; i++) {
     final fromEnd = digits.length - i;
     buffer.write(digits[i]);
     if (fromEnd > 1 && fromEnd % 3 == 1) buffer.write(',');
   }
-  return '$buffer km';
+  return buffer.toString();
 }
+
+/// 120,500 km
+String formatKm(int km) => '${formatNumber(km)} km';

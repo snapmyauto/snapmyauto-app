@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../../../../core/utils/formatters.dart';
 import '../../../../core/utils/l10n.dart';
 import '../../../reminders/domain/reminder.dart';
+import '../../../settings/data/app_settings.dart';
 import '../../../vehicles/data/vehicle_repository.dart';
 import '../../../vehicles/domain/vehicle.dart';
 import '../../../vehicles/presentation/widgets/fuel_type_ui.dart';
@@ -52,6 +52,7 @@ class VehicleHero extends ConsumerWidget {
     final fg = colors.onPrimary;
     final soft = fg.withValues(alpha: 0.75);
     final km = vehicle.odometerKm;
+    final unit = ref.watch(distanceUnitProvider);
 
     String due(ReminderType type) {
       final reminder = ref.watch(nextReminderProvider(type));
@@ -122,7 +123,7 @@ class VehicleHero extends ConsumerWidget {
                 ),
               ),
               Text(
-                km == null ? l10n.homeNoMileage : formatKm(km),
+                km == null ? l10n.homeNoMileage : unit.format(km),
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w800,

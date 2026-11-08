@@ -519,6 +519,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Photo'**
   String get sourceGallery;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearance;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsTheme;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// No description provided for @settingsAccent.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent colour'**
+  String get settingsAccent;
+
+  /// No description provided for @accentGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get accentGreen;
+
+  /// No description provided for @accentBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get accentBlue;
+
+  /// No description provided for @settingsGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneral;
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// No description provided for @languageSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone language'**
+  String get languageSystem;
+
+  /// No description provided for @settingsUnits.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance units'**
+  String get settingsUnits;
+
+  /// No description provided for @unitsKm.
+  ///
+  /// In en, this message translates to:
+  /// **'Kilometres (km)'**
+  String get unitsKm;
+
+  /// No description provided for @unitsMiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Miles (mi)'**
+  String get unitsMiles;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsReminderAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get settingsReminderAlerts;
+
+  /// No description provided for @settingsReminderAlertsSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Licence, insurance, service'**
+  String get settingsReminderAlertsSub;
+
+  /// No description provided for @settingsAiButton.
+  ///
+  /// In en, this message translates to:
+  /// **'AI chat button'**
+  String get settingsAiButton;
+
+  /// No description provided for @settingsAiButtonSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Show a quick button to ask the AI'**
+  String get settingsAiButtonSub;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account and tools'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsMyVehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'My vehicles'**
+  String get settingsMyVehicles;
+
+  /// No description provided for @settingsEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contacts'**
+  String get settingsEmergency;
+
+  /// No description provided for @settingsAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About SnapMyAuto'**
+  String get settingsAbout;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
+  /// No description provided for @logoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get logoutTitle;
+
+  /// No description provided for @logoutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can log back in any time.'**
+  String get logoutBody;
 }
 
 class _AppLocalizationsDelegate

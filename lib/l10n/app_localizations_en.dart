@@ -229,4 +229,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sourceGallery => 'Photo';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get settingsAccent => 'Accent colour';
+
+  @override
+  String get accentGreen => 'Green';
+
+  @override
+  String get accentBlue => 'Blue';
+
+  @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get languageSystem => 'Phone language';
+
+  @override
+  String get settingsUnits => 'Distance units';
+
+  @override
+  String get unitsKm => 'Kilometres (km)';
+
+  @override
+  String get unitsMiles => 'Miles (mi)';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsReminderAlerts => 'Reminders';
+
+  @override
+  String get settingsReminderAlertsSub => 'Licence, insurance, service';
+
+  @override
+  String get settingsAiButton => 'AI chat button';
+
+  @override
+  String get settingsAiButtonSub => 'Show a quick button to ask the AI';
+
+  @override
+  String get settingsAccount => 'Account and tools';
+
+  @override
+  String get settingsMyVehicles => 'My vehicles';
+
+  @override
+  String get settingsEmergency => 'Emergency contacts';
+
+  @override
+  String get settingsAbout => 'About SnapMyAuto';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get logoutTitle => 'Log out?';
+
+  @override
+  String get logoutBody => 'You can log back in any time.';
 }

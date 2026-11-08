@@ -230,4 +230,85 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get sourceGallery => 'ඡායාරූපය';
+
+  @override
+  String get settingsTitle => 'සැකසුම්';
+
+  @override
+  String get settingsAppearance => 'පෙනුම';
+
+  @override
+  String get settingsTheme => 'තේමාව';
+
+  @override
+  String get themeLight => 'ආලෝක';
+
+  @override
+  String get themeDark => 'අඳුරු';
+
+  @override
+  String get themeSystem => 'පද්ධතිය';
+
+  @override
+  String get settingsAccent => 'ප්‍රධාන වර්ණය';
+
+  @override
+  String get accentGreen => 'කොළ';
+
+  @override
+  String get accentBlue => 'නිල්';
+
+  @override
+  String get settingsGeneral => 'සාමාන්‍ය';
+
+  @override
+  String get settingsLanguage => 'භාෂාව';
+
+  @override
+  String get languageSystem => 'දුරකථන භාෂාව';
+
+  @override
+  String get settingsUnits => 'දුර ඒකක';
+
+  @override
+  String get unitsKm => 'කිලෝමීටර් (km)';
+
+  @override
+  String get unitsMiles => 'සැතපුම් (mi)';
+
+  @override
+  String get settingsNotifications => 'දැනුම්දීම්';
+
+  @override
+  String get settingsReminderAlerts => 'සිහිකැඳවීම්';
+
+  @override
+  String get settingsReminderAlertsSub => 'බලපත්‍රය, රක්ෂණය, සේවාව';
+
+  @override
+  String get settingsAiButton => 'AI කතාබස් බොත්තම';
+
+  @override
+  String get settingsAiButtonSub => 'AI ගෙන් ඇසීමට ඉක්මන් බොත්තමක් පෙන්වන්න';
+
+  @override
+  String get settingsAccount => 'ගිණුම සහ මෙවලම්';
+
+  @override
+  String get settingsMyVehicles => 'මගේ වාහන';
+
+  @override
+  String get settingsEmergency => 'හදිසි සම්බන්ධතා';
+
+  @override
+  String get settingsAbout => 'SnapMyAuto ගැන';
+
+  @override
+  String get logout => 'ඉවත් වන්න';
+
+  @override
+  String get logoutTitle => 'ඉවත් වෙනවාද?';
+
+  @override
+  String get logoutBody => 'ඔබට ඕනෑම වේලාවක නැවත ඇතුළු විය හැක.';
 }
