@@ -4,6 +4,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/severity_colors.dart';
 import '../../../../core/utils/l10n.dart';
+import 'home_section_title.dart';
 
 class QuickActions extends StatelessWidget {
   const QuickActions({super.key});
@@ -17,11 +18,8 @@ class QuickActions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          l10n.homeQuickActions,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
-        ),
-        const SizedBox(height: 10),
+        HomeSectionTitle(l10n.homeQuickActions),
+        const SizedBox(height: 6),
         Row(
           children: [
             _Action(
@@ -104,7 +102,7 @@ class _Action extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

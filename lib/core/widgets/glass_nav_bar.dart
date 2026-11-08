@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../theme/app_colors.dart';
 import '../utils/l10n.dart';
 
 class GlassNavBar extends StatelessWidget {
@@ -24,6 +25,7 @@ class GlassNavBar extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final radius = BorderRadius.circular(35);
     final l10n = context.l10n;
+    final brand = context.brand;
 
     Widget item(int index, IconData icon, String label) {
       final selected = index == currentIndex;
@@ -43,7 +45,7 @@ class GlassNavBar extends StatelessWidget {
                   label,
                   style: TextStyle(
                     color: color,
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
                   ),
                 ),
@@ -116,26 +118,36 @@ class GlassNavBar extends StatelessWidget {
               top: -26,
               child: Tooltip(
                 message: l10n.navScan,
-                child: Material(
-                  color: scheme.primary,
-                  elevation: 6,
-                  shadowColor: scheme.primary.withValues(alpha: 0.5),
-                  shape: CircleBorder(
-                    side: BorderSide(
-                      color: theme.scaffoldBackgroundColor,
-                      width: 6,
-                    ),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: brand.fill.withValues(alpha: 0.4),
+                        blurRadius: 24,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: onScan,
-                    child: SizedBox(
-                      width: 68,
-                      height: 68,
-                      child: Icon(
-                        LucideIcons.scanLine,
-                        color: scheme.onPrimary,
-                        size: 28,
+                  child: Material(
+                    color: brand.fill,
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: theme.scaffoldBackgroundColor,
+                        width: 6,
+                      ),
+                    ),
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: onScan,
+                      child: SizedBox(
+                        width: 68,
+                        height: 68,
+                        child: Icon(
+                          LucideIcons.scanLine,
+                          color: brand.onFill,
+                          size: 28,
+                        ),
                       ),
                     ),
                   ),

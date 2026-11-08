@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
                 title: 'What it means',
                 child: Text(
                   light.meaning,
-                  style: const TextStyle(fontSize: 14, height: 1.5),
+                  style: const TextStyle(fontSize: 15, height: 1.5),
                 ),
               ),
               if (light.causes.isNotEmpty) ...[
@@ -77,7 +77,7 @@ class _Body extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 4),
                           child: Text(
                             '${i + 1}. ${light.steps[i]}',
-                            style: const TextStyle(fontSize: 14, height: 1.5),
+                            style: const TextStyle(fontSize: 15, height: 1.5),
                           ),
                         ),
                     ],
@@ -113,7 +113,7 @@ class _Body extends StatelessWidget {
                     : 'Reference only. Scanning can\'t detect this light yet.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
@@ -181,7 +181,7 @@ class _Header extends StatelessWidget {
                     Text(
                       '${light.severity.lightColour} · ${light.category.label}',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
                         color: colors.onSurfaceVariant,
                       ),
@@ -214,7 +214,7 @@ class _InfoCard extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w800,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
@@ -245,7 +245,7 @@ class _CauseChip extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
       ),
     );
   }
@@ -294,7 +294,7 @@ class _DriveCard extends StatelessWidget {
                   Text(
                     light.driveNote,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: colors.onSurfaceVariant,
                     ),
                   ),

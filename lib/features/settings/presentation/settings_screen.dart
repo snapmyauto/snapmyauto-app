@@ -11,6 +11,7 @@ import '../../ai_chat/data/chat_bubble_setting.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../profile/data/user_repository.dart';
 import '../data/app_settings.dart';
+import 'widgets/appearance_pickers.dart';
 import 'widgets/settings_group.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -26,6 +27,7 @@ class SettingsScreen extends ConsumerWidget {
   }) {
     return showModalBottomSheet<T>(
       context: context,
+      useRootNavigator: true,
       showDragHandle: true,
       builder: (context) => SafeArea(
         child: Column(
@@ -101,8 +103,8 @@ class SettingsScreen extends ConsumerWidget {
         ),
       ),
       body: ListView(
-        // extra bottom space so the glass bar doesn't cover the last item
-        padding: const EdgeInsets.fromLTRB(18, 8, 18, 130),
+        // room at the bottom for the glass bar and the ai button
+        padding: const EdgeInsets.fromLTRB(18, 8, 18, 170),
         children: [
           Card(
             child: ListTile(
@@ -147,24 +149,15 @@ class SettingsScreen extends ConsumerWidget {
                       style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(height: 8),
-                    SegmentedButton<ThemeMode>(
-                      segments: [
-                        ButtonSegment(
-                          value: ThemeMode.light,
-                          label: Text(l10n.themeLight),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.dark,
-                          label: Text(l10n.themeDark),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.system,
-                          label: Text(l10n.themeSystem),
-                        ),
-                      ],
-                      selected: {mode},
-                      onSelectionChanged: (s) =>
-                          ref.read(themeModeProvider.notifier).change(s.first),
+                    PillPicker<ThemeMode>(
+                      options: {
+                        ThemeMode.light: l10n.themeLight,
+                        ThemeMode.dark: l10n.themeDark,
+                        ThemeMode.system: l10n.themeSystem,
+                      },
+                      selected: mode,
+                      onChanged: (m) =>
+                          ref.read(themeModeProvider.notifier).change(m),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -172,20 +165,14 @@ class SettingsScreen extends ConsumerWidget {
                       style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(height: 8),
-                    SegmentedButton<AppAccent>(
-                      segments: [
-                        ButtonSegment(
-                          value: AppAccent.green,
-                          label: Text(l10n.accentGreen),
-                        ),
-                        ButtonSegment(
-                          value: AppAccent.blue,
-                          label: Text(l10n.accentBlue),
-                        ),
-                      ],
-                      selected: {accent},
-                      onSelectionChanged: (s) =>
-                          ref.read(accentProvider.notifier).change(s.first),
+                    AccentPicker(
+                      selected: accent,
+                      labels: {
+                        AppAccent.green: l10n.accentGreen,
+                        AppAccent.blue: l10n.accentBlue,
+                      },
+                      onChanged: (a) =>
+                          ref.read(accentProvider.notifier).change(a),
                     ),
                   ],
                 ),

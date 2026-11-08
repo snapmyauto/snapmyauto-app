@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/utils/l10n.dart';
-import '../../../../core/widgets/section_header.dart';
 import '../../../../core/widgets/severity_badge.dart';
 import '../../../icon_library/presentation/widgets/light_visuals.dart';
 import '../../../scan/data/scan_repository.dart';
@@ -12,6 +11,7 @@ import '../../../scan/data/scan_results.dart';
 import '../../../scan/domain/scan_record.dart';
 import '../../data/home_providers.dart';
 import 'date_labels.dart';
+import 'home_section_title.dart';
 
 class RecentScans extends ConsumerWidget {
   const RecentScans({super.key});
@@ -26,12 +26,12 @@ class RecentScans extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(
+        HomeSectionTitle(
           l10n.homeRecentScans,
           actionLabel: l10n.homeSeeAll,
           onAction: () => context.go('/history'),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         if (loading)
           const Center(child: CircularProgressIndicator())
         else if (scans.isEmpty)
@@ -93,7 +93,7 @@ class _ScanRow extends ConsumerWidget {
                           if (extra > 0) context.l10n.homeMoreLights(extra),
                         ].join(' · '),
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: colors.onSurfaceVariant,
                         ),
                       ),

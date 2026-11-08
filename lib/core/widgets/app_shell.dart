@@ -16,7 +16,8 @@ class AppShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final offline = ref.watch(isOfflineProvider).value ?? false;
-    final showBubble = ref.watch(chatBubbleProvider);
+    // the more tab holds the switch for the bubble, so keep it clear there
+    final showBubble = ref.watch(chatBubbleProvider) && shell.currentIndex != 3;
 
     return Scaffold(
       // lets screen content scroll behind the glass bar

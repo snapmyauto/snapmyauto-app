@@ -51,7 +51,7 @@ class _IconLibraryScreenState extends ConsumerState<IconLibraryScreen> {
               'Works offline',
               style: TextStyle(
                 color: sev.safe,
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w800,
               ),
             ),

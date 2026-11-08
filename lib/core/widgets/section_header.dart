@@ -26,7 +26,7 @@ class SectionHeader extends StatelessWidget {
             child: Text(
               title.toUpperCase(),
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 0.7,
                 color: color ?? colors.onSurfaceVariant,

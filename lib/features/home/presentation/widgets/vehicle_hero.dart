@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/l10n.dart';
+import '../../../../core/widgets/card_rings.dart';
 import '../../../reminders/domain/reminder.dart';
 import '../../../settings/data/app_settings.dart';
 import '../../../vehicles/data/vehicle_repository.dart';
@@ -21,6 +23,7 @@ class VehicleHero extends ConsumerWidget {
     final vehicles = ref.read(vehiclesProvider).value ?? const [];
     final picked = await showModalBottomSheet<String>(
       context: context,
+      useRootNavigator: true,
       showDragHandle: true,
       builder: (context) => SafeArea(
         child: Column(
@@ -47,9 +50,8 @@ class VehicleHero extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final fg = colors.onPrimary;
+    final fg = context.brand.onFill;
     final soft = fg.withValues(alpha: 0.75);
     final km = vehicle.odometerKm;
     final unit = ref.watch(distanceUnitProvider);
@@ -62,97 +64,112 @@ class VehicleHero extends ConsumerWidget {
     }
 
     return Material(
-      color: colors.primary,
+      color: context.brand.fill,
       borderRadius: BorderRadius.circular(28),
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () => context.push('/vehicles/${vehicle.id}'),
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+      child: Stack(
+        children: [
+          const CardRings(),
+          InkWell(
+            onTap: () => context.push('/vehicles/${vehicle.id}'),
+            child: Padding(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: Tooltip(
-                      message: l10n.homeChangeCar,
-                      child: ActionChip(
-                        onPressed: () => _pickCar(context, ref),
-                        backgroundColor: fg.withValues(alpha: 0.14),
-                        side: BorderSide.none,
-                        shape: const StadiumBorder(),
-                        label: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                vehicle.displayName,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: fg,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Tooltip(
+                          message: l10n.homeChangeCar,
+                          child: ActionChip(
+                            onPressed: () => _pickCar(context, ref),
+                            // chips have a solid canvas behind, so blend the colour
+                            color: WidgetStatePropertyAll(
+                              Color.alphaBlend(
+                                fg.withValues(alpha: 0.14),
+                                context.brand.fill,
                               ),
                             ),
-                            const SizedBox(width: 4),
-                            Icon(LucideIcons.chevronDown, size: 16, color: fg),
-                          ],
+                            side: BorderSide.none,
+                            shape: const StadiumBorder(),
+                            label: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    vehicle.displayName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: fg,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Icon(
+                                  LucideIcons.chevronDown,
+                                  size: 16,
+                                  color: fg,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${vehicle.year} · ${vehicle.fuelType.label}',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: soft,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(height: 16),
                   Text(
-                    '${vehicle.year} · ${vehicle.fuelType.label}',
+                    l10n.homeOdometer,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: soft,
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Text(
-                l10n.homeOdometer,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: soft,
-                ),
-              ),
-              Text(
-                km == null ? l10n.homeNoMileage : unit.format(km),
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.8,
-                  color: fg,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  _Stat(
-                    label: l10n.homeNextService,
-                    value: due(ReminderType.service),
+                  Text(
+                    km == null ? l10n.homeNoMileage : unit.format(km),
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.8,
+                      color: fg,
+                    ),
                   ),
-                  const SizedBox(width: 8),
-                  _Stat(
-                    label: l10n.homeLicence,
-                    value: due(ReminderType.revenueLicence),
-                  ),
-                  const SizedBox(width: 8),
-                  _Stat(
-                    label: l10n.homeInsurance,
-                    value: due(ReminderType.insurance),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      _Stat(
+                        label: l10n.homeNextService,
+                        value: due(ReminderType.service),
+                      ),
+                      const SizedBox(width: 8),
+                      _Stat(
+                        label: l10n.homeLicence,
+                        value: due(ReminderType.revenueLicence),
+                      ),
+                      const SizedBox(width: 8),
+                      _Stat(
+                        label: l10n.homeInsurance,
+                        value: due(ReminderType.insurance),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -166,7 +183,7 @@ class _Stat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = Theme.of(context).colorScheme.onPrimary;
+    final fg = context.brand.onFill;
 
     return Expanded(
       child: Container(
@@ -183,7 +200,7 @@ class _Stat extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: fg.withValues(alpha: 0.75),
               ),
@@ -194,7 +211,7 @@ class _Stat extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: FontWeight.w800,
                 color: fg,
               ),
@@ -229,7 +246,7 @@ class AddCarCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               l10n.homeAddCarBody,
-              style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant),
+              style: TextStyle(fontSize: 14, color: colors.onSurfaceVariant),
             ),
             const SizedBox(height: 14),
             FilledButton.icon(
