@@ -9,6 +9,7 @@ import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 import '../../features/about/presentation/about_screen.dart';
 import '../../features/ai_chat/domain/chat_context.dart';
 import '../../features/ai_chat/presentation/ai_chat_screen.dart';
+import '../../features/home/presentation/home_screen.dart';
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
@@ -57,6 +58,19 @@ final routerProvider = Provider<GoRouter>((ref) {
             chatContext: extra is ChatContext ? extra : const ChatContext(),
           );
         },
+      ),
+      // temp: the symptom check comes in #8
+      GoRoute(
+        path: '/symptoms',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) =>
+            const PlaceholderScreen(title: 'Symptom check'),
+      ),
+      // temp: sos comes in #6
+      GoRoute(
+        path: '/sos',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const PlaceholderScreen(title: 'SOS'),
       ),
       GoRoute(
         path: '/about',
@@ -138,8 +152,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/home',
-                builder: (context, state) =>
-                    const PlaceholderScreen(title: 'Home'),
+                builder: (context, state) => const HomeScreen(),
                 routes: [
                   GoRoute(
                     path: 'triage',

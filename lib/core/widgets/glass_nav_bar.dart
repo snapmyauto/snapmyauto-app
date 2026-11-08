@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../utils/l10n.dart';
+
 class GlassNavBar extends StatelessWidget {
   const GlassNavBar({
     super.key,
@@ -21,6 +23,7 @@ class GlassNavBar extends StatelessWidget {
     final scheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
     final radius = BorderRadius.circular(35);
+    final l10n = context.l10n;
 
     Widget item(int index, IconData icon, String label) {
       final selected = index == currentIndex;
@@ -96,12 +99,12 @@ class GlassNavBar extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          item(0, LucideIcons.house, 'Home'),
-                          item(1, LucideIcons.history, 'History'),
+                          item(0, LucideIcons.house, l10n.navHome),
+                          item(1, LucideIcons.history, l10n.navHistory),
                           // empty gap under the raised scan button
                           const SizedBox(width: 76),
-                          item(2, LucideIcons.mapPin, 'Garages'),
-                          item(3, LucideIcons.layoutGrid, 'More'),
+                          item(2, LucideIcons.mapPin, l10n.navGarages),
+                          item(3, LucideIcons.layoutGrid, l10n.navMore),
                         ],
                       ),
                     ),
@@ -112,7 +115,7 @@ class GlassNavBar extends StatelessWidget {
             Positioned(
               top: -26,
               child: Tooltip(
-                message: 'Scan a warning light',
+                message: l10n.navScan,
                 child: Material(
                   color: scheme.primary,
                   elevation: 6,
