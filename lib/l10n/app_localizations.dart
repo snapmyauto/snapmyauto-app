@@ -129,6 +129,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scan a warning light'**
   String get navScan;
+
+  /// No description provided for @homeGreetingMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning,'**
+  String get homeGreetingMorning;
+
+  /// No description provided for @homeGreetingAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon,'**
+  String get homeGreetingAfternoon;
+
+  /// No description provided for @homeGreetingEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening,'**
+  String get homeGreetingEvening;
+
+  /// No description provided for @homeNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get homeNameFallback;
+
+  /// No description provided for @homeProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get homeProfile;
+
+  /// No description provided for @homeAddCarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first car'**
+  String get homeAddCarTitle;
+
+  /// No description provided for @homeAddCarBody.
+  ///
+  /// In en, this message translates to:
+  /// **'So results, reminders and the AI match your car.'**
+  String get homeAddCarBody;
+
+  /// No description provided for @homeAddCarButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a car'**
+  String get homeAddCarButton;
+
+  /// No description provided for @homeChangeCar.
+  ///
+  /// In en, this message translates to:
+  /// **'Change car'**
+  String get homeChangeCar;
+
+  /// No description provided for @homeOdometer.
+  ///
+  /// In en, this message translates to:
+  /// **'Odometer'**
+  String get homeOdometer;
+
+  /// No description provided for @homeNoMileage.
+  ///
+  /// In en, this message translates to:
+  /// **'Not added'**
+  String get homeNoMileage;
+
+  /// No description provided for @homeNextService.
+  ///
+  /// In en, this message translates to:
+  /// **'Next service'**
+  String get homeNextService;
+
+  /// No description provided for @homeLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Licence'**
+  String get homeLicence;
+
+  /// No description provided for @homeInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance'**
+  String get homeInsurance;
+
+  /// No description provided for @homeNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get homeNotSet;
+
+  /// No description provided for @dueOverdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get dueOverdue;
+
+  /// No description provided for @dueToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get dueToday;
+
+  /// No description provided for @dueTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow'**
+  String get dueTomorrow;
+
+  /// No description provided for @dueInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String dueInDays(int count);
+
+  /// No description provided for @agoToday.
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get agoToday;
+
+  /// No description provided for @agoYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get agoYesterday;
+
+  /// No description provided for @agoDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String agoDays(int count);
+
+  /// No description provided for @homeWarningScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned {when}'**
+  String homeWarningScanned(String when);
+
+  /// No description provided for @homeView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get homeView;
+
+  /// No description provided for @homeFeelsWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something feels wrong?'**
+  String get homeFeelsWrong;
+
+  /// No description provided for @homeQuickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick actions'**
+  String get homeQuickActions;
+
+  /// No description provided for @homeIconLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon library'**
+  String get homeIconLibrary;
+
+  /// No description provided for @homeReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get homeReminders;
+
+  /// No description provided for @homeSos.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS'**
+  String get homeSos;
+
+  /// No description provided for @homeComingUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming up'**
+  String get homeComingUp;
+
+  /// No description provided for @homeSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get homeSeeAll;
+
+  /// No description provided for @homeNoReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'No reminders yet'**
+  String get homeNoReminders;
+
+  /// No description provided for @homeAddReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Add reminder'**
+  String get homeAddReminder;
+
+  /// No description provided for @homeRecentScans.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent scans'**
+  String get homeRecentScans;
+
+  /// No description provided for @homeNoScans.
+  ///
+  /// In en, this message translates to:
+  /// **'No scans yet'**
+  String get homeNoScans;
+
+  /// No description provided for @homeNoScansBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned lights show up here.'**
+  String get homeNoScansBody;
+
+  /// No description provided for @homeMoreLights.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more'**
+  String homeMoreLights(int count);
 }
 
 class _AppLocalizationsDelegate

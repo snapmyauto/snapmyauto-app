@@ -4,5 +4,70 @@
   "navHistory": "History",
   "navGarages": "Garages",
   "navMore": "More",
-  "navScan": "Scan a warning light"
+  "navScan": "Scan a warning light",
+  "homeGreetingMorning": "Good morning,",
+  "homeGreetingAfternoon": "Good afternoon,",
+  "homeGreetingEvening": "Good evening,",
+  "homeNameFallback": "Driver",
+  "homeProfile": "Profile",
+  "homeAddCarTitle": "Add your first car",
+  "homeAddCarBody": "So results, reminders and the AI match your car.",
+  "homeAddCarButton": "Add a car",
+  "homeChangeCar": "Change car",
+  "homeOdometer": "Odometer",
+  "homeNoMileage": "Not added",
+  "homeNextService": "Next service",
+  "homeLicence": "Licence",
+  "homeInsurance": "Insurance",
+  "homeNotSet": "Not set",
+  "dueOverdue": "Overdue",
+  "dueToday": "Today",
+  "dueTomorrow": "Tomorrow",
+  "dueInDays": "{count} days",
+  "@dueInDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "agoToday": "today",
+  "agoYesterday": "yesterday",
+  "agoDays": "{count} days ago",
+  "@agoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeWarningScanned": "Scanned {when}",
+  "@homeWarningScanned": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeView": "View",
+  "homeFeelsWrong": "Something feels wrong?",
+  "homeQuickActions": "Quick actions",
+  "homeIconLibrary": "Icon library",
+  "homeReminders": "Reminders",
+  "homeSos": "SOS",
+  "homeComingUp": "Coming up",
+  "homeSeeAll": "See all",
+  "homeNoReminders": "No reminders yet",
+  "homeAddReminder": "Add reminder",
+  "homeRecentScans": "Recent scans",
+  "homeNoScans": "No scans yet",
+  "homeNoScansBody": "Scanned lights show up here.",
+  "homeMoreLights": "+{count} more",
+  "@homeMoreLights": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }
