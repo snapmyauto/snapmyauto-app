@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/formatters.dart';
@@ -57,6 +58,32 @@ class ReminderAlertsNotifier extends Notifier<bool> {
     }
   }
 }
+
+// null follows the phone language
+class AppLocaleNotifier extends Notifier<Locale?> {
+  static const _key = 'language';
+  static const supported = ['en', 'si', 'ta'];
+
+  @override
+  Locale? build() {
+    final saved = ref.read(sharedPrefsProvider).getString(_key);
+    return supported.contains(saved) ? Locale(saved!) : null;
+  }
+
+  Future<void> change(Locale? locale) async {
+    state = locale;
+    final prefs = ref.read(sharedPrefsProvider);
+    if (locale == null) {
+      await prefs.remove(_key);
+    } else {
+      await prefs.setString(_key, locale.languageCode);
+    }
+  }
+}
+
+final appLocaleProvider = NotifierProvider<AppLocaleNotifier, Locale?>(
+  AppLocaleNotifier.new,
+);
 
 final reminderAlertsProvider = NotifierProvider<ReminderAlertsNotifier, bool>(
   ReminderAlertsNotifier.new,
