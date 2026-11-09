@@ -311,4 +311,32 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get logoutBody => 'ඔබට ඕනෑම වේලාවක නැවත ඇතුළු විය හැක.';
+
+  @override
+  String get offlineTitle => 'දැන් අන්තර්ජාලය නැත';
+
+  @override
+  String get offlineBody =>
+      'කනගාටු නොවන්න, වැදගත් කොටස් තවමත් ක්‍රියා කරයි. ඔබ නැවත සම්බන්ධ වූ විට අපි දත්ත යාවත්කාලීන කරන්නෙමු.';
+
+  @override
+  String get offlineStillWorks => 'තවමත් ක්‍රියා කරයි';
+
+  @override
+  String get offlineScanSub => 'DashLight ඔබේ දුරකථනයේම ක්‍රියා කරයි';
+
+  @override
+  String get offlineSos => 'SOS ඇමතුම සහ SMS';
+
+  @override
+  String get offlineSosSub => 'ඔබේ ජංගම ජාලය භාවිත කරයි';
+
+  @override
+  String get offlineNeedsInternet => 'අන්තර්ජාලය අවශ්‍යයි';
+
+  @override
+  String get offlineAiChat => 'AI කතාබහ';
+
+  @override
+  String get offlineGarageMap => 'ගරාජ සිතියම';
 }

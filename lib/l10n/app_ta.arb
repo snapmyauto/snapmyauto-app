@@ -96,5 +96,14 @@
   "settingsAbout": "SnapMyAuto பற்றி",
   "logout": "வெளியேறு",
   "logoutTitle": "வெளியேறவா?",
-  "logoutBody": "எப்போது வேண்டுமானாலும் மீண்டும் உள்நுழையலாம்."
+    "logoutBody": "எப்போது வேண்டுமானாலும் மீண்டும் உள்நுழையலாம்.",
+  "offlineTitle": "இப்போது இணையம் இல்லை",
+  "offlineBody": "கவலை வேண்டாம், முக்கியமான பகுதிகள் இன்னும் வேலை செய்யும். மீண்டும் இணைந்ததும் தரவை ஒத்திசைப்போம்.",
+  "offlineStillWorks": "இன்னும் வேலை செய்யும்",
+  "offlineScanSub": "DashLight உங்கள் போனிலேயே இயங்கும்",
+  "offlineSos": "SOS அழைப்பு & SMS",
+  "offlineSosSub": "உங்கள் மொபைல் நெட்வொர்க்கைப் பயன்படுத்தும்",
+  "offlineNeedsInternet": "இணையம் தேவை",
+  "offlineAiChat": "AI உரையாடல்",
+  "offlineGarageMap": "கேரேஜ் வரைபடம்"
 }

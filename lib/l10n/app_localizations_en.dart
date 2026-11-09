@@ -310,4 +310,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutBody => 'You can log back in any time.';
+
+  @override
+  String get offlineTitle => 'No internet right now';
+
+  @override
+  String get offlineBody =>
+      'Don\'t worry, the important parts still work. We\'ll sync when you\'re back online.';
+
+  @override
+  String get offlineStillWorks => 'Still works';
+
+  @override
+  String get offlineScanSub => 'DashLight runs on your phone';
+
+  @override
+  String get offlineSos => 'SOS call & SMS';
+
+  @override
+  String get offlineSosSub => 'Uses your mobile network';
+
+  @override
+  String get offlineNeedsInternet => 'Needs internet';
+
+  @override
+  String get offlineAiChat => 'AI chat';
+
+  @override
+  String get offlineGarageMap => 'Garage map';
 }

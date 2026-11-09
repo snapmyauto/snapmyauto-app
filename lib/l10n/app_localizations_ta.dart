@@ -312,4 +312,32 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get logoutBody => 'எப்போது வேண்டுமானாலும் மீண்டும் உள்நுழையலாம்.';
+
+  @override
+  String get offlineTitle => 'இப்போது இணையம் இல்லை';
+
+  @override
+  String get offlineBody =>
+      'கவலை வேண்டாம், முக்கியமான பகுதிகள் இன்னும் வேலை செய்யும். மீண்டும் இணைந்ததும் தரவை ஒத்திசைப்போம்.';
+
+  @override
+  String get offlineStillWorks => 'இன்னும் வேலை செய்யும்';
+
+  @override
+  String get offlineScanSub => 'DashLight உங்கள் போனிலேயே இயங்கும்';
+
+  @override
+  String get offlineSos => 'SOS அழைப்பு & SMS';
+
+  @override
+  String get offlineSosSub => 'உங்கள் மொபைல் நெட்வொர்க்கைப் பயன்படுத்தும்';
+
+  @override
+  String get offlineNeedsInternet => 'இணையம் தேவை';
+
+  @override
+  String get offlineAiChat => 'AI உரையாடல்';
+
+  @override
+  String get offlineGarageMap => 'கேரேஜ் வரைபடம்';
 }

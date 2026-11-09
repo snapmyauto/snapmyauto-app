@@ -131,5 +131,14 @@
   "settingsAbout": "About SnapMyAuto",
   "logout": "Log out",
   "logoutTitle": "Log out?",
-  "logoutBody": "You can log back in any time."
+    "logoutBody": "You can log back in any time.",
+  "offlineTitle": "No internet right now",
+  "offlineBody": "Don't worry, the important parts still work. We'll sync when you're back online.",
+  "offlineStillWorks": "Still works",
+  "offlineScanSub": "DashLight runs on your phone",
+  "offlineSos": "SOS call & SMS",
+  "offlineSosSub": "Uses your mobile network",
+  "offlineNeedsInternet": "Needs internet",
+  "offlineAiChat": "AI chat",
+  "offlineGarageMap": "Garage map"
 }
