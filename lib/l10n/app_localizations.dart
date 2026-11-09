@@ -681,6 +681,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can log back in any time.'**
   String get logoutBody;
+
+  /// No description provided for @offlineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet right now'**
+  String get offlineTitle;
+
+  /// No description provided for @offlineBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t worry, the important parts still work. We\'ll sync when you\'re back online.'**
+  String get offlineBody;
+
+  /// No description provided for @offlineStillWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'Still works'**
+  String get offlineStillWorks;
+
+  /// No description provided for @offlineScanSub.
+  ///
+  /// In en, this message translates to:
+  /// **'DashLight runs on your phone'**
+  String get offlineScanSub;
+
+  /// No description provided for @offlineSos.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS call & SMS'**
+  String get offlineSos;
+
+  /// No description provided for @offlineSosSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Uses your mobile network'**
+  String get offlineSosSub;
+
+  /// No description provided for @offlineNeedsInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs internet'**
+  String get offlineNeedsInternet;
+
+  /// No description provided for @offlineAiChat.
+  ///
+  /// In en, this message translates to:
+  /// **'AI chat'**
+  String get offlineAiChat;
+
+  /// No description provided for @offlineGarageMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Garage map'**
+  String get offlineGarageMap;
 }
 
 class _AppLocalizationsDelegate

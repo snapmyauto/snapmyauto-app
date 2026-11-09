@@ -96,5 +96,14 @@
   "settingsAbout": "SnapMyAuto ගැන",
   "logout": "ඉවත් වන්න",
   "logoutTitle": "ඉවත් වෙනවාද?",
-  "logoutBody": "ඔබට ඕනෑම වේලාවක නැවත ඇතුළු විය හැක."
+    "logoutBody": "ඔබට ඕනෑම වේලාවක නැවත ඇතුළු විය හැක.",
+  "offlineTitle": "දැන් අන්තර්ජාලය නැත",
+  "offlineBody": "කනගාටු නොවන්න, වැදගත් කොටස් තවමත් ක්‍රියා කරයි. ඔබ නැවත සම්බන්ධ වූ විට අපි දත්ත යාවත්කාලීන කරන්නෙමු.",
+  "offlineStillWorks": "තවමත් ක්‍රියා කරයි",
+  "offlineScanSub": "DashLight ඔබේ දුරකථනයේම ක්‍රියා කරයි",
+  "offlineSos": "SOS ඇමතුම සහ SMS",
+  "offlineSosSub": "ඔබේ ජංගම ජාලය භාවිත කරයි",
+  "offlineNeedsInternet": "අන්තර්ජාලය අවශ්‍යයි",
+  "offlineAiChat": "AI කතාබහ",
+  "offlineGarageMap": "ගරාජ සිතියම"
 }
