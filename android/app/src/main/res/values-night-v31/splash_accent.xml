@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LaunchThemeBlue" parent="LaunchTheme">
+        <item name="android:windowSplashScreenBackground">#0A0F1C</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/android12splash_blue</item>
+    </style>
+</resources>
