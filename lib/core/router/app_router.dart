@@ -28,6 +28,7 @@ import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/triage/domain/triage_result.dart';
 import '../../features/triage/presentation/symptom_check_screen.dart';
+import '../../features/triage/presentation/triage_result_screen.dart';
 import '../../features/scan/domain/scan_draft.dart';
 import '../../features/scan/presentation/scan_review_screen.dart';
 import '../../features/scan/presentation/scan_screen.dart';
@@ -36,7 +37,6 @@ import '../../features/vehicles/presentation/vehicle_detail_screen.dart';
 import '../../features/vehicles/presentation/vehicle_form_screen.dart';
 import '../../features/vehicles/presentation/vehicles_screen.dart';
 import '../widgets/app_shell.dart';
-import '../widgets/placeholder_screen.dart';
 
 final _rootKey = GlobalKey<NavigatorState>();
 
@@ -264,15 +264,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: _rootKey,
         redirect: (context, state) =>
             state.extra is TriageResult ? null : '/home',
-        // temp: the triage result screen comes in #8
-        builder: (context, state) => PlaceholderScreen(
-          title: 'Triage result',
-          actionLabel: 'Ask AI',
-          onAction: () => context.push(
-            '/chat',
-            extra: ChatContext(triage: state.extra! as TriageResult),
-          ),
-        ),
+        builder: (context, state) =>
+            TriageResultScreen(result: state.extra! as TriageResult),
       ),
     ],
   );
