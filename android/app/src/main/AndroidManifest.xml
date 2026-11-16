@@ -70,4 +70,10 @@
             <data android:scheme="sms" />
         </intent>
     </queries>
+    <!-- lets flutter_tts find the phone's text to speech engine -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
 </manifest>
