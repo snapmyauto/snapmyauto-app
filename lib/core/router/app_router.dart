@@ -14,6 +14,8 @@ import '../../features/history/presentation/scan_detail_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/icon_library/presentation/icon_library_screen.dart';
 import '../../features/icon_library/presentation/light_detail_screen.dart';
+import '../../features/onboarding/data/onboarding_seen.dart';
+import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/reminders/presentation/reminder_form_screen.dart';
 import '../../features/reminders/presentation/reminders_screen.dart';
 import '../../features/garages/presentation/garages_screen.dart';
@@ -38,7 +40,7 @@ import '../widgets/placeholder_screen.dart';
 final _rootKey = GlobalKey<NavigatorState>();
 
 // these work without an account so people can scan with no data
-const _openPaths = ['/auth', '/scan', '/triage', '/library'];
+const _openPaths = ['/auth', '/scan', '/triage', '/library', '/onboarding'];
 
 final routerProvider = Provider<GoRouter>((ref) {
   // router re-checks redirect whenever this value changes
@@ -55,6 +57,9 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final loggedIn = user.value != null;
       final path = state.matchedLocation;
+      // first launch shows the intro once, before anything else
+      final seen = ref.read(onboardingSeenProvider);
+      if (!seen && path != '/onboarding') return '/onboarding';
       final onAuthPage = path.startsWith('/auth');
       if (!loggedIn && !_openPaths.any(path.startsWith)) return '/auth/login';
       if (loggedIn && onAuthPage) return '/home';
@@ -141,6 +146,10 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ReminderFormScreen(reminderId: state.pathParameters['id']),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         path: '/auth/login',
