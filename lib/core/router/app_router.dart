@@ -27,6 +27,7 @@ import '../../features/sos/presentation/sos_screen.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/triage/domain/triage_result.dart';
+import '../../features/triage/presentation/symptom_check_screen.dart';
 import '../../features/scan/domain/scan_draft.dart';
 import '../../features/scan/presentation/scan_review_screen.dart';
 import '../../features/scan/presentation/scan_screen.dart';
@@ -40,7 +41,14 @@ import '../widgets/placeholder_screen.dart';
 final _rootKey = GlobalKey<NavigatorState>();
 
 // these work without an account so people can scan with no data
-const _openPaths = ['/auth', '/scan', '/triage', '/library', '/onboarding'];
+const _openPaths = [
+  '/auth',
+  '/scan',
+  '/triage',
+  '/library',
+  '/onboarding',
+  '/symptoms',
+];
 
 final routerProvider = Provider<GoRouter>((ref) {
   // router re-checks redirect whenever this value changes
@@ -76,12 +84,13 @@ final routerProvider = Provider<GoRouter>((ref) {
           );
         },
       ),
-      // temp: the symptom check comes in #8
       GoRoute(
         path: '/symptoms',
         parentNavigatorKey: _rootKey,
-        builder: (context, state) =>
-            const PlaceholderScreen(title: 'Symptom check'),
+        builder: (context, state) {
+          final extra = state.extra;
+          return SymptomCheckScreen(base: extra is TriageResult ? extra : null);
+        },
       ),
       GoRoute(
         path: '/sos',
