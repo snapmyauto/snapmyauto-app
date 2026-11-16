@@ -12,6 +12,7 @@ import '../../auth/data/auth_repository.dart';
 import '../../icon_library/presentation/widgets/light_visuals.dart';
 import '../domain/triage_result.dart';
 import 'triage_advice.dart';
+import 'widgets/read_aloud_button.dart';
 
 class TriageResultScreen extends ConsumerWidget {
   final TriageResult result;
@@ -77,6 +78,10 @@ class TriageResultScreen extends ConsumerWidget {
           'Your result',
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
+        actions: [
+          ReadAloudButton(text: TriageAdvice.speech(result)),
+          const SizedBox(width: 8),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(18, 8, 18, 24),
