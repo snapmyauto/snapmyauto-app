@@ -113,5 +113,10 @@
   "homeStepAccount": "ගිණුමක් සාදන්න",
   "homeStepCar": "ඔබේ වාහනය එක් කරන්න",
   "homeStepSos": "SOS සම්බන්ධතා සකසන්න",
-  "homeStepScan": "පළමු ස්කෑන් එක කරන්න"
+  "homeStepScan": "පළමු ස්කෑන් එක කරන්න",
+  "homeHealth": "සෞඛ්‍යය",
+  "homeHealthGood": "සියල්ල හොඳයි",
+  "homeHealthOverdue": "ප්‍රමාද {count}",
+  "homeHealthSoon": "ළඟදීම {count}",
+  "homeHealthLight": "අනතුරු ඇඟවීමේ ලාම්පුව"
 }

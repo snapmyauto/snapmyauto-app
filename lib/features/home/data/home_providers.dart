@@ -10,6 +10,7 @@ import '../../scan/domain/scan_record.dart';
 import '../../triage/domain/triage_result.dart';
 import '../../vehicles/data/vehicle_repository.dart';
 import '../../vehicles/domain/vehicle.dart';
+import '../domain/health_score.dart';
 
 class SelectedVehicleNotifier extends Notifier<String?> {
   static const _key = 'selectedVehicle';
@@ -79,4 +80,39 @@ final nextReminderProvider = Provider.family<Reminder?, ReminderType>((
           .toList()
         ..sort((a, b) => a.dueDate.compareTo(b.dueDate));
   return matches.isEmpty ? null : matches.first;
+});
+
+// score for the home car from recent scans and its reminders
+final healthProvider = Provider<HealthScore?>((ref) {
+  final car = ref.watch(homeVehicleProvider);
+  if (car == null) return null;
+  final now = DateTime.now();
+
+  Severity? light;
+  final scans = ref.watch(scansProvider).value ?? const [];
+  final monthAgo = now.subtract(const Duration(days: 30));
+  for (final scan in scans) {
+    if (scan.vehicleId != null && scan.vehicleId != car.id) continue;
+    final at = scan.createdAt;
+    if (at != null && at.isBefore(monthAgo)) break;
+    // only the newest scan counts, older lights were likely fixed
+    light = ref.watch(scanResultProvider(scan.id))?.severity;
+    break;
+  }
+
+  final reminders = (ref.watch(remindersProvider).value ?? const <Reminder>[])
+      .where((r) => !r.done && r.vehicleId == car.id);
+  var overdue = 0;
+  var soon = 0;
+  final week = now.add(const Duration(days: 7));
+  for (final r in reminders) {
+    if (r.isOverdueAt(car.odometerKm)) {
+      overdue++;
+    } else if (r.dueDate.isBefore(week) ||
+        (r.kmLeft(car.odometerKm) ?? 9999) <= 500) {
+      soon++;
+    }
+  }
+
+  return scoreHealth(recentLight: light, overdue: overdue, dueSoon: soon);
 });

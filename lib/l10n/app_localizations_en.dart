@@ -364,4 +364,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeStepScan => 'Do your first scan';
+
+  @override
+  String get homeHealth => 'Health';
+
+  @override
+  String get homeHealthGood => 'All good';
+
+  @override
+  String homeHealthOverdue(int count) {
+    return '$count overdue';
+  }
+
+  @override
+  String homeHealthSoon(int count) {
+    return '$count due soon';
+  }
+
+  @override
+  String get homeHealthLight => 'Warning light';
 }

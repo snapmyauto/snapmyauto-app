@@ -783,6 +783,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Do your first scan'**
   String get homeStepScan;
+
+  /// No description provided for @homeHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get homeHealth;
+
+  /// No description provided for @homeHealthGood.
+  ///
+  /// In en, this message translates to:
+  /// **'All good'**
+  String get homeHealthGood;
+
+  /// No description provided for @homeHealthOverdue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} overdue'**
+  String homeHealthOverdue(int count);
+
+  /// No description provided for @homeHealthSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} due soon'**
+  String homeHealthSoon(int count);
+
+  /// No description provided for @homeHealthLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning light'**
+  String get homeHealthLight;
 }
 
 class _AppLocalizationsDelegate
