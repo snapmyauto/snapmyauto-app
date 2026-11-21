@@ -113,5 +113,10 @@
   "homeStepAccount": "கணக்கை உருவாக்கு",
   "homeStepCar": "உங்கள் வாகனத்தைச் சேர்",
   "homeStepSos": "SOS தொடர்புகளை அமை",
-  "homeStepScan": "முதல் ஸ்கேனைச் செய்"
+  "homeStepScan": "முதல் ஸ்கேனைச் செய்",
+  "homeHealth": "நிலை",
+  "homeHealthGood": "எல்லாம் நன்று",
+  "homeHealthOverdue": "{count} தாமதம்",
+  "homeHealthSoon": "{count} விரைவில்",
+  "homeHealthLight": "எச்சரிக்கை விளக்கு"
 }

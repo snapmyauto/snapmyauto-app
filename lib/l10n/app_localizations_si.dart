@@ -365,4 +365,23 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get homeStepScan => 'පළමු ස්කෑන් එක කරන්න';
+
+  @override
+  String get homeHealth => 'සෞඛ්‍යය';
+
+  @override
+  String get homeHealthGood => 'සියල්ල හොඳයි';
+
+  @override
+  String homeHealthOverdue(int count) {
+    return 'ප්‍රමාද $count';
+  }
+
+  @override
+  String homeHealthSoon(int count) {
+    return 'ළඟදීම $count';
+  }
+
+  @override
+  String get homeHealthLight => 'අනතුරු ඇඟවීමේ ලාම්පුව';
 }

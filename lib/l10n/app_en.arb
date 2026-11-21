@@ -158,5 +158,24 @@
   "homeStepAccount": "Create your account",
   "homeStepCar": "Add your car",
   "homeStepSos": "Set up SOS contacts",
-  "homeStepScan": "Do your first scan"
+  "homeStepScan": "Do your first scan",
+  "homeHealth": "Health",
+  "homeHealthGood": "All good",
+  "homeHealthOverdue": "{count} overdue",
+  "@homeHealthOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeHealthSoon": "{count} due soon",
+  "@homeHealthSoon": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeHealthLight": "Warning light"
 }

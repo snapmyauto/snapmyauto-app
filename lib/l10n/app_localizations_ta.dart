@@ -366,4 +366,23 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get homeStepScan => 'முதல் ஸ்கேனைச் செய்';
+
+  @override
+  String get homeHealth => 'நிலை';
+
+  @override
+  String get homeHealthGood => 'எல்லாம் நன்று';
+
+  @override
+  String homeHealthOverdue(int count) {
+    return '$count தாமதம்';
+  }
+
+  @override
+  String homeHealthSoon(int count) {
+    return '$count விரைவில்';
+  }
+
+  @override
+  String get homeHealthLight => 'எச்சரிக்கை விளக்கு';
 }

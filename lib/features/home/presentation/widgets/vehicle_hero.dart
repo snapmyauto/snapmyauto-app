@@ -12,6 +12,7 @@ import '../../../vehicles/data/vehicle_repository.dart';
 import '../../../vehicles/domain/vehicle.dart';
 import '../../../vehicles/presentation/widgets/fuel_type_ui.dart';
 import '../../data/home_providers.dart';
+import '../../domain/health_score.dart';
 import 'date_labels.dart';
 
 class VehicleHero extends ConsumerWidget {
@@ -132,22 +133,42 @@ class VehicleHero extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    l10n.homeOdometer,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: soft,
-                    ),
-                  ),
-                  Text(
-                    km == null ? l10n.homeNoMileage : unit.format(km),
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.8,
-                      color: fg,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.homeOdometer,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: soft,
+                              ),
+                            ),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                km == null
+                                    ? l10n.homeNoMileage
+                                    : unit.format(km),
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: -0.8,
+                                  color: fg,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (ref.watch(healthProvider) case final health?)
+                        _HealthRing(health: health),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -174,6 +195,64 @@ class VehicleHero extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _HealthRing extends StatelessWidget {
+  const _HealthRing({required this.health});
+
+  final HealthScore health;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final fg = context.brand.onFill;
+    final reasons = [
+      if (health.light != null) l10n.homeHealthLight,
+      if (health.overdue > 0) l10n.homeHealthOverdue(health.overdue),
+      if (health.dueSoon > 0) l10n.homeHealthSoon(health.dueSoon),
+    ];
+
+    return Column(
+      children: [
+        SizedBox.square(
+          dimension: 64,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              CircularProgressIndicator(
+                value: health.score / 100,
+                strokeWidth: 6,
+                strokeCap: StrokeCap.round,
+                color: fg,
+                backgroundColor: fg.withValues(alpha: 0.18),
+              ),
+              Center(
+                child: Text(
+                  '${health.score}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: fg,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          reasons.isEmpty
+              ? '${l10n.homeHealth} · ${l10n.homeHealthGood}'
+              : reasons.first,
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            color: fg.withValues(alpha: 0.8),
+          ),
+        ),
+      ],
     );
   }
 }
