@@ -8,6 +8,7 @@ import '../../../core/widgets/app_button.dart';
 import '../../vehicles/data/vehicle_repository.dart';
 import '../data/home_providers.dart';
 import 'widgets/coming_up.dart';
+import 'widgets/get_started.dart';
 import 'widgets/home_header.dart';
 import 'widgets/offline_help.dart';
 import 'widgets/quick_actions.dart';
@@ -34,6 +35,7 @@ class HomeScreen extends ConsumerWidget {
             const HomeHeader(),
             const SizedBox(height: 18),
             const OfflineHelp(),
+            const GetStarted(),
             if (vehiclesLoading)
               const SizedBox(
                 height: 180,

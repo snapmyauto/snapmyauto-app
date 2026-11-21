@@ -4,8 +4,14 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class ReadAloudButton extends StatefulWidget {
   final String text;
+  // starts reading as soon as the page opens
+  final bool autoStart;
 
-  const ReadAloudButton({super.key, required this.text});
+  const ReadAloudButton({
+    super.key,
+    required this.text,
+    this.autoStart = false,
+  });
 
   @override
   State<ReadAloudButton> createState() => _ReadAloudButtonState();
@@ -27,6 +33,7 @@ class _ReadAloudButtonState extends State<ReadAloudButton> {
     _tts.setCompletionHandler(_onStopped);
     _tts.setCancelHandler(_onStopped);
     _tts.setErrorHandler((message) => _onStopped());
+    if (widget.autoStart && mounted) await _onPressed();
   }
 
   void _onStopped() {

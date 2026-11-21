@@ -105,5 +105,13 @@
   "offlineSosSub": "ඔබේ ජංගම ජාලය භාවිත කරයි",
   "offlineNeedsInternet": "අන්තර්ජාලය අවශ්‍යයි",
   "offlineAiChat": "AI කතාබහ",
-  "offlineGarageMap": "ගරාජ සිතියම"
+  "offlineGarageMap": "ගරාජ සිතියම",
+  "settingsReadAloud": "ප්‍රතිඵල හඬින් කියවන්න",
+  "settingsReadAloudSub": "ප්‍රතිඵලය විවෘත වූ විගස කියවයි",
+  "homeGetStarted": "ආරම්භ කරන්න",
+  "homeStepsDone": "{done}/{total} සම්පූර්ණයි",
+  "homeStepAccount": "ගිණුමක් සාදන්න",
+  "homeStepCar": "ඔබේ වාහනය එක් කරන්න",
+  "homeStepSos": "SOS සම්බන්ධතා සකසන්න",
+  "homeStepScan": "පළමු ස්කෑන් එක කරන්න"
 }

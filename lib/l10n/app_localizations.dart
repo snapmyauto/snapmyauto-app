@@ -735,6 +735,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Garage map'**
   String get offlineGarageMap;
+
+  /// No description provided for @settingsReadAloud.
+  ///
+  /// In en, this message translates to:
+  /// **'Read results aloud'**
+  String get settingsReadAloud;
+
+  /// No description provided for @settingsReadAloudSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Speaks the result as soon as it opens'**
+  String get settingsReadAloudSub;
+
+  /// No description provided for @homeGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get homeGetStarted;
+
+  /// No description provided for @homeStepsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} done'**
+  String homeStepsDone(int done, int total);
+
+  /// No description provided for @homeStepAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get homeStepAccount;
+
+  /// No description provided for @homeStepCar.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your car'**
+  String get homeStepCar;
+
+  /// No description provided for @homeStepSos.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up SOS contacts'**
+  String get homeStepSos;
+
+  /// No description provided for @homeStepScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Do your first scan'**
+  String get homeStepScan;
 }
 
 class _AppLocalizationsDelegate

@@ -105,5 +105,13 @@
   "offlineSosSub": "உங்கள் மொபைல் நெட்வொர்க்கைப் பயன்படுத்தும்",
   "offlineNeedsInternet": "இணையம் தேவை",
   "offlineAiChat": "AI உரையாடல்",
-  "offlineGarageMap": "கேரேஜ் வரைபடம்"
+  "offlineGarageMap": "கேரேஜ் வரைபடம்",
+  "settingsReadAloud": "முடிவுகளை உரக்கப் படி",
+  "settingsReadAloudSub": "முடிவு திறந்தவுடன் படிக்கும்",
+  "homeGetStarted": "தொடங்குங்கள்",
+  "homeStepsDone": "{done}/{total} முடிந்தது",
+  "homeStepAccount": "கணக்கை உருவாக்கு",
+  "homeStepCar": "உங்கள் வாகனத்தைச் சேர்",
+  "homeStepSos": "SOS தொடர்புகளை அமை",
+  "homeStepScan": "முதல் ஸ்கேனைச் செய்"
 }

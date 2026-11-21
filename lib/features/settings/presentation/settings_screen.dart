@@ -228,6 +228,17 @@ class SettingsScreen extends ConsumerWidget {
                 onChanged: (on) =>
                     ref.read(chatBubbleProvider.notifier).change(on),
               ),
+              SwitchListTile(
+                secondary: const SettingsIcon(LucideIcons.volume2),
+                title: Text(
+                  l10n.settingsReadAloud,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                subtitle: Text(l10n.settingsReadAloudSub),
+                value: ref.watch(readResultsProvider),
+                onChanged: (on) =>
+                    ref.read(readResultsProvider.notifier).change(on),
+              ),
             ],
           ),
           SettingsGroup(
