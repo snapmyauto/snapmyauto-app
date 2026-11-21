@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -8,6 +7,8 @@ import '../../../core/theme/severity_colors.dart';
 import '../data/contact_repository.dart';
 import '../data/sos_service.dart';
 import '../domain/emergency_contact.dart';
+import 'widgets/hold_sos_button.dart';
+import 'widgets/sms_preview_sheet.dart';
 
 class SosScreen extends ConsumerStatefulWidget {
   const SosScreen({super.key});
@@ -17,8 +18,6 @@ class SosScreen extends ConsumerStatefulWidget {
 }
 
 class _SosScreenState extends ConsumerState<SosScreen> {
-  bool _sendingSms = false;
-
   void _snack(String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
@@ -28,21 +27,16 @@ class _SosScreenState extends ConsumerState<SosScreen> {
       _snack('Add an emergency contact first');
       return;
     }
-    HapticFeedback.heavyImpact();
     final ok = await ref.read(sosServiceProvider).call(primary);
     if (!ok && mounted) _snack('Could not open the phone app');
   }
 
-  Future<void> _sendSms(List<EmergencyContact> contacts) async {
+  void _previewSms(List<EmergencyContact> contacts) {
     if (contacts.isEmpty) {
       _snack('Add an emergency contact first');
       return;
     }
-    setState(() => _sendingSms = true);
-    final ok = await ref.read(sosServiceProvider).sendLocationSms(contacts);
-    if (!mounted) return;
-    setState(() => _sendingSms = false);
-    if (!ok) _snack('Could not open the messages app');
+    showSmsPreview(context, contacts);
   }
 
   @override
@@ -73,57 +67,21 @@ class _SosScreenState extends ConsumerState<SosScreen> {
             Text(
               primary == null
                   ? 'No emergency contact yet'
-                  : 'Press to call ${primary.name}',
+                  : 'Hold to call ${primary.name}',
               textAlign: TextAlign.center,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             Center(
-              child: SizedBox.square(
-                dimension: 220,
-                child: Material(
-                  color: sev.stop,
-                  shape: CircleBorder(
-                    side: BorderSide(color: sev.stopTint, width: 14),
-                  ),
-                  elevation: 6,
-                  child: InkWell(
-                    customBorder: const CircleBorder(),
-                    onTap: () => _callPrimary(primary),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          LucideIcons.phoneCall,
-                          size: 44,
-                          color: sev.stopTint,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'SOS',
-                          style: theme.textTheme.displaySmall?.copyWith(
-                            color: sev.stopTint,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              child: HoldSosButton(onTriggered: () => _callPrimary(primary)),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 28),
             OutlinedButton.icon(
-              icon: _sendingSms
-                  ? const SizedBox.square(
-                      dimension: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(LucideIcons.messageSquare, size: 18),
+              icon: const Icon(LucideIcons.messageSquare, size: 18),
               label: const Text('Send my location by SMS'),
-              onPressed: _sendingSms ? null : () => _sendSms(contacts),
+              onPressed: () => _previewSms(contacts),
             ),
             const SizedBox(height: 12),
             TextButton.icon(
