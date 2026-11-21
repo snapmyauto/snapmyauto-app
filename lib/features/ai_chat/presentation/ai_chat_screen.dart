@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/widgets/severity_badge.dart';
+import '../../triage/presentation/widgets/read_aloud_button.dart';
 import '../../vehicles/data/vehicle_repository.dart';
 import '../../vehicles/domain/vehicle.dart';
 import '../data/ai_chat_repository.dart';
@@ -347,6 +349,25 @@ class _Bubble extends StatelessWidget {
               ),
             ),
           ),
+          if (!mine && onRetry == null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // markdown marks sound odd when spoken
+                  ReadAloudButton(
+                    text: message.text.replaceAll(RegExp(r'[*#_`]'), ''),
+                  ),
+                  const SizedBox(width: 4),
+                  TextButton.icon(
+                    onPressed: () => context.go('/garages'),
+                    icon: const Icon(LucideIcons.mapPin, size: 16),
+                    label: const Text('Find garage'),
+                  ),
+                ],
+              ),
+            ),
           if (onRetry != null)
             TextButton.icon(
               onPressed: onRetry,

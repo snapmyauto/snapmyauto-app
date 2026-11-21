@@ -5,6 +5,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/severity.dart';
 import '../../../core/widgets/severity_badge.dart';
+import '../../triage/presentation/widgets/read_aloud_button.dart';
 import '../data/warning_light_repository.dart';
 import '../domain/warning_light.dart';
 import 'widgets/light_visuals.dart';
@@ -144,15 +145,21 @@ class _Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconButton.filled(
-            tooltip: 'Back',
-            style: IconButton.styleFrom(
-              backgroundColor: colors.surface,
-              foregroundColor: colors.onSurface,
-              fixedSize: const Size(44, 44),
-            ),
-            onPressed: () => context.pop(),
-            icon: const Icon(LucideIcons.chevronLeft, size: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton.filled(
+                tooltip: 'Back',
+                style: IconButton.styleFrom(
+                  backgroundColor: colors.surface,
+                  foregroundColor: colors.onSurface,
+                  fixedSize: const Size(44, 44),
+                ),
+                onPressed: () => context.pop(),
+                icon: const Icon(LucideIcons.chevronLeft, size: 20),
+              ),
+              ReadAloudButton(text: _speech(light)),
+            ],
           ),
           const SizedBox(height: 14),
           Row(
@@ -195,6 +202,19 @@ class _Header extends StatelessWidget {
       ),
     );
   }
+}
+
+String _speech(WarningLight light) {
+  final text = StringBuffer(
+    '${light.name}. Usually ${light.severity.label}. ${light.meaning} ',
+  );
+  if (light.steps.isNotEmpty) {
+    text.write('What to do. ${light.steps.join('. ')}. ');
+  }
+  text.write(
+    'Can I keep driving? ${light.canDrive.answer}. ${light.driveNote}',
+  );
+  return text.toString();
 }
 
 class _InfoCard extends StatelessWidget {
