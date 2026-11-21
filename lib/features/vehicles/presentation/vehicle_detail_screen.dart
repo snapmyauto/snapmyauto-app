@@ -139,7 +139,7 @@ class _HeaderCard extends StatelessWidget {
                     color: fg.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(LucideIcons.carFront, size: 26, color: fg),
+                  child: Icon(vehicle.type.icon, size: 26, color: fg),
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -162,7 +162,13 @@ class _HeaderCard extends StatelessWidget {
                 const SizedBox(height: 14),
                 _InfoRow(LucideIcons.calendar, 'Year', '${vehicle.year}'),
                 _InfoRow(LucideIcons.hash, 'Plate', vehicle.plate ?? 'Not set'),
+                _InfoRow(vehicle.type.icon, 'Type', vehicle.type.label),
                 _InfoRow(vehicle.fuelType.icon, 'Fuel', vehicle.fuelType.label),
+                _InfoRow(
+                  LucideIcons.cog,
+                  'Transmission',
+                  vehicle.transmission.label,
+                ),
                 _InfoRow(
                   LucideIcons.gauge,
                   'Odometer',

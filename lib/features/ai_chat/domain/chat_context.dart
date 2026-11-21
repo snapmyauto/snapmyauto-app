@@ -18,7 +18,8 @@ class ChatContext {
     if (vehicle != null) {
       lines.add(
         'Vehicle: ${vehicle.year} ${vehicle.make} ${vehicle.model}, '
-        '${vehicle.fuelType.name}.',
+        '${vehicle.type.name}, ${vehicle.fuelType.name}, '
+        '${vehicle.transmission.name}.',
       );
     }
     if (triage != null && triage.lights.isNotEmpty) {

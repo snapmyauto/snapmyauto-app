@@ -29,6 +29,8 @@ class _VehicleFormScreenState extends ConsumerState<VehicleFormScreen> {
   final _odometer = TextEditingController();
 
   FuelType _fuel = FuelType.petrol;
+  VehicleType _type = VehicleType.car;
+  Transmission _transmission = Transmission.automatic;
   Vehicle? _editing;
   bool _saving = false;
 
@@ -50,6 +52,8 @@ class _VehicleFormScreenState extends ConsumerState<VehicleFormScreen> {
     _plate.text = vehicle.plate ?? '';
     _odometer.text = vehicle.odometerKm?.toString() ?? '';
     _fuel = vehicle.fuelType;
+    _type = vehicle.type;
+    _transmission = vehicle.transmission;
   }
 
   @override
@@ -89,6 +93,8 @@ class _VehicleFormScreenState extends ConsumerState<VehicleFormScreen> {
       nickname: _optional(_nickname.text),
       plate: _optional(_plate.text)?.toUpperCase(),
       fuelType: _fuel,
+      type: _type,
+      transmission: _transmission,
       odometerKm: int.tryParse(_odometer.text.trim()),
     );
 
@@ -120,6 +126,22 @@ class _VehicleFormScreenState extends ConsumerState<VehicleFormScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            Text('Vehicle type', style: Theme.of(context).textTheme.titleSmall),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final type in VehicleType.values)
+                  ChoiceChip(
+                    avatar: Icon(type.icon, size: 16),
+                    label: Text(type.label),
+                    selected: _type == type,
+                    onSelected: (_) => setState(() => _type = type),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 20),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -187,6 +209,18 @@ class _VehicleFormScreenState extends ConsumerState<VehicleFormScreen> {
                     onSelected: (_) => setState(() => _fuel = type),
                   ),
               ],
+            ),
+            const SizedBox(height: 20),
+            Text('Transmission', style: Theme.of(context).textTheme.titleSmall),
+            const SizedBox(height: 8),
+            SegmentedButton<Transmission>(
+              segments: [
+                for (final t in Transmission.values)
+                  ButtonSegment(value: t, label: Text(t.label)),
+              ],
+              selected: {_transmission},
+              onSelectionChanged: (picked) =>
+                  setState(() => _transmission = picked.first),
             ),
             const SizedBox(height: 28),
             FilledButton(

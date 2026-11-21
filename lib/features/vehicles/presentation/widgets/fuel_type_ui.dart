@@ -18,3 +18,26 @@ extension FuelTypeUi on FuelType {
     FuelType.electric => LucideIcons.zap,
   };
 }
+
+extension VehicleTypeUi on VehicleType {
+  String get label => switch (this) {
+    VehicleType.car => 'Car',
+    VehicleType.van => 'Van',
+    VehicleType.motorbike => 'Motorbike',
+    VehicleType.threeWheeler => 'Three-wheeler',
+  };
+
+  IconData get icon => switch (this) {
+    VehicleType.car => LucideIcons.carFront,
+    VehicleType.van => LucideIcons.bus,
+    VehicleType.motorbike => LucideIcons.motorbike,
+    VehicleType.threeWheeler => LucideIcons.carTaxiFront,
+  };
+}
+
+extension TransmissionUi on Transmission {
+  String get label => switch (this) {
+    Transmission.manual => 'Manual',
+    Transmission.automatic => 'Automatic',
+  };
+}
