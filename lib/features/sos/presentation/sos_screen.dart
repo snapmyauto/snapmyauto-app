@@ -5,6 +5,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/severity_colors.dart';
 import '../data/contact_repository.dart';
+import '../data/crash_detector.dart';
 import '../data/sos_service.dart';
 import '../domain/emergency_contact.dart';
 import 'widgets/hold_sos_button.dart';
@@ -45,6 +46,7 @@ class _SosScreenState extends ConsumerState<SosScreen> {
     final sev = context.severity;
     final contacts = ref.watch(contactsProvider).value ?? [];
     final primary = ref.read(sosServiceProvider).primaryOf(contacts);
+    final crashOn = ref.watch(crashDetectionProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -83,7 +85,24 @@ class _SosScreenState extends ConsumerState<SosScreen> {
               label: const Text('Send my location by SMS'),
               onPressed: () => _previewSms(contacts),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+            Card(
+              child: SwitchListTile(
+                secondary: const Icon(LucideIcons.carFront),
+                title: const Text(
+                  'Crash detection',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+                subtitle: const Text(
+                  'A hard knock starts a 10 second countdown, then calls '
+                  'your contact. Works while the app is open.',
+                ),
+                value: crashOn,
+                onChanged: (on) =>
+                    ref.read(crashDetectionProvider.notifier).change(on),
+              ),
+            ),
+            const SizedBox(height: 4),
             TextButton.icon(
               icon: const Icon(LucideIcons.timer, size: 18),
               label: const Text('Test crash countdown'),
