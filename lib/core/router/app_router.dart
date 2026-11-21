@@ -7,6 +7,7 @@ import 'package:snapmyauto/features/auth/presentation/login_screen.dart';
 import 'package:snapmyauto/features/auth/presentation/register_screen.dart';
 
 import '../../features/about/presentation/about_screen.dart';
+import '../../features/about/presentation/terms_screen.dart';
 import '../../features/ai_chat/domain/chat_context.dart';
 import '../../features/ai_chat/presentation/ai_chat_screen.dart';
 import '../../features/history/presentation/history_screen.dart';
@@ -48,6 +49,7 @@ const _openPaths = [
   '/library',
   '/onboarding',
   '/symptoms',
+  '/terms',
 ];
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -127,6 +129,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/about',
         parentNavigatorKey: _rootKey,
         builder: (context, state) => const AboutScreen(),
+      ),
+      GoRoute(
+        path: '/terms',
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) => const TermsScreen(),
       ),
       GoRoute(
         path: '/library',
