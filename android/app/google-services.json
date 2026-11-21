@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1096943069899-ubv7tp34rcsdnkkmncabqo906joaikcp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snapmyauto.snapmyauto",
+            "certificate_hash": "b11c9c40eb8bbbef824416c91abc86a004e10f6c"
+          }
+        },
+        {
           "client_id": "1096943069899-4fcjdm8kqbf86a0lrupt6pi479c3sh9t.apps.googleusercontent.com",
           "client_type": 3
         }
