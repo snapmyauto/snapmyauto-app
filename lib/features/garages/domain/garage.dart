@@ -9,6 +9,7 @@ class Garage {
     this.phone,
     this.address,
     this.openingHours,
+    this.isTyreShop = false,
   });
 
   final String id;
@@ -18,6 +19,7 @@ class Garage {
   final String? phone;
   final String? address;
   final String? openingHours;
+  final bool isTyreShop;
 
   String get distanceText {
     if (distanceMeters < 1000) return '${distanceMeters.round()} m';
@@ -44,6 +46,7 @@ class Garage {
       phone: (tags['phone'] ?? tags['contact:phone']) as String?,
       address: _address(tags),
       openingHours: tags['opening_hours'] as String?,
+      isTyreShop: tags['shop'] == 'tyres',
     );
   }
 
@@ -72,6 +75,7 @@ class Garage {
       phone: (extra['phone'] ?? extra['contact:phone']) as String?,
       address: parts.isEmpty ? null : parts.take(3).join(', '),
       openingHours: extra['opening_hours'] as String?,
+      isTyreShop: json['type'] == 'tyres',
     );
   }
 
