@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/severity_colors.dart';
 import '../../../core/theme/theme_providers.dart';
 
+const _modelRepo = 'https://github.com/snapmyauto/dashlight';
 final _packageInfoProvider = FutureProvider(
   (ref) => PackageInfo.fromPlatform(),
 );
@@ -86,6 +89,30 @@ class AboutScreen extends ConsumerWidget {
                 'check the app.',
             color: sev.soon,
             background: sev.soonTint,
+          ),
+          const SizedBox(height: 16),
+          Card(
+            margin: EdgeInsets.zero,
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(LucideIcons.fileText),
+                  title: const Text('Terms and privacy'),
+                  trailing: const Icon(LucideIcons.chevronRight, size: 18),
+                  onTap: () => context.push('/terms'),
+                ),
+                const Divider(height: 1),
+                ListTile(
+                  leading: const Icon(LucideIcons.code),
+                  title: const Text('DashLight model on GitHub'),
+                  trailing: const Icon(LucideIcons.externalLink, size: 18),
+                  onTap: () => launchUrl(
+                    Uri.parse(_modelRepo),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 24),
           Text(

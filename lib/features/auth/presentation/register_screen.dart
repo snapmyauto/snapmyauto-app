@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/severity_colors.dart';
@@ -135,6 +136,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         contentPadding: EdgeInsets.zero,
                         title: const Text(
                           'I agree to the Terms and Privacy Policy',
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () => context.push('/terms'),
+                          child: const Text(
+                            'Read the Terms and Privacy Policy',
+                          ),
                         ),
                       ),
                       const SizedBox(height: 8),
