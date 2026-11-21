@@ -339,4 +339,30 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get offlineGarageMap => 'ගරාජ සිතියම';
+
+  @override
+  String get settingsReadAloud => 'ප්‍රතිඵල හඬින් කියවන්න';
+
+  @override
+  String get settingsReadAloudSub => 'ප්‍රතිඵලය විවෘත වූ විගස කියවයි';
+
+  @override
+  String get homeGetStarted => 'ආරම්භ කරන්න';
+
+  @override
+  String homeStepsDone(int done, int total) {
+    return '$done/$total සම්පූර්ණයි';
+  }
+
+  @override
+  String get homeStepAccount => 'ගිණුමක් සාදන්න';
+
+  @override
+  String get homeStepCar => 'ඔබේ වාහනය එක් කරන්න';
+
+  @override
+  String get homeStepSos => 'SOS සම්බන්ධතා සකසන්න';
+
+  @override
+  String get homeStepScan => 'පළමු ස්කෑන් එක කරන්න';
 }

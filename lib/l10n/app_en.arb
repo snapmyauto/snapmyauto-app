@@ -140,5 +140,23 @@
   "offlineSosSub": "Uses your mobile network",
   "offlineNeedsInternet": "Needs internet",
   "offlineAiChat": "AI chat",
-  "offlineGarageMap": "Garage map"
+  "offlineGarageMap": "Garage map",
+  "settingsReadAloud": "Read results aloud",
+  "settingsReadAloudSub": "Speaks the result as soon as it opens",
+  "homeGetStarted": "Get started",
+  "homeStepsDone": "{done} of {total} done",
+  "@homeStepsDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStepAccount": "Create your account",
+  "homeStepCar": "Add your car",
+  "homeStepSos": "Set up SOS contacts",
+  "homeStepScan": "Do your first scan"
 }

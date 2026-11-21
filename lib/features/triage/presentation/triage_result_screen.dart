@@ -10,6 +10,7 @@ import '../../../core/widgets/severity_badge.dart';
 import '../../ai_chat/domain/chat_context.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../icon_library/presentation/widgets/light_visuals.dart';
+import '../../settings/data/app_settings.dart';
 import '../domain/triage_result.dart';
 import 'triage_advice.dart';
 import 'widgets/read_aloud_button.dart';
@@ -79,7 +80,10 @@ class TriageResultScreen extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
         actions: [
-          ReadAloudButton(text: TriageAdvice.speech(result)),
+          ReadAloudButton(
+            text: TriageAdvice.speech(result),
+            autoStart: ref.read(readResultsProvider),
+          ),
           const SizedBox(width: 8),
         ],
       ),

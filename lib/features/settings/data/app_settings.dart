@@ -88,3 +88,19 @@ final appLocaleProvider = NotifierProvider<AppLocaleNotifier, Locale?>(
 final reminderAlertsProvider = NotifierProvider<ReminderAlertsNotifier, bool>(
   ReminderAlertsNotifier.new,
 );
+
+class ReadResultsNotifier extends Notifier<bool> {
+  static const _key = 'readResults';
+
+  @override
+  bool build() => ref.read(sharedPrefsProvider).getBool(_key) ?? false;
+
+  Future<void> change(bool on) async {
+    state = on;
+    await ref.read(sharedPrefsProvider).setBool(_key, on);
+  }
+}
+
+final readResultsProvider = NotifierProvider<ReadResultsNotifier, bool>(
+  ReadResultsNotifier.new,
+);

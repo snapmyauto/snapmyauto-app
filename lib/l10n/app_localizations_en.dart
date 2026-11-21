@@ -338,4 +338,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offlineGarageMap => 'Garage map';
+
+  @override
+  String get settingsReadAloud => 'Read results aloud';
+
+  @override
+  String get settingsReadAloudSub => 'Speaks the result as soon as it opens';
+
+  @override
+  String get homeGetStarted => 'Get started';
+
+  @override
+  String homeStepsDone(int done, int total) {
+    return '$done of $total done';
+  }
+
+  @override
+  String get homeStepAccount => 'Create your account';
+
+  @override
+  String get homeStepCar => 'Add your car';
+
+  @override
+  String get homeStepSos => 'Set up SOS contacts';
+
+  @override
+  String get homeStepScan => 'Do your first scan';
 }

@@ -340,4 +340,30 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get offlineGarageMap => 'கேரேஜ் வரைபடம்';
+
+  @override
+  String get settingsReadAloud => 'முடிவுகளை உரக்கப் படி';
+
+  @override
+  String get settingsReadAloudSub => 'முடிவு திறந்தவுடன் படிக்கும்';
+
+  @override
+  String get homeGetStarted => 'தொடங்குங்கள்';
+
+  @override
+  String homeStepsDone(int done, int total) {
+    return '$done/$total முடிந்தது';
+  }
+
+  @override
+  String get homeStepAccount => 'கணக்கை உருவாக்கு';
+
+  @override
+  String get homeStepCar => 'உங்கள் வாகனத்தைச் சேர்';
+
+  @override
+  String get homeStepSos => 'SOS தொடர்புகளை அமை';
+
+  @override
+  String get homeStepScan => 'முதல் ஸ்கேனைச் செய்';
 }
