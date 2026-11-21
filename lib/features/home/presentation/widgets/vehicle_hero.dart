@@ -31,7 +31,7 @@ class VehicleHero extends ConsumerWidget {
           children: [
             for (final v in vehicles)
               ListTile(
-                leading: const Icon(LucideIcons.carFront),
+                leading: Icon(v.type.icon),
                 title: Text(v.displayName),
                 subtitle: Text('${v.year} · ${v.fuelType.label}'),
                 trailing: v.id == vehicle.id

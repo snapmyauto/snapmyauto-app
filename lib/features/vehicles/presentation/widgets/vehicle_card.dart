@@ -36,7 +36,7 @@ class VehicleCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(
-                  LucideIcons.carFront,
+                  vehicle.type.icon,
                   color: colors.onPrimaryContainer,
                 ),
               ),
@@ -71,6 +71,10 @@ class VehicleCard extends StatelessWidget {
                         _Tag(
                           icon: vehicle.fuelType.icon,
                           text: vehicle.fuelType.label,
+                        ),
+                        _Tag(
+                          icon: LucideIcons.cog,
+                          text: vehicle.transmission.label,
                         ),
                         if (odometer != null)
                           _Tag(

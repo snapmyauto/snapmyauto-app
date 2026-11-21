@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum FuelType { petrol, diesel, hybrid, electric }
 
+enum VehicleType { car, van, motorbike, threeWheeler }
+
+enum Transmission { manual, automatic }
+
 class Vehicle {
   const Vehicle({
     required this.id,
@@ -11,6 +15,8 @@ class Vehicle {
     this.nickname,
     this.plate,
     this.fuelType = FuelType.petrol,
+    this.type = VehicleType.car,
+    this.transmission = Transmission.automatic,
     this.odometerKm,
     this.createdAt,
   });
@@ -23,6 +29,8 @@ class Vehicle {
   final String? nickname;
   final String? plate;
   final FuelType fuelType;
+  final VehicleType type;
+  final Transmission transmission;
   final int? odometerKm;
   final DateTime? createdAt;
 
@@ -42,6 +50,11 @@ class Vehicle {
       plate: data['plate'] as String?,
       fuelType:
           FuelType.values.asNameMap()[data['fuelType']] ?? FuelType.petrol,
+      // older cars were saved before these fields existed
+      type: VehicleType.values.asNameMap()[data['type']] ?? VehicleType.car,
+      transmission:
+          Transmission.values.asNameMap()[data['transmission']] ??
+          Transmission.automatic,
       odometerKm: (data['odometerKm'] as num?)?.toInt(),
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
     );
@@ -55,6 +68,8 @@ class Vehicle {
     'nickname': nickname,
     'plate': plate,
     'fuelType': fuelType.name,
+    'type': type.name,
+    'transmission': transmission.name,
     'odometerKm': odometerKm,
   };
 
@@ -66,6 +81,8 @@ class Vehicle {
     String? nickname,
     String? plate,
     FuelType? fuelType,
+    VehicleType? type,
+    Transmission? transmission,
     int? odometerKm,
   }) {
     return Vehicle(
@@ -76,6 +93,8 @@ class Vehicle {
       nickname: nickname ?? this.nickname,
       plate: plate ?? this.plate,
       fuelType: fuelType ?? this.fuelType,
+      type: type ?? this.type,
+      transmission: transmission ?? this.transmission,
       odometerKm: odometerKm ?? this.odometerKm,
       createdAt: createdAt,
     );
