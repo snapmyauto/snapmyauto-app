@@ -77,6 +77,23 @@ class AuthRepository {
     await _auth.currentUser?.updateDisplayName(name.trim());
   }
 
+  bool get emailVerified => _auth.currentUser?.emailVerified ?? false;
+
+  Future<void> sendVerificationEmail() async {
+    await _auth.currentUser?.sendEmailVerification();
+  }
+
+  // the cached user doesn't know about the link click until reloaded
+  Future<bool> refreshEmailVerified() async {
+    await _auth.currentUser?.reload();
+    return emailVerified;
+  }
+
+  Future<void> changePassword(String current, String next) async {
+    await reauthenticate(password: current);
+    await _auth.currentUser?.updatePassword(next);
+  }
+
   /// Firebase asks for a fresh login before deleting an account.
   /// Email users pass their [password], Google users get the Google popup.
   Future<void> reauthenticate({String? password}) async {

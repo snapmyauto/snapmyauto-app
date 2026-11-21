@@ -10,7 +10,9 @@ import '../../scan/data/scan_repository.dart';
 import '../../vehicles/data/vehicle_repository.dart';
 import '../data/user_repository.dart';
 import '../domain/user_profile.dart';
+import 'widgets/change_password_dialog.dart';
 import 'widgets/delete_account_dialog.dart';
+import 'widgets/email_status.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -58,6 +60,7 @@ class ProfileScreen extends ConsumerWidget {
     final scanCount = ref.watch(scansProvider).value?.length ?? 0;
     final colors = Theme.of(context).colorScheme;
     final severity = context.severity;
+    final usesPassword = ref.read(authRepositoryProvider).usesPassword;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
@@ -75,6 +78,10 @@ class ProfileScreen extends ConsumerWidget {
                 profile: profile,
                 onEditName: () => _editName(context, ref, profile),
               ),
+              if (usesPassword) ...[
+                const SizedBox(height: 10),
+                const Center(child: EmailStatus()),
+              ],
               const SizedBox(height: 24),
               Row(
                 children: [
@@ -103,6 +110,14 @@ class ProfileScreen extends ConsumerWidget {
                 trailing: const Icon(LucideIcons.chevronRight),
                 onTap: () => context.push('/vehicles'),
               ),
+              if (usesPassword)
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(LucideIcons.keyRound),
+                  title: const Text('Change password'),
+                  trailing: const Icon(LucideIcons.chevronRight),
+                  onTap: () => showChangePasswordDialog(context),
+                ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(LucideIcons.logOut),
