@@ -44,6 +44,7 @@ class GarageRepository {
 (
   nwr["shop"="car_repair"]$around;
   nwr["amenity"="car_repair"]$around;
+  nwr["shop"="tyres"]$around;
 );
 out center tags;
 ''';

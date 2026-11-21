@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -8,6 +9,7 @@ import '../../../core/theme/severity_colors.dart';
 import '../../../core/utils/location_service.dart';
 import '../data/garage_repository.dart';
 import '../domain/garage.dart';
+import '../domain/garage_filter.dart';
 import 'garage_detail_sheet.dart';
 import 'garages_provider.dart';
 
@@ -20,6 +22,18 @@ class GaragesScreen extends ConsumerStatefulWidget {
 
 class _GaragesScreenState extends ConsumerState<GaragesScreen> {
   final _map = MapController();
+  final _search = TextEditingController();
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _clearFilters() {
+    _search.clear();
+    ref.read(garageFilterProvider.notifier).clear();
+  }
 
   void _refresh() {
     ref.read(selectedGarageProvider.notifier).select(null);
@@ -35,19 +49,18 @@ class _GaragesScreenState extends ConsumerState<GaragesScreen> {
   @override
   Widget build(BuildContext context) {
     final nearby = ref.watch(nearbyGaragesProvider);
+    final filter = ref.watch(garageFilterProvider);
 
     return Scaffold(
+      // keeps the map from squashing when the keyboard opens
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           'Garages nearby',
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
         actions: [
-          IconButton(
-            tooltip: 'Refresh',
-            icon: const Icon(LucideIcons.refreshCw),
-            onPressed: nearby.isLoading ? null : _refresh,
-          ),
+          _RefreshButton(loading: nearby.isLoading, onPressed: _refresh),
         ],
       ),
       body: nearby.when(
@@ -63,21 +76,27 @@ class _GaragesScreenState extends ConsumerState<GaragesScreen> {
               onAction: _refresh,
             );
           }
+          final shown = filter.apply(data.garages, DateTime.now());
           return Column(
             children: [
+              _FilterBar(controller: _search, filter: filter),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.38,
+                height: MediaQuery.sizeOf(context).height * 0.32,
                 child: _GarageMap(
                   controller: _map,
-                  data: data,
+                  me: data.me,
+                  garages: shown,
                   onTapGarage: _openGarage,
                 ),
               ),
               Expanded(
-                child: _GarageList(
-                  garages: data.garages,
-                  onTapGarage: _openGarage,
-                ),
+                child: shown.isEmpty
+                    ? _NoMatch(onClear: _clearFilters)
+                    : _GarageList(
+                        garages: shown,
+                        total: data.garages.length,
+                        onTapGarage: _openGarage,
+                      ),
               ),
             ],
           );
@@ -136,15 +155,192 @@ class _GaragesScreenState extends ConsumerState<GaragesScreen> {
   }
 }
 
+class _RefreshButton extends StatefulWidget {
+  const _RefreshButton({required this.loading, required this.onPressed});
+
+  final bool loading;
+  final VoidCallback onPressed;
+
+  @override
+  State<_RefreshButton> createState() => _RefreshButtonState();
+}
+
+class _RefreshButtonState extends State<_RefreshButton>
+    with SingleTickerProviderStateMixin {
+  late final _spin = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 800),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.loading) _spin.repeat();
+  }
+
+  @override
+  void didUpdateWidget(_RefreshButton old) {
+    super.didUpdateWidget(old);
+    if (widget.loading && !_spin.isAnimating) {
+      _spin.repeat();
+    } else if (!widget.loading && old.loading) {
+      // finish the current turn so the icon stops upright
+      _spin.forward().then((_) {
+        if (mounted && !widget.loading) _spin.reset();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _spin.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      tooltip: 'Refresh',
+      icon: RotationTransition(
+        turns: _spin,
+        child: const Icon(LucideIcons.refreshCw),
+      ),
+      onPressed: widget.loading ? null : widget.onPressed,
+    );
+  }
+}
+
+class _FilterBar extends ConsumerWidget {
+  const _FilterBar({required this.controller, required this.filter});
+
+  final TextEditingController controller;
+  final GarageFilter filter;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(garageFilterProvider.notifier);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+      child: Column(
+        children: [
+          TextField(
+            controller: controller,
+            onChanged: notifier.search,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              hintText: 'Search garages',
+              prefixIcon: const Icon(LucideIcons.search, size: 20),
+              suffixIcon: filter.query.isEmpty
+                  ? null
+                  : IconButton(
+                      tooltip: 'Clear search',
+                      icon: const Icon(LucideIcons.x, size: 18),
+                      onPressed: () {
+                        controller.clear();
+                        notifier.search('');
+                      },
+                    ),
+              isDense: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _chip(
+                  label: 'Nearest',
+                  icon: LucideIcons.navigation,
+                  selected: filter.nearest,
+                  onTap: notifier.toggleNearest,
+                ),
+                const SizedBox(width: 8),
+                _chip(
+                  label: 'Open now',
+                  icon: LucideIcons.clock,
+                  selected: filter.openNow,
+                  onTap: notifier.toggleOpenNow,
+                ),
+                const SizedBox(width: 8),
+                _chip(
+                  label: 'Tyre shops',
+                  icon: LucideIcons.circleDot,
+                  selected: filter.tyreShops,
+                  onTap: notifier.toggleTyreShops,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _chip({
+    required String label,
+    required IconData icon,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return FilterChip(
+      label: Text(label),
+      avatar: selected ? null : Icon(icon, size: 16),
+      selected: selected,
+      onSelected: (_) => onTap(),
+    );
+  }
+}
+
+class _NoMatch extends StatelessWidget {
+  const _NoMatch({required this.onClear});
+
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32, 24, 32, 170),
+      child: Column(
+        children: [
+          Text(
+            'No garages match',
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Many garages don\'t list their hours, so try fewer filters.',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 12),
+          TextButton(onPressed: onClear, child: const Text('Clear filters')),
+        ],
+      ),
+    );
+  }
+}
+
 class _GarageMap extends ConsumerWidget {
   const _GarageMap({
     required this.controller,
-    required this.data,
+    required this.me,
+    required this.garages,
     required this.onTapGarage,
   });
 
   final MapController controller;
-  final NearbyGarages data;
+  final LatLng me;
+  final List<Garage> garages;
   final ValueChanged<Garage> onTapGarage;
 
   @override
@@ -154,7 +350,7 @@ class _GarageMap extends ConsumerWidget {
 
     return FlutterMap(
       mapController: controller,
-      options: MapOptions(initialCenter: data.me, initialZoom: 13.5),
+      options: MapOptions(initialCenter: me, initialZoom: 13.5),
       children: [
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -162,7 +358,7 @@ class _GarageMap extends ConsumerWidget {
         ),
         MarkerLayer(
           markers: [
-            for (final g in data.garages)
+            for (final g in garages)
               Marker(
                 point: g.location,
                 width: 40,
@@ -180,7 +376,7 @@ class _GarageMap extends ConsumerWidget {
                 ),
               ),
             Marker(
-              point: data.me,
+              point: me,
               width: 22,
               height: 22,
               child: Container(
@@ -200,9 +396,14 @@ class _GarageMap extends ConsumerWidget {
 }
 
 class _GarageList extends ConsumerWidget {
-  const _GarageList({required this.garages, required this.onTapGarage});
+  const _GarageList({
+    required this.garages,
+    required this.total,
+    required this.onTapGarage,
+  });
 
   final List<Garage> garages;
+  final int total;
   final ValueChanged<Garage> onTapGarage;
 
   @override
@@ -219,7 +420,9 @@ class _GarageList extends ConsumerWidget {
       itemBuilder: (context, i) {
         if (i == 0) {
           return Text(
-            '${garages.length} garages within 5 km',
+            garages.length == total
+                ? '$total garages within 5 km'
+                : '${garages.length} of $total garages',
             style: theme.textTheme.titleSmall?.copyWith(
               color: scheme.onSurfaceVariant,
             ),

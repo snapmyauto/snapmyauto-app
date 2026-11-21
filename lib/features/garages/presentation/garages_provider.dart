@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import '../../../core/utils/location_service.dart';
 import '../data/garage_repository.dart';
 import '../domain/garage.dart';
+import '../domain/garage_filter.dart';
 
 class NearbyGarages {
   const NearbyGarages({required this.me, required this.garages});
@@ -31,4 +32,24 @@ class SelectedGarageNotifier extends Notifier<String?> {
 final selectedGarageProvider =
     NotifierProvider<SelectedGarageNotifier, String?>(
       SelectedGarageNotifier.new,
+    );
+
+class GarageFilterNotifier extends Notifier<GarageFilter> {
+  @override
+  GarageFilter build() => const GarageFilter();
+
+  void search(String query) => state = state.copyWith(query: query);
+
+  void toggleNearest() => state = state.copyWith(nearest: !state.nearest);
+
+  void toggleOpenNow() => state = state.copyWith(openNow: !state.openNow);
+
+  void toggleTyreShops() => state = state.copyWith(tyreShops: !state.tyreShops);
+
+  void clear() => state = const GarageFilter();
+}
+
+final garageFilterProvider =
+    NotifierProvider<GarageFilterNotifier, GarageFilter>(
+      GarageFilterNotifier.new,
     );
