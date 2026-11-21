@@ -8,6 +8,7 @@ import '../../../core/utils/formatters.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../scan/data/scan_repository.dart';
 import '../../vehicles/data/vehicle_repository.dart';
+import '../../vehicles/presentation/export_report.dart';
 import '../data/user_repository.dart';
 import '../domain/user_profile.dart';
 import 'widgets/change_password_dialog.dart';
@@ -118,6 +119,21 @@ class ProfileScreen extends ConsumerWidget {
                   trailing: const Icon(LucideIcons.chevronRight),
                   onTap: () => showChangePasswordDialog(context),
                 ),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(LucideIcons.fileDown),
+                title: const Text('Export my data (PDF)'),
+                subtitle: const Text('Vehicles, scans and reminders'),
+                onTap: () => exportReport(
+                  context,
+                  ref,
+                  title: 'My SnapMyAuto data',
+                  filename: 'snapmyauto-my-data.pdf',
+                  vehicles: ref.read(vehiclesProvider).value ?? const [],
+                  ownerName: profile.name,
+                  ownerEmail: profile.email,
+                ),
+              ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(LucideIcons.logOut),

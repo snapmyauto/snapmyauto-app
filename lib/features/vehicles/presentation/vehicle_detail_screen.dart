@@ -16,6 +16,7 @@ import '../../scan/domain/scan_record.dart';
 import '../../reminders/presentation/widgets/reminder_type_ui.dart';
 import '../data/vehicle_repository.dart';
 import '../domain/vehicle.dart';
+import 'export_report.dart';
 import 'vehicle_providers.dart';
 import 'widgets/fuel_type_ui.dart';
 import 'widgets/warnings_chart.dart';
@@ -83,6 +84,19 @@ class VehicleDetailScreen extends ConsumerWidget {
               style: const TextStyle(fontWeight: FontWeight.w800),
             ),
             actions: [
+              IconButton(
+                tooltip: 'Export PDF',
+                icon: const Icon(LucideIcons.fileDown),
+                onPressed: () => exportReport(
+                  context,
+                  ref,
+                  title: '${vehicle.displayName} report',
+                  filename: 'snapmyauto-${vehicle.make}-${vehicle.model}.pdf'
+                      .toLowerCase()
+                      .replaceAll(' ', '-'),
+                  vehicles: [vehicle],
+                ),
+              ),
               IconButton(
                 tooltip: 'Edit',
                 icon: const Icon(LucideIcons.pencil),
