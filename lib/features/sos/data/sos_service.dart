@@ -24,19 +24,18 @@ class SosService {
     return launchUrl(Uri(scheme: 'tel', path: _clean(contact.phone)));
   }
 
-  // Opens the SMS app with all contacts and a map link filled in.
-  // The user still has to press send.
-  Future<bool> sendLocationSms(List<EmergencyContact> contacts) async {
-    if (contacts.isEmpty) return false;
-
+  // The SOS text with a map link, or without one if location fails.
+  Future<String> locationMessage() async {
     LatLng? here;
     try {
       here = await _location.current();
     } catch (_) {
-      // Still send the message even if we can't get the location.
       here = null;
     }
+    return messageFor(here);
+  }
 
+  String messageFor(LatLng? here) {
     final message = StringBuffer(
       'SOS from SnapMyAuto. I need help with my car.',
     );
@@ -46,12 +45,17 @@ class SosService {
         '${here.latitude},${here.longitude}',
       );
     }
+    return message.toString();
+  }
+
+  // Opens the SMS app with all contacts and the message filled in.
+  // The user still has to press send.
+  Future<bool> sendSms(List<EmergencyContact> contacts, String message) {
+    if (contacts.isEmpty) return Future.value(false);
 
     final numbers = contacts.map((c) => _clean(c.phone)).join(',');
     // query is built by hand so spaces become %20 and not "+".
-    final uri = Uri.parse(
-      'sms:$numbers?body=${Uri.encodeComponent(message.toString())}',
-    );
+    final uri = Uri.parse('sms:$numbers?body=${Uri.encodeComponent(message)}');
     return launchUrl(uri);
   }
 
