@@ -43,6 +43,7 @@ class RemindersScreen extends ConsumerWidget {
     final reminders = ref.watch(remindersProvider);
     final vehicles = ref.watch(vehiclesProvider).value ?? const [];
     final names = {for (final v in vehicles) v.id: v.displayName};
+    final odometers = {for (final v in vehicles) v.id: v.odometerKm};
     final actions = ref.read(reminderActionsProvider);
 
     Widget tile(Reminder r) => Padding(
@@ -50,6 +51,7 @@ class RemindersScreen extends ConsumerWidget {
       child: ReminderTile(
         reminder: r,
         vehicleName: names[r.vehicleId],
+        odometerKm: odometers[r.vehicleId],
         onTap: () => context.push('/reminders/${r.id}/edit'),
         onDelete: () => _confirmDelete(context, ref, r),
         onToggleDone: () =>
@@ -79,8 +81,9 @@ class RemindersScreen extends ConsumerWidget {
               text: 'Add your next service, licence or insurance date and we\'ll remind you.',
             );
           }
-          final overdue = all.where((r) => r.isOverdue).toList();
-          final upcoming = all.where((r) => !r.done && !r.isOverdue).toList();
+          bool late(Reminder r) => r.isOverdueAt(odometers[r.vehicleId]);
+          final overdue = all.where(late).toList();
+          final upcoming = all.where((r) => !r.done && !late(r)).toList();
           final done = all.where((r) => r.done).toList();
 
           return ListView(
