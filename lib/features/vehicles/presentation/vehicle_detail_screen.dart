@@ -12,11 +12,13 @@ import '../../history/presentation/widgets/scan_tile.dart';
 import '../../home/presentation/widgets/date_labels.dart';
 import '../../home/presentation/widgets/home_section_title.dart';
 import '../../reminders/domain/reminder.dart';
+import '../../scan/domain/scan_record.dart';
 import '../../reminders/presentation/widgets/reminder_type_ui.dart';
 import '../data/vehicle_repository.dart';
 import '../domain/vehicle.dart';
 import 'vehicle_providers.dart';
 import 'widgets/fuel_type_ui.dart';
+import 'widgets/warnings_chart.dart';
 
 class VehicleDetailScreen extends ConsumerWidget {
   const VehicleDetailScreen({super.key, required this.vehicleId});
@@ -97,10 +99,14 @@ class VehicleDetailScreen extends ConsumerWidget {
             padding: const EdgeInsets.fromLTRB(18, 8, 18, 32),
             children: [
               _HeaderCard(vehicle: vehicle),
-              const SizedBox(height: 18),
-              _RecentScans(vehicleId: vehicleId),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
+              WarningsChart(
+                counts: ref.watch(vehicleLightCountsProvider(vehicleId)),
+              ),
+              const SizedBox(height: 14),
               _Reminders(vehicleId: vehicleId),
+              const SizedBox(height: 6),
+              _Tabs(vehicleId: vehicleId),
             ],
           ),
         );
@@ -241,28 +247,82 @@ class _EmptyNote extends StatelessWidget {
   }
 }
 
-class _RecentScans extends ConsumerWidget {
-  const _RecentScans({required this.vehicleId});
+// scans, service log and documents, one at a time
+class _Tabs extends ConsumerStatefulWidget {
+  const _Tabs({required this.vehicleId});
 
   final String vehicleId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final scans = ref.watch(vehicleScansProvider(vehicleId));
+  ConsumerState<_Tabs> createState() => _TabsState();
+}
+
+class _TabsState extends ConsumerState<_Tabs> {
+  int _tab = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final id = widget.vehicleId;
+
+    final List<Widget> content = switch (_tab) {
+      0 => _scans(ref.watch(allVehicleScansProvider(id))),
+      1 => _log(ref.watch(vehicleServiceLogProvider(id))),
+      _ => _documents(ref.watch(vehicleDocumentsProvider(id))),
+    };
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const HomeSectionTitle('Recent scans'),
-        const SizedBox(height: 6),
-        if (scans.isEmpty) const _EmptyNote('No scans saved for this car yet.'),
-        for (final scan in scans)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: ScanTile(scan: scan),
-          ),
+        SegmentedButton<int>(
+          showSelectedIcon: false,
+          segments: const [
+            ButtonSegment(value: 0, label: Text('Scans')),
+            ButtonSegment(value: 1, label: Text('Service log')),
+            ButtonSegment(value: 2, label: Text('Documents')),
+          ],
+          selected: {_tab},
+          onSelectionChanged: (s) => setState(() => _tab = s.first),
+        ),
+        const SizedBox(height: 12),
+        ...content,
       ],
     );
+  }
+
+  List<Widget> _scans(List<ScanRecord> scans) {
+    if (scans.isEmpty) {
+      return [const _EmptyNote('No scans saved for this car yet.')];
+    }
+    return [
+      for (final scan in scans)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: ScanTile(scan: scan),
+        ),
+    ];
+  }
+
+  List<Widget> _log(List<Reminder> done) {
+    if (done.isEmpty) {
+      return [
+        const _EmptyNote(
+          'Nothing here yet. Reminders you tick off show up as your service log.',
+        ),
+      ];
+    }
+    return [for (final r in done) _ReminderRow(reminder: r)];
+  }
+
+  List<Widget> _documents(List<Reminder> docs) {
+    if (docs.isEmpty) {
+      return [
+        const _EmptyNote(
+          'Add insurance, revenue licence or emission test reminders '
+          'to track their expiry here.',
+        ),
+      ];
+    }
+    return [for (final r in docs) _ReminderRow(reminder: r)];
   }
 }
 
@@ -296,6 +356,7 @@ class _ReminderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final overdue = reminder.isOverdue;
+    final done = reminder.done;
     final color = overdue ? context.severity.stop : colors.primary;
     final tint = overdue ? context.severity.stopTint : colors.primaryContainer;
 
@@ -350,7 +411,7 @@ class _ReminderRow extends StatelessWidget {
                     borderRadius: BorderRadius.circular(99),
                   ),
                   child: Text(
-                    dueLabel(context, reminder.dueDate),
+                    done ? 'Done' : dueLabel(context, reminder.dueDate),
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w800,
