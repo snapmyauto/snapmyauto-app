@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -23,15 +24,23 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _title = TextEditingController();
   final _notes = TextEditingController();
+  final _km = TextEditingController();
 
   Reminder? _old;
   ReminderType _type = ReminderType.service;
   DateTime _due = DateTime.now().add(const Duration(days: 30));
   String? _vehicleId;
   int? _repeat;
+  int _notifyBefore = 0;
   bool _saving = false;
 
   static const _repeatOptions = [null, 1, 3, 6, 12];
+  static const _notifyOptions = {
+    0: 'On the day',
+    1: '1 day before',
+    3: '3 days before',
+    7: '1 week before',
+  };
 
   @override
   void initState() {
@@ -52,12 +61,17 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
     _due = old.dueDate;
     _vehicleId = old.vehicleId;
     _repeat = old.repeatMonths;
+    _km.text = old.dueKm?.toString() ?? '';
+    _notifyBefore = _notifyOptions.containsKey(old.notifyDaysBefore)
+        ? old.notifyDaysBefore
+        : 0;
   }
 
   @override
   void dispose() {
     _title.dispose();
     _notes.dispose();
+    _km.dispose();
     super.dispose();
   }
 
@@ -93,6 +107,8 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
       dueDate: _due,
       vehicleId: _vehicleId,
       repeatMonths: _repeat,
+      dueKm: int.tryParse(_km.text.trim()),
+      notifyDaysBefore: _notifyBefore,
       notes: notes.isEmpty ? null : notes,
       done: _old?.done ?? false,
     );
@@ -172,6 +188,18 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
               ),
             ),
             const SizedBox(height: 16),
+            TextFormField(
+              controller: _km,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                labelText: 'Or at mileage (km, optional)',
+                hintText: '86000',
+                helperText: 'Due at this date or km, whichever comes first',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
             DropdownButtonFormField<String?>(
               initialValue: vehicleValue,
               decoration: const InputDecoration(
@@ -208,6 +236,19 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
               onChanged: (m) => setState(() => _repeat = m),
             ),
             const SizedBox(height: 16),
+            DropdownButtonFormField<int>(
+              initialValue: _notifyBefore,
+              decoration: const InputDecoration(
+                labelText: 'Notify me',
+                border: OutlineInputBorder(),
+              ),
+              items: [
+                for (final e in _notifyOptions.entries)
+                  DropdownMenuItem(value: e.key, child: Text(e.value)),
+              ],
+              onChanged: (d) => setState(() => _notifyBefore = d ?? 0),
+            ),
+            const SizedBox(height: 16),
             TextFormField(
               controller: _notes,
               maxLines: 3,
@@ -220,7 +261,8 @@ class _ReminderFormScreenState extends ConsumerState<ReminderFormScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'You\'ll get a notification on the due date at 9:00 AM.',
+              'You\'ll get a notification at 9:00 AM '
+              '${_notifyOptions[_notifyBefore]!.toLowerCase()}.',
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 24),

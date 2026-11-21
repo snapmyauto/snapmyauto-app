@@ -65,15 +65,19 @@ class ReminderNotifications {
     await _plugin.cancel(id: idFor(reminder.id));
     if (reminder.done) return;
 
+    final days = reminder.notifyDaysBefore;
     final due = reminder.dueDate;
-    final at = tz.TZDateTime(tz.local, due.year, due.month, due.day, 9);
+    final at = tz.TZDateTime(tz.local, due.year, due.month, due.day - days, 9);
     if (at.isBefore(tz.TZDateTime.now(tz.local))) return;
 
     await _plugin.zonedSchedule(
       id: idFor(reminder.id),
       scheduledDate: at,
       title: reminder.title,
-      body: 'Due today. Open SnapMyAuto to mark it done.',
+      body: days == 0
+          ? 'Due today. Open SnapMyAuto to mark it done.'
+          : 'Due in ${days == 7 ? 'a week' : '$days days'}. '
+                'Open SnapMyAuto for details.',
       notificationDetails: _details,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );

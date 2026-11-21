@@ -58,9 +58,12 @@ class VehicleHero extends ConsumerWidget {
 
     String due(ReminderType type) {
       final reminder = ref.watch(nextReminderProvider(type));
-      return reminder == null
-          ? l10n.homeNotSet
-          : dueLabel(context, reminder.dueDate);
+      if (reminder == null) return l10n.homeNotSet;
+      if (reminder.isOverdueAt(km)) return l10n.dueOverdue;
+      // a km limit says more than a date for service
+      final left = reminder.kmLeft(km);
+      if (left != null) return unit.format(left);
+      return dueLabel(context, reminder.dueDate);
     }
 
     return Material(

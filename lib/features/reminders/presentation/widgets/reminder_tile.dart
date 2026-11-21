@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/severity_colors.dart';
+import '../../../../core/utils/formatters.dart';
 import '../../domain/reminder.dart';
 import 'reminder_type_ui.dart';
 
@@ -13,10 +14,13 @@ class ReminderTile extends StatelessWidget {
     required this.onTap,
     required this.onDelete,
     this.vehicleName,
+    this.odometerKm,
   });
 
   final Reminder reminder;
   final String? vehicleName;
+  // the linked car's odometer, for mileage reminders
+  final int? odometerKm;
   final VoidCallback onToggleDone;
   final VoidCallback onTap;
   final VoidCallback onDelete;
@@ -26,7 +30,8 @@ class ReminderTile extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final sev = context.severity;
-    final overdue = reminder.isOverdue;
+    final kmLeft = reminder.kmLeft(odometerKm);
+    final overdue = reminder.isOverdueAt(odometerKm);
     final done = reminder.done;
 
     final accent = overdue ? sev.stop : colors.primary;
@@ -36,6 +41,10 @@ class ReminderTile extends StatelessWidget {
           : '${overdue ? 'Overdue' : 'Due'} ${relativeDue(reminder.dueDate)} '
                 '· ${shortDate(reminder.dueDate)}',
       ?vehicleName,
+      if (reminder.dueKm != null)
+        kmLeft == null || kmLeft <= 0
+            ? 'at ${formatKm(reminder.dueKm!)}'
+            : 'or in ${formatKm(kmLeft)}',
       if (reminder.repeatMonths != null)
         'every ${reminder.repeatMonths} months',
     ].join(' · ');
@@ -65,9 +74,21 @@ class ReminderTile extends StatelessWidget {
             ),
           ],
         ),
-        subtitle: Text(
-          details,
-          style: TextStyle(color: overdue ? sev.stop : null),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(details, style: TextStyle(color: overdue ? sev.stop : null)),
+            if (reminder.isRenewal && !done)
+              TextButton.icon(
+                onPressed: onToggleDone,
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+                icon: const Icon(LucideIcons.badgeCheck, size: 16),
+                label: const Text('Mark as renewed'),
+              ),
+          ],
         ),
         trailing: IconButton(
           tooltip: 'Delete',
