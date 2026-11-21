@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/ai_chat/data/chat_bubble_setting.dart';
 import '../../features/ai_chat/presentation/widgets/chat_bubble.dart';
+import '../../features/sos/data/crash_detector.dart';
 import '../utils/connectivity.dart';
 import 'glass_nav_bar.dart';
 import 'offline_banner.dart';
@@ -15,6 +16,9 @@ class AppShell extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(crashProvider, (_, next) {
+      if (next.hasValue) context.push('/sos/countdown');
+    });
     final offline = ref.watch(isOfflineProvider).value ?? false;
     // the more tab holds the switch for the bubble, so keep it clear there
     final showBubble = ref.watch(chatBubbleProvider) && shell.currentIndex != 3;
