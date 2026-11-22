@@ -8,7 +8,22 @@
   Snap a photo of your car's dashboard and find out what each warning light means, how serious it is, and what to do next.
 </p>
 
+<p align="center">
+  <a href="https://github.com/snapmyauto/snapmyauto-app/releases/latest"><img src="https://img.shields.io/badge/release-v1.0-0B6E5F" alt="Release v1.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2B211A" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/Android-phone-4E7A3C?logo=android&logoColor=white" alt="Android">
+  <img src="https://img.shields.io/badge/Flutter-3.47-1F4FD8?logo=flutter&logoColor=white" alt="Flutter 3.47">
+  <img src="https://img.shields.io/badge/Firebase-Auth_%2B_Firestore-B7741A?logo=firebase&logoColor=white" alt="Firebase">
+  <img src="https://img.shields.io/badge/DashLight-TFLite_on_device-B24A35?logo=tensorflow&logoColor=white" alt="DashLight on TFLite">
+  <img src="https://img.shields.io/badge/Gemini-AI_chat-7D52A0?logo=googlegemini&logoColor=white" alt="Gemini AI chat">
+  <img src="https://img.shields.io/badge/languages-EN_%7C_SI_%7C_TA-3E6D80" alt="English, Sinhala, Tamil">
+</p>
+
 SnapMyAuto runs its own object detection model, **DashLight**, on the phone, so a scan works even with no internet.
+
+## Download
+
+Get the latest APK from [Releases](https://github.com/snapmyauto/snapmyauto-app/releases/latest). Most phones use `app-arm64-v8a-release.apk`.
 
 ## Features
 
@@ -39,6 +54,16 @@ SnapMyAuto runs its own object detection model, **DashLight**, on the phone, so 
 - English, Sinhala and Tamil
 - Light and dark mode, green or blue accent
 - Works offline for scanning, the icon library and SOS calls
+
+## Screenshots
+
+| Home | Scan review | Garages |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/01-home.png" width="220"> | <img src="docs/screenshots/02-review.png" width="220"> | <img src="docs/screenshots/03-garages.png" width="220"> |
+
+| SOS | AI chat | Vehicle |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/04-sos.png" width="220"> | <img src="docs/screenshots/05-ai-chat.png" width="220"> | <img src="docs/screenshots/06-vehicle.png" width="220"> |
 
 ## DashLight model
 
@@ -92,6 +117,8 @@ assets/
 
 Run the tests with `flutter test`.
 
+The Firebase project is private. To run your own copy, create a Firebase project and connect it with `flutterfire configure`.
+
 ## Release build
 
 Release builds are signed with a key that is never committed. Create `android/key.properties`:
@@ -120,3 +147,7 @@ SnapMyAuto gives general advice. It does not replace a mechanic. If a red light 
 Questions, bugs or ideas? Send an email:
 
 [![Email us](https://skillicons.dev/icons?i=gmail)](mailto:dev.sasmitha@gmail.com)
+
+## License
+
+[MIT](LICENSE)
