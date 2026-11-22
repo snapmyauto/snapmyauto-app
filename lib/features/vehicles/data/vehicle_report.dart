@@ -215,6 +215,14 @@ pw.Widget _table(List<String> headers, List<List<String>> rows) {
   return pw.TableHelper.fromTextArray(
     headers: headers,
     data: rows,
+    // the scans table keeps date and result narrow, lights get the rest
+    columnWidths: headers.last == 'Lights'
+        ? const {
+            0: pw.FixedColumnWidth(70),
+            1: pw.FixedColumnWidth(70),
+            2: pw.FlexColumnWidth(),
+          }
+        : null,
     border: const pw.TableBorder(
       horizontalInside: pw.BorderSide(color: _line, width: 0.5),
       bottom: pw.BorderSide(color: _line, width: 0.5),
