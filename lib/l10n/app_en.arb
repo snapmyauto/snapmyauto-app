@@ -1,0 +1,181 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "navHistory": "History",
+  "navGarages": "Garages",
+  "navMore": "More",
+  "navScan": "Scan a warning light",
+  "homeGreetingMorning": "Good morning,",
+  "homeGreetingAfternoon": "Good afternoon,",
+  "homeGreetingEvening": "Good evening,",
+  "homeNameFallback": "Driver",
+  "homeProfile": "Profile",
+  "homeAddCarTitle": "Add your first car",
+  "homeAddCarBody": "So results, reminders and the AI match your car.",
+  "homeAddCarButton": "Add a car",
+  "homeChangeCar": "Change car",
+  "homeOdometer": "Odometer",
+  "homeNoMileage": "Not added",
+  "homeNextService": "Next service",
+  "homeLicence": "Licence",
+  "homeInsurance": "Insurance",
+  "homeNotSet": "Not set",
+  "dueOverdue": "Overdue",
+  "dueToday": "Today",
+  "dueTomorrow": "Tomorrow",
+  "dueInDays": "{count} days",
+  "@dueInDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "agoToday": "today",
+  "agoYesterday": "yesterday",
+  "agoDays": "{count} days ago",
+  "@agoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeWarningScanned": "Scanned {when}",
+  "@homeWarningScanned": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeView": "View",
+  "homeFeelsWrong": "Something feels wrong?",
+  "homeQuickActions": "Quick actions",
+  "homeIconLibrary": "Icon library",
+  "homeReminders": "Reminders",
+  "homeSos": "SOS",
+  "homeComingUp": "Coming up",
+  "homeSeeAll": "See all",
+  "homeNoReminders": "No reminders yet",
+  "homeAddReminder": "Add reminder",
+  "homeRecentScans": "Recent scans",
+  "homeNoScans": "No scans yet",
+  "homeNoScansBody": "Scanned lights show up here.",
+  "homeMoreLights": "+{count} more",
+  "@homeMoreLights": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyTitle": "History",
+  "historyAllVehicles": "All vehicles",
+  "historySearch": "Search warnings",
+  "historyAll": "All",
+  "groupToday": "Today",
+  "groupYesterday": "Yesterday",
+  "groupThisWeek": "This week",
+  "groupOlder": "Earlier",
+  "historyEmptyTitle": "No scans yet",
+  "historyEmptyBody": "Scan a warning light and it shows up here.",
+  "historyNoMatch": "No scans match",
+  "historyNoMatchBody": "Try another search or filter.",
+  "historyClearFilters": "Clear filters",
+  "historyDeleted": "Scan deleted",
+  "historyUndo": "Undo",
+  "historyDelete": "Delete",
+  "historyNoCar": "No car",
+  "scanDetailTitle": "Scan details",
+  "scanDetailGone": "This scan was deleted.",
+  "scanDetailLights": "Lights found",
+  "scanDetailSure": "{percent}% sure",
+  "@scanDetailSure": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "scanDetailAdvice": "See advice",
+  "scanDetailAskAi": "Ask AI about this",
+  "scanDetailDeleteTitle": "Delete this scan?",
+  "scanDetailDeleteBody": "This can't be undone.",
+  "cancel": "Cancel",
+  "sourceCamera": "Camera",
+  "sourceGallery": "Photo",
+  "settingsTitle": "Settings",
+  "settingsAppearance": "Appearance",
+  "settingsTheme": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+  "settingsAccent": "Accent colour",
+  "accentGreen": "Green",
+  "accentBlue": "Blue",
+  "settingsGeneral": "General",
+  "settingsLanguage": "Language",
+  "languageSystem": "Phone language",
+  "settingsUnits": "Distance units",
+  "unitsKm": "Kilometres (km)",
+  "unitsMiles": "Miles (mi)",
+  "settingsNotifications": "Notifications",
+  "settingsReminderAlerts": "Reminders",
+  "settingsReminderAlertsSub": "Licence, insurance, service",
+  "settingsAiButton": "AI chat button",
+  "settingsAiButtonSub": "Quick button to ask the AI",
+  "settingsAccount": "Account and tools",
+  "settingsMyVehicles": "My vehicles",
+  "settingsEmergency": "Emergency contacts",
+  "settingsAbout": "About SnapMyAuto",
+  "logout": "Log out",
+  "logoutTitle": "Log out?",
+    "logoutBody": "You can log back in any time.",
+  "offlineTitle": "No internet right now",
+  "offlineBody": "Don't worry, the important parts still work. We'll sync when you're back online.",
+  "offlineStillWorks": "Still works",
+  "offlineScanSub": "DashLight runs on your phone",
+  "offlineSos": "SOS call & SMS",
+  "offlineSosSub": "Uses your mobile network",
+  "offlineNeedsInternet": "Needs internet",
+  "offlineAiChat": "AI chat",
+  "offlineGarageMap": "Garage map",
+  "settingsReadAloud": "Read results aloud",
+  "settingsReadAloudSub": "Speaks the result as soon as it opens",
+  "homeGetStarted": "Get started",
+  "homeStepsDone": "{done} of {total} done",
+  "@homeStepsDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStepAccount": "Create your account",
+  "homeStepCar": "Add your car",
+  "homeStepSos": "Set up SOS contacts",
+  "homeStepScan": "Do your first scan",
+  "homeHealth": "Health",
+  "homeHealthGood": "All good",
+  "homeHealthOverdue": "{count} overdue",
+  "@homeHealthOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeHealthSoon": "{count} due soon",
+  "@homeHealthSoon": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeHealthLight": "Warning light"
+}

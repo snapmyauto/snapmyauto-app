@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/card_rings.dart';
 import '../data/auth_errors.dart';
 import '../data/auth_repository.dart';
 import 'widgets/auth_widgets.dart';
@@ -157,12 +159,85 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 20),
+                      const _QuickScanCard(),
+                      const SizedBox(height: 6),
+                      Center(
+                        child: TextButton.icon(
+                          onPressed: () => context.push('/library'),
+                          icon: const Icon(LucideIcons.bookOpen, size: 18),
+                          label: const Text('Warning light guide'),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _QuickScanCard extends StatelessWidget {
+  const _QuickScanCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final fg = context.brand.onFill;
+
+    return Material(
+      color: context.brand.fill,
+      borderRadius: BorderRadius.circular(22),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => context.push('/scan'),
+        child: Stack(
+          children: [
+            const CardRings(size: 120, offset: 30, radii: [58, 36]),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: fg.withValues(alpha: 0.14),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(LucideIcons.scanLine, size: 24, color: fg),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Quick scan',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800,
+                            color: fg,
+                          ),
+                        ),
+                        Text(
+                          'No account or mobile data needed',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: fg.withValues(alpha: 0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(LucideIcons.chevronRight, color: fg),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

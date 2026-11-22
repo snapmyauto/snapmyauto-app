@@ -7,7 +7,9 @@ import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_providers.dart';
 import 'core/utils/shared_prefs.dart';
+import 'features/settings/data/app_settings.dart';
 import 'firebase_options.dart';
+import 'l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +36,9 @@ class SnapMyAutoApp extends ConsumerWidget {
       theme: buildTheme(accent, Brightness.light),
       darkTheme: buildTheme(accent, Brightness.dark),
       themeMode: mode,
+      locale: ref.watch(appLocaleProvider),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: ref.watch(routerProvider),
     );
   }
